@@ -21,12 +21,15 @@
   - Map and list views
   - Filter by fuel type, sort by price or distance, radius filter
 
-### Recent Changes (3 Feb 2026)
+- **PWA (Progressive Web App)** - Installable on phones
+  - Service worker with offline caching (map tiles, fonts, fuel data)
+  - Install banner on mobile phones
+  - App icon on home screen, opens fullscreen
+  - Works on Android (Chrome) and iOS (Safari)
 
-- Switched from authenticated FuelPriceCheck/v2 to public FuelCheckApp/v1 endpoint
-- API key authentication was returning "Access token is not valid"
-- Public endpoint works without auth, returns all NSW stations + prices
-- Client-side filtering by fuel type, distance, and sorting
+- **GitHub Pages Deployment** - Live at https://scottleimroth.github.io/berrima-diesel-app/
+  - Auto-deploys on push to main via GitHub Actions
+  - API keys stored as encrypted GitHub Secrets
 
 ### Known Issues
 
@@ -37,6 +40,21 @@
 2. **Fuel data freshness** - Some station prices may be weeks old
    - This is a data quality issue from FuelCheck, not our code
    - Prices show their "last updated" timestamp
+
+### Future - After Staff Assessment
+
+1. **Google Play Store APK (TWA)** - Wrap the web app as a real Android app
+   - Trusted Web Activity wraps the existing website in an Android shell
+   - Same app, but distributed via Google Play Store
+   - Wait for staff feedback on the web app first
+
+2. **Apple App Store** - iOS version if there's demand
+   - PWA already works on iPhone via Safari "Add to Home Screen"
+   - Native iOS app only needed if PWA isn't sufficient
+
+3. **Push notifications** - Price drop alerts
+4. **Fuel stops along route** - Show cheapest diesel along planned routes
+5. **Offline mode** - Cache routes and prices for use without internet
 
 ### API Credentials
 
@@ -65,22 +83,19 @@ npm run dev
 | `frontend/web/src/hooks/useVehicleProfile.js` | Vehicle dimension presets |
 | `frontend/web/src/pages/RoutePlanner.jsx` | Main route planner page |
 | `frontend/web/src/pages/FuelTracker.jsx` | Main fuel tracker page |
-
-### Next Steps
-
-1. **Production deployment** - Build and deploy to hosting
-2. **Add fuel stops along route** - Show cheapest diesel along planned routes
-3. **Improve mobile responsiveness** - Test on various screen sizes
-4. **Add service/booking page** - Berrima Diesel Service business info
+| `frontend/web/src/hooks/useInstallPrompt.js` | PWA install prompt hook |
+| `frontend/web/vite.config.js` | Vite + PWA config |
+| `.github/workflows/deploy.yml` | GitHub Actions deploy workflow |
 
 ### Tech Stack
 
-- React 18 + Vite
+- React 18 + Vite + vite-plugin-pwa
 - Tailwind CSS (Australian heritage color scheme)
 - TanStack React Query
 - Leaflet.js for maps
 - HERE Platform API (routing)
 - NSW FuelCheck API (prices - public endpoint)
+- GitHub Pages (hosting)
 
 ### Color Scheme (Berrima Heritage)
 
