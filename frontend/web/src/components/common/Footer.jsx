@@ -75,7 +75,6 @@ function Footer() {
         {/* Copyright */}
         <div className="border-t border-brand-yellow/30 mt-8 pt-6 text-center text-white/60 text-sm">
           <p>&copy; {currentYear} DEEZELPRO Pty Ltd. All rights reserved.</p>
-          <p className="mt-1">Part of historic Berrima village since 1956.</p>
         </div>
       </div>
     </footer>
