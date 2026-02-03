@@ -1,12 +1,10 @@
 # Berrima Diesel - Touring Tools
 
-**Diesel Price Tracker & Heavy Vehicle Route Planner for Berrima Diesel Service.**
+[![Launch App](https://img.shields.io/badge/Launch-Touring_Tools-blue?style=for-the-badge)](https://scottleimroth.github.io/berrima-diesel-app/)
 
-Working exclusively on diesel since 1956.
+Diesel Price Tracker & Heavy Vehicle Route Planner for Berrima Diesel Service. Working exclusively on diesel since 1956.
 
-## Live Demo
-
-**https://scottleimroth.github.io/berrima-diesel-app/**
+> Installable as a mobile app — open the link above on your phone and tap "Add to Home Screen".
 
 ## Features
 
