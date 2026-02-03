@@ -61,15 +61,6 @@ function Header() {
               <Compass size={20} />
               <span>Trip Planner</span>
             </NavLink>
-            {canInstall && (
-              <button
-                onClick={promptInstall}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors font-semibold bg-brand-gold text-brand-navy hover:bg-brand-yellow"
-              >
-                <Download size={20} />
-                <span>Install App</span>
-              </button>
-            )}
           </nav>
 
           {/* Mobile: Install + Menu buttons */}
