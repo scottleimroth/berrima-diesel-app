@@ -161,7 +161,7 @@ function Home() {
                 {/* Shop Photo */}
                 <div className="md:w-2/5 flex-shrink-0">
                   <img
-                    src="/berrima-shop.jpg"
+                    src={`${import.meta.env.BASE_URL}berrima-shop.jpg`}
                     alt="Berrima Diesel Service Workshop"
                     className="w-full h-full object-cover min-h-[250px]"
                     onError={(e) => {

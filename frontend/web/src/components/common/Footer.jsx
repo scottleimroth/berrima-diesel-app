@@ -14,7 +14,7 @@ function Footer() {
           <div>
             <div className="bg-white rounded-lg p-1.5 shadow inline-block mb-4">
               <img
-                src="/berrima-logo.jpg"
+                src={`${import.meta.env.BASE_URL}berrima-logo.jpg`}
                 alt="Berrima Diesel Service"
                 className="h-12 w-auto"
                 onError={(e) => {
