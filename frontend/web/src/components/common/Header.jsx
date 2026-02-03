@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Compass, Download, Menu, X } from 'lucide-react'
+import { Compass, Download, Menu, Smartphone, X } from 'lucide-react'
 import { useState } from 'react'
 import { useInstallPrompt } from '../../hooks/useInstallPrompt'
 
@@ -7,7 +7,10 @@ const BASE_URL = import.meta.env.BASE_URL || '/'
 
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [bannerDismissed, setBannerDismissed] = useState(false)
   const { canInstall, promptInstall } = useInstallPrompt()
+
+  const showBanner = canInstall && !bannerDismissed
 
   return (
     <header className="bg-gradient-to-r from-brand-navy to-brand-blue text-white sticky top-0 z-50 shadow-lg">
@@ -63,25 +66,14 @@ function Header() {
             </NavLink>
           </nav>
 
-          {/* Mobile: Install + Menu buttons */}
-          <div className="flex md:hidden items-center gap-2">
-            {canInstall && (
-              <button
-                onClick={promptInstall}
-                className="p-2 text-brand-yellow hover:text-white"
-                aria-label="Install app"
-              >
-                <Download size={22} />
-              </button>
-            )}
-            <button
-              className="p-2 text-white hover:text-brand-yellow"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-white hover:text-brand-yellow"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
 
         {/* Mobile Navigation */}
@@ -117,18 +109,34 @@ function Header() {
               <Compass size={20} />
               <span>Trip Planner</span>
             </NavLink>
-            {canInstall && (
-              <button
-                onClick={() => { promptInstall(); setMobileMenuOpen(false) }}
-                className="flex items-center gap-2 px-4 py-3 rounded-lg transition-colors font-semibold bg-brand-gold text-brand-navy hover:bg-brand-yellow"
-              >
-                <Download size={20} />
-                <span>Install App on Phone</span>
-              </button>
-            )}
           </nav>
         )}
       </div>
+
+      {/* Mobile Install App Banner - shown below header */}
+      {showBanner && (
+        <div className="md:hidden bg-brand-gold">
+          <div className="container mx-auto px-4 py-2.5 flex items-center gap-3">
+            <Smartphone size={20} className="text-brand-navy flex-shrink-0" />
+            <p className="text-sm text-brand-navy font-medium flex-1">
+              Install this app on your phone for quick access
+            </p>
+            <button
+              onClick={promptInstall}
+              className="flex-shrink-0 bg-brand-navy text-white text-sm font-bold px-4 py-1.5 rounded-lg hover:bg-brand-brown transition-colors"
+            >
+              Install
+            </button>
+            <button
+              onClick={() => setBannerDismissed(true)}
+              className="flex-shrink-0 text-brand-navy/60 hover:text-brand-navy p-1"
+              aria-label="Dismiss"
+            >
+              <X size={18} />
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   )
 }
