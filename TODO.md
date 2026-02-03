@@ -1,0 +1,99 @@
+# Berrima Diesel App - Development TODO
+
+## Current Status (Feb 2026)
+
+### Working Features
+
+- **Route Planner** - Fully functional with HERE Routing API
+  - Real road routes with 7,000+ polyline points
+  - Vehicle dimension presets (4WD + Caravan, Motorhome, etc.)
+  - Avoid options (tolls, ferries, unpaved roads)
+  - Save/load favourite routes (localStorage)
+  - Fuel consumption calculator
+  - Turn-by-turn directions
+
+- **Fuel Price Tracker** - Fully working with real data
+  - Live prices from NSW FuelCheck public API (3,282 stations)
+  - Uses public FuelCheckApp/v1 endpoint (no auth required)
+  - 5-minute in-memory cache to avoid repeated large fetches
+  - Price alerts feature
+  - Station bookmarking
+  - Map and list views
+  - Filter by fuel type, sort by price or distance, radius filter
+
+### Recent Changes (3 Feb 2026)
+
+- Switched from authenticated FuelPriceCheck/v2 to public FuelCheckApp/v1 endpoint
+- API key authentication was returning "Access token is not valid"
+- Public endpoint works without auth, returns all NSW stations + prices
+- Client-side filtering by fuel type, distance, and sorting
+
+### Known Issues
+
+1. **HERE Autosuggest API** - Returns 400 errors sometimes
+   - Geocoding fallback is working
+   - Location search still functions via fallback
+
+2. **Fuel data freshness** - Some station prices may be weeks old
+   - This is a data quality issue from FuelCheck, not our code
+   - Prices show their "last updated" timestamp
+
+### API Credentials
+
+All credentials stored in `CREDENTIALS.md` (gitignored):
+- NSW Fuel API key (not currently used - public endpoint doesn't need it)
+- HERE Platform API key (used for routing)
+- Account details and portal URLs
+
+### Environment Setup
+
+```bash
+cd frontend/web
+npm install
+npm run dev
+# Runs on http://localhost:3000 (or 3001 if 3000 is in use)
+```
+
+### Files to Know
+
+| File | Purpose |
+|------|---------|
+| `CREDENTIALS.md` | Private API keys and account info |
+| `frontend/web/.env` | Environment variables for Vite |
+| `frontend/web/src/services/nswFuelApi.js` | NSW Fuel API integration (public endpoint) |
+| `frontend/web/src/services/hereRoutingApi.js` | HERE Routing API integration |
+| `frontend/web/src/hooks/useVehicleProfile.js` | Vehicle dimension presets |
+| `frontend/web/src/pages/RoutePlanner.jsx` | Main route planner page |
+| `frontend/web/src/pages/FuelTracker.jsx` | Main fuel tracker page |
+
+### Next Steps
+
+1. **Production deployment** - Build and deploy to hosting
+2. **Add fuel stops along route** - Show cheapest diesel along planned routes
+3. **Improve mobile responsiveness** - Test on various screen sizes
+4. **Add service/booking page** - Berrima Diesel Service business info
+
+### Tech Stack
+
+- React 18 + Vite
+- Tailwind CSS (Australian heritage color scheme)
+- TanStack React Query
+- Leaflet.js for maps
+- HERE Platform API (routing)
+- NSW FuelCheck API (prices - public endpoint)
+
+### Color Scheme (Berrima Heritage)
+
+```
+brand-brown: #6B4423     (Dark timber)
+brand-ochre: #CC7722     (Ochre/rust)
+brand-gold: #D4A84B      (Wattle gold)
+brand-yellow: #F5D547    (Bright yellow)
+brand-eucalyptus: #4A6741 (Gum leaf green)
+brand-cream: #FDF6E3     (Heritage cream)
+brand-tan: #D4C4A8       (Sandstone)
+```
+
+---
+
+*Last updated: 3 Feb 2026*

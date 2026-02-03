@@ -1,0 +1,16 @@
+{
+  "name": "Berrima Diesel Fleet Tools",
+  "short_name": "Berrima Diesel",
+  "description": "Diesel Price Tracker & Heavy Vehicle Route Planner - Working exclusively on diesel since 1956",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#c41230",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
