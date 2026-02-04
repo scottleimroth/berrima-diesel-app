@@ -36,6 +36,14 @@ export default defineConfig({
             },
           },
           {
+            urlPattern: /^https:\/\/www\.fuelcheck\.tas\.gov\.au\/.*/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'tas-fuel-api-cache',
+              expiration: { maxEntries: 10, maxAgeSeconds: 5 * 60 },
+            },
+          },
+          {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
             options: {

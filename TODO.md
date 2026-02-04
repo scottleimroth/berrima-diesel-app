@@ -3,24 +3,18 @@
 ## Last Session
 
 - **Date:** 2026-02-04
-- **Summary:** Expanded Diesel Price Finder from NSW-only to national coverage (NSW, WA, QLD)
+- **Summary:** Added TAS FuelCheck API, expanding national coverage to NSW+ACT, WA, QLD, TAS. Deep research into VIC/SA/NT APIs.
 - **Key changes:**
-  - Created `waFuelApi.js` — WA FuelWatch RSS parser via CORS proxy (allorigins.win)
-  - Created `qldFuelApi.js` — QLD Open Data CKAN DataStore API service
-  - Created `nationalFuelApi.js` — Unified service merging all state APIs
-  - Updated `useFuelPrices.js` hook to accept state parameter
-  - Updated `FuelTracker.jsx` with state selector dropdown
-  - Updated `FilterBar.jsx` with state filter and 500km radius option
-  - Added state badges to `StationCard.jsx`
-  - Updated `nswFuelApi.js` with state/source metadata fields
-  - Updated service worker caching for WA and QLD API domains
-  - Updated README.md and Home.jsx for national coverage
-- **Stopped at:** National fuel coverage built for NSW+ACT, WA, QLD. Ready to test live.
+  - Created `tasFuelApi.js` — TAS FuelCheck API (real-time, CORS enabled, ~75+ stations)
+  - Integrated TAS into `nationalFuelApi.js` — now 4 states + ACT live
+  - Added TAS service worker caching to `vite.config.js`
+  - Updated Home.jsx, README.md descriptions for TAS coverage
+  - Deep API research: VIC (Servo Saver requires application), SA (Informed Sources aggregator, no public API), NT (site down, no public API)
+- **Stopped at:** TAS integrated. VIC/SA/NT still need API access or backend proxy.
 - **Blockers:**
-  - TAS: NSW FuelCheck V2 auth token still invalid, cannot access TAS data
-  - VIC: Servo Saver API requires application for access key
-  - SA: Informed Sources requires registration as data consumer
-  - NT: No public API available, only historical CSVs
+  - VIC: Servo Saver API requires free application — currently delayed due to high demand. 24hr data delay.
+  - SA: No public government API. Data flows through Informed Sources (private aggregator). Options: register as data publisher via CBS, or use fuelprice.io free API.
+  - NT: MyFuelNT site currently down (service outage). No public API. Options: wait for site recovery + scrape, or use fuelprice.io free API.
   - WA FuelWatch has no CORS headers — using allorigins.win proxy (may be unreliable)
 
 ---
@@ -28,7 +22,7 @@
 ## Current Status
 
 ### Working Features
-- **Diesel Price Finder** — National diesel prices from NSW FuelCheck (3,200+ stations, real-time), WA FuelWatch (500+ stations, daily), QLD Open Data (1,500+ stations, monthly). State selector, map/list views, price alerts, bookmarks, radius filter.
+- **Diesel Price Finder** — National diesel prices from NSW FuelCheck (3,200+ stations, real-time), WA FuelWatch (500+ stations, daily), QLD Open Data (1,500+ stations, monthly), TAS FuelCheck (75+ stations, real-time). State selector, map/list views, price alerts, bookmarks, radius filter.
 - **Heavy Vehicle Route Planner** — HERE Routing API with truck-safe routing (works nationally), vehicle presets, avoid options, fuel consumption calc, turn-by-turn, saved routes
 - **PWA** — Installable on Android/iOS, offline caching, fullscreen mode
 - **GitHub Pages Deployment** — Auto-deploys on push to main via GitHub Actions
@@ -56,31 +50,39 @@ Expand diesel price coverage from NSW-only to all Australian states. Each state 
    - Data: Daily regulated fuel prices, metro + 9 regional areas
    - Implementation: `waFuelApi.js` with DOMParser XML parsing, 1hr cache
 
-3. [ ] **Victoria diesel prices** — Servo Saver API
-   - Requires application for API key at servosaver.com.au
-   - Format: JSON, free tier, 24-hour delay on prices
-   - Blocked: Need to apply and wait for approval
+3. [x] **Tasmania diesel prices** — TAS FuelCheck API
+   - API: `https://www.fuelcheck.tas.gov.au/fuel/api/v1/fuel/prices/bylocation`
+   - Format: JSON REST API, free, no auth, CORS enabled
+   - Data: Real-time diesel prices with lat/lng (~75+ stations)
+   - Implementation: `tasFuelApi.js` — same format as NSW FuelCheck
 
-4. [ ] **Tasmania diesel prices** — NSW FuelCheck V2
-   - V2 endpoint exists but auth token is invalid ("Access token is not valid")
-   - V1 public endpoint only returns NSW + ACT, not TAS
-   - Blocked: Need to resolve API authentication
+4. [ ] **Victoria diesel prices** — Servo Saver API (Service Victoria)
+   - API exists, free, requires application at service.vic.gov.au
+   - Format: JSON, CC-BY-4.0 licence, 24-hour data delay
+   - Base URL/endpoints provided only after approval (not public)
+   - Apply at: https://service.vic.gov.au/find-services/transport-and-driving/servo-saver/help-centre/servo-saver-public-api/apply-for-servo-saver-public-api
+   - Contact: fuel.program@service.vic.gov.au
+   - Blocked: Need to apply and wait for approval (delays due to high demand)
 
-5. [ ] **South Australia diesel prices** — Informed Sources
-   - Requires registration as data consumer
-   - Blocked: No free public API found
+5. [ ] **South Australia diesel prices** — Informed Sources aggregator
+   - No public government API — SA uses private aggregator model (Informed Sources)
+   - Options: (a) Register as data publisher via CBS, (b) Use fuelprice.io free API
+   - fuelprice.io covers all SA stations, free, JSON, requires signup
+   - Blocked: No direct public API; need to use fuelprice.io or register via CBS
 
 6. [ ] **Northern Territory diesel prices** — MyFuel NT
-   - Only historical monthly CSVs on NT open data portal
-   - No public developer API found
-   - Blocked: Would need web scraping or commercial API
+   - Website myfuelnt.nt.gov.au currently experiencing service outage
+   - No public developer API found; ASP.NET MVC app with no exposed endpoints
+   - Historical monthly XLSX data on data.nt.gov.au (2018-2024)
+   - Options: (a) Wait for site recovery + inspect XHR calls, (b) Use fuelprice.io free API
+   - Blocked: Site down, no public API
 
 7. [x] **Unified fuel price interface** — `nationalFuelApi.js`
-   - Merges NSW, WA, QLD into single price feed
+   - Merges NSW, WA, QLD, TAS into single price feed
    - Common data format: `{ code, name, lat, lng, price, fueltype, lastupdated, state, source }`
-   - State selector in UI (ALL, NSW, ACT, QLD, WA)
+   - State selector in UI (ALL, NSW, ACT, QLD, WA, TAS)
    - Cross-border price comparison near state boundaries
-   - Handle different update frequencies (real-time NSW vs daily WA)
+   - Handle different update frequencies (real-time NSW/TAS vs daily WA)
 
 8. [ ] **Fuel stops along route** — Show cheapest diesel along planned routes
    - Query fuel prices within corridor of planned route
@@ -320,6 +322,8 @@ Longer-term features requiring more infrastructure.
 - [x] Unified national fuel service (nationalFuelApi.js) (2026-02-04)
 - [x] State selector in Fuel Tracker UI (2026-02-04)
 - [x] State badges on station cards (2026-02-04)
+- [x] TAS FuelCheck API integration — real-time TAS diesel prices (2026-02-04)
+- [x] Deep API research for VIC, SA, NT fuel data sources (2026-02-04)
 
 ---
 
@@ -335,6 +339,8 @@ Longer-term features requiring more infrastructure.
 | Phase 1 priority: national prices | Most requested feature gap; builds on existing fuel tracker | 2026-02-04 |
 | allorigins.win CORS proxy for WA | FuelWatch has no CORS headers; free proxy is simplest for static site | 2026-02-04 |
 | QLD CKAN DataStore over CSV | SQL queries via API; no need to download/parse full CSV files | 2026-02-04 |
+| TAS FuelCheck direct API | Discovered TAS has its own FuelCheck API with CORS; no V2 auth needed | 2026-02-04 |
+| SA via fuelprice.io (future) | SA has no public gov API; Informed Sources aggregator is private | 2026-02-04 |
 
 ---
 
@@ -345,6 +351,7 @@ Longer-term features requiring more infrastructure.
 | NSW FuelCheck | `fuelcheck.nsw.gov.au` | None (public) | JSON | NSW diesel prices |
 | HERE Routing | `router.hereapi.com` | API key | JSON | Truck-safe routing |
 | QLD Open Data | `data.qld.gov.au` | None | JSON | QLD diesel prices |
+| TAS FuelCheck | `fuelcheck.tas.gov.au` | None | JSON | TAS diesel prices |
 | WA FuelWatch | `fuelwatch.wa.gov.au` | None | RSS/XML | WA diesel prices |
 | Open-Meteo BOM | `api.open-meteo.com/v1/bom` | None | JSON | Weather forecasts |
 | Overpass API | `overpass-api.de` | None | JSON | Campgrounds, POIs |
@@ -365,6 +372,7 @@ Longer-term features requiring more infrastructure.
 | `frontend/web/src/services/nswFuelApi.js` | NSW+ACT FuelCheck API integration |
 | `frontend/web/src/services/waFuelApi.js` | WA FuelWatch RSS integration |
 | `frontend/web/src/services/qldFuelApi.js` | QLD Open Data CKAN DataStore integration |
+| `frontend/web/src/services/tasFuelApi.js` | TAS FuelCheck API integration |
 | `frontend/web/src/services/hereRoutingApi.js` | HERE Routing API integration |
 | `frontend/web/src/hooks/useFuelPrices.js` | Fuel prices hook (supports state filter) |
 | `frontend/web/src/hooks/useVehicleProfile.js` | Vehicle dimension presets |
@@ -402,4 +410,4 @@ brand-tan: #D4C4A8       (Sandstone)
 
 ---
 
-*Last updated: 4 Feb 2026 (national fuel coverage added)*
+*Last updated: 4 Feb 2026 (TAS added, VIC/SA/NT research complete)*

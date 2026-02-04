@@ -8,17 +8,18 @@
  * - NSW + ACT: NSW FuelCheck API (real-time, ~3,200 stations)
  * - WA: FuelWatch RSS (daily prices, ~500+ stations)
  * - QLD: QLD Open Data DataStore API (monthly data, ~1,500+ stations)
+ * - TAS: TAS FuelCheck API (real-time, ~75+ stations)
  *
  * Coming soon (requires API keys or backend proxy):
- * - TAS: NSW FuelCheck V2 (auth currently broken)
- * - VIC: Servo Saver API (requires application)
- * - SA: Informed Sources (requires registration)
- * - NT: No public API available
+ * - VIC: Servo Saver API (free, requires application to Service Victoria)
+ * - SA: Informed Sources aggregator (requires CBS registration)
+ * - NT: MyFuelNT (site currently down, no public API)
  */
 
 import { getFuelPricesNearby as getNSWPrices } from './nswFuelApi'
 import { getWAFuelPricesNearby } from './waFuelApi'
 import { getQLDFuelPricesNearby } from './qldFuelApi'
+import { getTASFuelPricesNearby } from './tasFuelApi'
 
 /**
  * State configuration with coverage info
@@ -29,10 +30,10 @@ export const STATE_CONFIG = {
   ACT: { label: 'ACT', available: true, description: 'Real-time prices from NSW FuelCheck' },
   QLD: { label: 'Queensland', available: true, description: 'Monthly data from QLD Open Data' },
   WA: { label: 'Western Australia', available: true, description: 'Daily prices from FuelWatch' },
+  TAS: { label: 'Tasmania', available: true, description: 'Real-time prices from TAS FuelCheck' },
   VIC: { label: 'Victoria', available: false, description: 'Coming soon — requires API application' },
-  TAS: { label: 'Tasmania', available: false, description: 'Coming soon — API auth pending' },
   SA: { label: 'South Australia', available: false, description: 'Coming soon — requires registration' },
-  NT: { label: 'Northern Territory', available: false, description: 'Coming soon — no public API' },
+  NT: { label: 'Northern Territory', available: false, description: 'Coming soon — site currently down' },
 }
 
 /**
@@ -96,6 +97,16 @@ export async function getNationalFuelPrices(latitude, longitude, fuelType = 'DL'
       getQLDFuelPricesNearby(latitude, longitude, fuelType, sortBy)
         .catch((error) => {
           console.error('QLD fetch error:', error)
+          return []
+        })
+    )
+  }
+
+  if (state === 'ALL' || state === 'TAS') {
+    fetchFns.push(
+      getTASFuelPricesNearby(latitude, longitude, fuelType, sortBy)
+        .catch((error) => {
+          console.error('TAS fetch error:', error)
           return []
         })
     )

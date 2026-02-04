@@ -66,7 +66,7 @@ function FuelTracker() {
 
   // Get description of current data source
   const getSourceDescription = () => {
-    if (state === 'ALL') return 'Prices from NSW FuelCheck, WA FuelWatch, and QLD Open Data.'
+    if (state === 'ALL') return 'Prices from NSW FuelCheck, WA FuelWatch, QLD Open Data, and TAS FuelCheck.'
     const config = STATE_CONFIG[state]
     return config?.description || ''
   }
