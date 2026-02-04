@@ -1,4 +1,5 @@
-import { ArrowUpDown, Fuel, MapPin } from 'lucide-react'
+import { ArrowUpDown, Fuel, MapPin, Globe } from 'lucide-react'
+import { getAvailableStates } from '../../services/nationalFuelApi'
 
 function FilterBar({
   sortBy,
@@ -8,8 +9,11 @@ function FilterBar({
   fuelTypes,
   radius,
   onRadiusChange,
+  state,
+  onStateChange,
 }) {
-  const radiusOptions = [10, 25, 50, 100]
+  const radiusOptions = [10, 25, 50, 100, 500]
+  const availableStates = getAvailableStates()
 
   // Filter to show only diesel types
   const dieselTypes = (fuelTypes || []).filter(
@@ -26,6 +30,23 @@ function FilterBar({
 
   return (
     <div className="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-brand-tan/30">
+      {/* State Selector */}
+      <div className="flex items-center gap-2">
+        <Globe size={16} className="text-brand-ochre" />
+        <span className="text-sm text-brand-gray">State:</span>
+        <select
+          value={state}
+          onChange={(e) => onStateChange(e.target.value)}
+          className="px-3 py-1.5 text-sm bg-white border border-brand-tan rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-ochre text-brand-brown"
+        >
+          {availableStates.map((s) => (
+            <option key={s.code} value={s.code} disabled={!s.available}>
+              {s.label}{!s.available ? ' (coming soon)' : ''}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {/* Sort By */}
       <div className="flex items-center gap-2">
         <ArrowUpDown size={16} className="text-brand-ochre" />
