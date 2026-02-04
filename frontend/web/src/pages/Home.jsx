@@ -98,7 +98,7 @@ function Home() {
                 </svg>
               </div>
               <h3 className="font-headline text-2xl font-bold mb-3 text-brand-brown group-hover:text-brand-eucalyptus transition-colors">
-                Caravan Route Planner
+                4WD, Caravan & Motorhome Route Planner
               </h3>
               <p className="text-brand-gray mb-4">
                 Plan routes for your caravan, motorhome, or 4WD rig. Accounts for height and weight restrictions.

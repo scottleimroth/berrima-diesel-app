@@ -23,7 +23,7 @@
 
 ### Working Features
 - **Diesel Price Finder** — National diesel prices from NSW FuelCheck (3,200+ stations, real-time), WA FuelWatch (500+ stations, daily), QLD Open Data (1,500+ stations, monthly), TAS FuelCheck (75+ stations, real-time). State selector, map/list views, price alerts, bookmarks, radius filter.
-- **Caravan Route Planner** — HERE Routing API with dimension-aware routing (works nationally), vehicle presets, avoid options, fuel consumption calc, turn-by-turn, saved routes
+- **4WD, Caravan & Motorhome Route Planner** — HERE Routing API with weight-aware routing (works nationally), vehicle presets, avoid options, fuel consumption calc, turn-by-turn, saved routes
 - **PWA** — Installable on Android/iOS, offline caching, fullscreen mode
 - **GitHub Pages Deployment** — Auto-deploys on push to main via GitHub Actions
 

@@ -2,7 +2,7 @@
 
 [![Launch App](https://img.shields.io/badge/Launch-Touring_Tools-blue?style=for-the-badge)](https://scottleimroth.github.io/berrima-diesel-app/)
 
-Diesel Price Tracker & Caravan Route Planner for Berrima Diesel Service. Working exclusively on diesel since 1956.
+Diesel Price Tracker & 4WD, Caravan & Motorhome Route Planner for Berrima Diesel Service. Working exclusively on diesel since 1956.
 
 > Installable as a mobile app — open the link above on your phone and tap "Add to Home Screen".
 
@@ -16,8 +16,8 @@ Diesel Price Tracker & Caravan Route Planner for Berrima Diesel Service. Working
 - Map and list views
 - Price alerts and station bookmarking
 
-### Caravan Route Planner
-- Dimension-aware routing via HERE Routing API
+### 4WD, Caravan & Motorhome Route Planner
+- Weight-aware routing via HERE Routing API
 - Vehicle presets (4WD + Caravan, Motorhome, Campervan, etc.)
 - Avoid tolls, ferries, and unpaved roads
 - Fuel consumption calculator
@@ -28,7 +28,7 @@ Diesel Price Tracker & Caravan Route Planner for Berrima Diesel Service. Working
 
 - **Frontend**: React 18 + Vite + Tailwind CSS
 - **Maps**: Leaflet.js
-- **Routing**: HERE Platform API (dimension-aware routing for caravans & motorhomes)
+- **Routing**: HERE Platform API (weight-aware routing for caravans & motorhomes)
 - **Fuel Prices**: NSW FuelCheck API, WA FuelWatch RSS, QLD Open Data CKAN API, TAS FuelCheck API
 - **Styling**: Australian heritage color scheme (Berrima sandstone, ochre, eucalyptus)
 
