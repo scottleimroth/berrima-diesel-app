@@ -303,6 +303,47 @@ Longer-term features requiring more infrastructure.
     - Alert on: price drops at bookmarked stations, severe weather on saved routes
     - Would need simple notification backend
 
+35. [ ] **Elevation profile along route** — Grade warnings for towing
+    - Show elevation changes along planned route
+    - Highlight steep grades (important for caravans, motorhomes, heavy tow rigs)
+    - Source: Open-Meteo elevation API or HERE route elevation data
+    - Warn about long descents (brake fade risk) and steep climbs (fuel/power impact)
+    - Implementation: Chart component below route map
+
+36. [ ] **Diesel mechanic / workshop locator** — Find help on the road
+    - Find diesel mechanics and workshops near current location or along route
+    - Source: Google Places API or OSM `shop=car_repair` / `service:vehicle:diesel=yes`
+    - Filter by: diesel specialist, 4WD specialist, caravan/trailer service
+    - Particularly relevant for Berrima Diesel — link back to the business for Southern Highlands area
+    - Implementation: Page `WorkshopFinder.jsx` with map and list
+
+37. [ ] **Fuel price history and trends** — Track price movements
+    - Show historical price charts for bookmarked stations
+    - Indicate if prices are trending up or down
+    - Best day of the week to fill up (by state)
+    - Source: Store price snapshots in localStorage over time, or use fuelprice.io historical API
+    - Implementation: Chart on station detail view
+
+38. [ ] **Towing speed limit reference by state** — Quick legal reference
+    - Speed limits vary by state for vehicles towing trailers/caravans
+    - Table: state-by-state speed limits for towing (highway, rural, urban)
+    - Include GVM/ATM thresholds that trigger different limits
+    - Source: State road authority regulations (static reference data)
+    - Implementation: Reference page `TowingLimits.jsx`
+
+39. [ ] **Free WiFi hotspot locator** — Stay connected on the road
+    - Find free public WiFi near current location or along route
+    - Source: OSM nodes tagged `internet_access=wlan` / `internet_access:fee=no`
+    - Libraries, shopping centres, McDonald's, caravan parks
+    - Useful for remote area travellers needing to upload/download
+    - Implementation: Map layer or dedicated section
+
+40. [ ] **Laundromat locator** — Essential for long-term tourers
+    - Find laundromats and laundry facilities near current location
+    - Source: OSM nodes tagged `shop=laundry` or `amenity=laundry`
+    - Include caravan park laundry facilities where known
+    - Implementation: Map layer or dedicated section
+
 ---
 
 ## Completed
