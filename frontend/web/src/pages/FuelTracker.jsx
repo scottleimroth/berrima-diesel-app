@@ -4,6 +4,7 @@ import { useFuelPrices, useFuelTypes } from '../hooks/useFuelPrices'
 import { useGeolocation } from '../hooks/useGeolocation'
 import { useBookmarks } from '../hooks/useBookmarks'
 import { usePriceAlerts } from '../hooks/usePriceAlerts'
+import { STATE_CONFIG } from '../services/nationalFuelApi'
 import FuelSearch from '../components/fuel-tracker/FuelSearch'
 import StationList from '../components/fuel-tracker/StationList'
 import FilterBar from '../components/fuel-tracker/FilterBar'
@@ -17,6 +18,7 @@ function FuelTracker() {
   const [sortBy, setSortBy] = useState('price')
   const [fuelType, setFuelType] = useState('DL')
   const [radius, setRadius] = useState(50)
+  const [state, setState] = useState('ALL')
 
   const {
     location,
@@ -32,7 +34,7 @@ function FuelTracker() {
     isLoading: stationsLoading,
     error: stationsError,
     refetch,
-  } = useFuelPrices(location, fuelType, sortBy)
+  } = useFuelPrices(location, fuelType, sortBy, state)
 
   const { data: fuelTypes } = useFuelTypes()
   const bookmarks = useBookmarks()
@@ -51,8 +53,22 @@ function FuelTracker() {
     return a.distance - b.distance
   })
 
+  // Count stations per state for the info bar
+  const stateBreakdown = sortedStations.reduce((acc, s) => {
+    const st = s.state || 'Unknown'
+    acc[st] = (acc[st] || 0) + 1
+    return acc
+  }, {})
+
   const handleLocationSearch = (coords) => {
     setManualLocation(coords.lat, coords.lng)
+  }
+
+  // Get description of current data source
+  const getSourceDescription = () => {
+    if (state === 'ALL') return 'Prices from NSW FuelCheck, WA FuelWatch, and QLD Open Data.'
+    const config = STATE_CONFIG[state]
+    return config?.description || ''
   }
 
   return (
@@ -64,7 +80,7 @@ function FuelTracker() {
             Diesel Price Finder
           </h1>
           <p className="text-brand-gray">
-            Find the cheapest diesel for your next trip. Real-time prices from NSW FuelCheck.
+            Find the cheapest diesel across Australia. {getSourceDescription()}
           </p>
         </div>
       </div>
@@ -93,6 +109,8 @@ function FuelTracker() {
             fuelTypes={fuelTypes}
             radius={radius}
             onRadiusChange={setRadius}
+            state={state}
+            onStateChange={setState}
           />
         </div>
       </div>
@@ -108,10 +126,23 @@ function FuelTracker() {
         />
 
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
             <span className="text-sm text-brand-gray">
               {sortedStations.length} stations within {radius}km
             </span>
+            {/* State breakdown badges */}
+            {state === 'ALL' && Object.keys(stateBreakdown).length > 1 && (
+              <div className="flex items-center gap-1">
+                {Object.entries(stateBreakdown).map(([st, count]) => (
+                  <span
+                    key={st}
+                    className="inline-flex items-center text-xs bg-brand-tan/40 text-brand-brown px-2 py-0.5 rounded"
+                  >
+                    {st}: {count}
+                  </span>
+                ))}
+              </div>
+            )}
             {locationSource === 'gps' && (
               <span className="inline-flex items-center gap-1 text-xs text-success bg-success/10 px-2 py-1 rounded">
                 <Navigation size={12} />

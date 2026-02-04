@@ -15,8 +15,24 @@ export default defineConfig({
             urlPattern: /^https:\/\/api\.onegov\.nsw\.gov\.au\/.*/i,
             handler: 'NetworkFirst',
             options: {
-              cacheName: 'fuel-api-cache',
+              cacheName: 'nsw-fuel-api-cache',
               expiration: { maxEntries: 10, maxAgeSeconds: 5 * 60 },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/api\.allorigins\.win\/.*/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'wa-fuel-proxy-cache',
+              expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/www\.data\.qld\.gov\.au\/api\/.*/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'qld-fuel-api-cache',
+              expiration: { maxEntries: 10, maxAgeSeconds: 6 * 60 * 60 },
             },
           },
           {

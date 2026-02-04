@@ -106,6 +106,9 @@ export async function getFuelPricesNearby(latitude, longitude, fuelType = 'DL', 
         station.location.latitude, station.location.longitude
       )
 
+      // Determine state from address (NSW FuelCheck includes ACT stations)
+      const stateCode = station.address.includes(' ACT ') ? 'ACT' : 'NSW'
+
       results.push({
         code: station.code,
         brand: station.brand,
@@ -117,6 +120,8 @@ export async function getFuelPricesNearby(latitude, longitude, fuelType = 'DL', 
         lastupdated: parseAusDate(fuelPrice.lastupdated),
         distance,
         isAdBlueAvailable: station.isAdBlueAvailable || false,
+        state: stateCode,
+        source: 'fuelcheck',
       })
     }
 
@@ -152,6 +157,8 @@ export async function getFuelPricesByPostcode(postcode, fuelType = 'DL') {
       const fuelPrice = stationPrices.find((p) => p.fueltype === fuelType)
       if (!fuelPrice) continue
 
+      const stateCode = station.address.includes(' ACT ') ? 'ACT' : 'NSW'
+
       results.push({
         code: station.code,
         brand: station.brand,
@@ -163,6 +170,8 @@ export async function getFuelPricesByPostcode(postcode, fuelType = 'DL') {
         lastupdated: parseAusDate(fuelPrice.lastupdated),
         distance: 0,
         isAdBlueAvailable: station.isAdBlueAvailable || false,
+        state: stateCode,
+        source: 'fuelcheck',
       })
     }
 

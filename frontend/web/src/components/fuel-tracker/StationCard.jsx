@@ -35,6 +35,11 @@ function StationCard({ station, isBookmarked, onToggleBookmark, rank, isBelowAle
               <span className="text-xs font-medium text-brand-gray uppercase tracking-wide">
                 {station.brand}
               </span>
+              {station.state && (
+                <span className="text-xs font-medium bg-brand-tan/40 text-brand-brown px-1.5 py-0.5 rounded">
+                  {station.state}
+                </span>
+              )}
             </div>
             <h3 className="font-bold text-lg text-brand-brown truncate">{station.name}</h3>
             <p className="text-brand-gray text-sm flex items-start gap-1 mt-1">
