@@ -9,8 +9,8 @@ Diesel Price Tracker & Heavy Vehicle Route Planner for Berrima Diesel Service. W
 ## Features
 
 ### Diesel Price Finder
-- Diesel prices across NSW, WA, and QLD (5,000+ stations)
-- NSW: Real-time via FuelCheck API | WA: Daily via FuelWatch | QLD: Monthly via Open Data
+- Diesel prices across NSW, WA, QLD, and TAS (5,000+ stations)
+- NSW: Real-time via FuelCheck API | WA: Daily via FuelWatch | QLD: Monthly via Open Data | TAS: Real-time via TAS FuelCheck
 - State selector or search all states at once
 - Sort by price or distance, filter by radius
 - Map and list views
@@ -29,7 +29,7 @@ Diesel Price Tracker & Heavy Vehicle Route Planner for Berrima Diesel Service. W
 - **Frontend**: React 18 + Vite + Tailwind CSS
 - **Maps**: Leaflet.js
 - **Routing**: HERE Platform API (truck routing)
-- **Fuel Prices**: NSW FuelCheck API, WA FuelWatch RSS, QLD Open Data CKAN API
+- **Fuel Prices**: NSW FuelCheck API, WA FuelWatch RSS, QLD Open Data CKAN API, TAS FuelCheck API
 - **Styling**: Australian heritage color scheme (Berrima sandstone, ochre, eucalyptus)
 
 ## Local Development

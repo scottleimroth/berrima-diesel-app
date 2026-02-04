@@ -68,7 +68,7 @@ function Home() {
                 Diesel Price Finder
               </h3>
               <p className="text-brand-gray mb-4">
-                Find the cheapest diesel across Australia. Prices from NSW, WA, and QLD
+                Find the cheapest diesel across Australia. Prices from NSW, WA, QLD, and TAS
                 sorted by price or distance.
               </p>
               <ul className="text-sm text-brand-gray space-y-2">
