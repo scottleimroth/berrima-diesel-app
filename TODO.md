@@ -23,7 +23,7 @@
 
 ### Working Features
 - **Diesel Price Finder** — National diesel prices from NSW FuelCheck (3,200+ stations, real-time), WA FuelWatch (500+ stations, daily), QLD Open Data (1,500+ stations, monthly), TAS FuelCheck (75+ stations, real-time). State selector, map/list views, price alerts, bookmarks, radius filter.
-- **Heavy Vehicle Route Planner** — HERE Routing API with truck-safe routing (works nationally), vehicle presets, avoid options, fuel consumption calc, turn-by-turn, saved routes
+- **Caravan Route Planner** — HERE Routing API with dimension-aware routing (works nationally), vehicle presets, avoid options, fuel consumption calc, turn-by-turn, saved routes
 - **PWA** — Installable on Android/iOS, offline caching, fullscreen mode
 - **GitHub Pages Deployment** — Auto-deploys on push to main via GitHub Actions
 
@@ -95,10 +95,10 @@ Expand diesel price coverage from NSW-only to all Australian states. Each state 
 ### Phase 2: Touring Infrastructure
 Essential services and facilities for diesel vehicle tourers.
 
-9. [ ] **Rest areas database** — National Heavy Vehicle Rest Areas
+9. [ ] **Rest areas database** — National Rest Areas
    - API: National Freight Data Hub / data.gov.au
-   - URL: `https://data.gov.au/dataset/` (search "rest areas" or "heavy vehicle")
-   - Data: Locations, facilities (toilets, water, shade, parking bays), vehicle size limits
+   - URL: `https://data.gov.au/dataset/` (search "rest areas")
+   - Data: Locations, facilities (toilets, water, shade, parking bays), vehicle suitability
    - Implementation: New page `RestAreas.jsx` with map markers and list view
    - Filter by facilities, distance from route, vehicle size suitability
 
@@ -288,10 +288,10 @@ Longer-term features requiring more infrastructure.
     - Consider: Firebase, Supabase, or similar serverless backend
     - Moderation system for submissions
 
-32. [ ] **Speed camera and RMS weigh station alerts**
+32. [ ] **Speed camera and weigh station alerts**
     - Source: Community databases, OSM data
     - Alert when approaching known locations
-    - Particularly useful for heavy vehicle weigh stations
+    - Useful for caravans and motorhomes at weigh stations
 
 33. [ ] **Google Play Store TWA** — Wrap PWA as Android app
     - Trusted Web Activity wraps existing website in Android shell
@@ -349,7 +349,7 @@ Longer-term features requiring more infrastructure.
 ## Completed
 
 - [x] NSW diesel price tracker with FuelCheck API (2026-01)
-- [x] Heavy vehicle route planner with HERE Routing API (2026-01)
+- [x] Caravan route planner with HERE Routing API (2026-01)
 - [x] PWA with offline caching and install prompt (2026-01)
 - [x] GitHub Pages auto-deployment via Actions (2026-01)
 - [x] Vehicle dimension presets for route planner (2026-01)
@@ -390,7 +390,7 @@ Longer-term features requiring more infrastructure.
 | API | URL | Auth | Format | Used For |
 |-----|-----|------|--------|----------|
 | NSW FuelCheck | `fuelcheck.nsw.gov.au` | None (public) | JSON | NSW diesel prices |
-| HERE Routing | `router.hereapi.com` | API key | JSON | Truck-safe routing |
+| HERE Routing | `router.hereapi.com` | API key | JSON | Caravan/motorhome routing |
 | QLD Open Data | `data.qld.gov.au` | None | JSON | QLD diesel prices |
 | TAS FuelCheck | `fuelcheck.tas.gov.au` | None | JSON | TAS diesel prices |
 | WA FuelWatch | `fuelwatch.wa.gov.au` | None | RSS/XML | WA diesel prices |

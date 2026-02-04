@@ -7,7 +7,9 @@ const GEOCODE_BASE_URL = 'https://geocode.search.hereapi.com/v1'
 const AUTOSUGGEST_BASE_URL = 'https://autosuggest.search.hereapi.com/v1'
 
 /**
- * Calculate a truck route between origin and destination
+ * Calculate a dimension-aware route for caravans, motorhomes, and tow vehicles.
+ * Uses HERE's truck transport mode which accounts for height, weight, and length
+ * restrictions — ideal for large touring vehicles.
  * @param {Object} params - Route parameters
  * @param {Object} params.origin - { lat, lng }
  * @param {Object} params.destination - { lat, lng }
