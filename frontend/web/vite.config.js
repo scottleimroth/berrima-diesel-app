@@ -72,7 +72,7 @@ export default defineConfig({
       manifest: {
         name: 'Berrima Diesel Touring Tools',
         short_name: 'Berrima Diesel',
-        description: 'Diesel Price Tracker & Heavy Vehicle Route Planner - The Diesel Experts since 1956',
+        description: 'Diesel Price Tracker & Caravan Route Planner for 4WD, Motorhome & Camper Travellers - The Diesel Experts since 1956',
         theme_color: '#6B4423',
         background_color: '#FDF6E3',
         display: 'standalone',

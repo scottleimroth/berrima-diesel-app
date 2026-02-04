@@ -44,12 +44,12 @@ const DEFAULT_PRESETS = {
     type: 'straight',
     trailersCount: 0,
   },
-  'small-truck': {
-    name: 'Small Truck / Ute',
-    height: 350, // cm
-    width: 220,
-    length: 800, // 8m
-    grossWeight: 8000, // kg
+  'ute-canopy': {
+    name: 'Ute + Canopy',
+    height: 250, // cm
+    width: 200,
+    length: 550, // 5.5m
+    grossWeight: 3500, // kg
     axleCount: 2,
     type: 'straight',
     trailersCount: 0,
