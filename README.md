@@ -6,7 +6,14 @@
 
 Diesel Price Tracker & 4WD, Caravan & Motorhome Route Planner for Berrima Diesel Service. Working exclusively on diesel since 1956.
 
-> **Install on mobile:** Open the link above on your phone and tap "Add to Home Screen".
+---
+
+## Available Platforms
+
+| Platform | How to Get It |
+|----------|---------------|
+| Web App | [Launch in browser](https://scottleimroth.github.io/berrima-diesel-app/) — no install needed |
+| Mobile (PWA) | Open the link above on your phone and tap "Add to Home Screen" |
 
 ## Features
 
