@@ -2,20 +2,26 @@
 
 ## Last Session
 
-- **Date:** 2026-02-04
-- **Summary:** Added TAS FuelCheck API, expanding national coverage to NSW+ACT, WA, QLD, TAS. Deep research into VIC/SA/NT APIs.
+- **Date:** 2026-02-10
+- **Summary:** Fixed route planner location search (small towns not found), researched SA/NT fuel APIs and fuelprice.io pricing.
 - **Key changes:**
-  - Created `tasFuelApi.js` — TAS FuelCheck API (real-time, CORS enabled, ~75+ stations)
-  - Integrated TAS into `nationalFuelApi.js` — now 4 states + ACT live
-  - Added TAS service worker caching to `vite.config.js`
-  - Updated Home.jsx, README.md descriptions for TAS coverage
-  - Deep API research: VIC (Servo Saver requires application), SA (Informed Sources aggregator, no public API), NT (site down, no public API)
-- **Stopped at:** TAS integrated. VIC/SA/NT still need API access or backend proxy.
+  - Fixed location search: added `at` parameter (Australia center) to HERE Autosuggest/Geocode APIs for geographic relevance
+  - Added OpenStreetMap Nominatim as fallback geocoder for small Australian towns (Eden, Bombala, etc.)
+  - Added Nominatim service worker caching to `vite.config.js`
+  - Researched fuelprice.io — NOT free, A$99/month (Visser Associates), ruled out
+  - Researched SA CBS data publisher registration — free path via Informed Sources
+  - Confirmed MyFuelNT still broken, found internal API endpoints but no usable JSON API
+- **Stopped at:** Location search fix deployed. SA/VIC/NT fuel APIs still blocked on applications/registrations.
 - **Blockers:**
-  - VIC: Servo Saver API requires free application — currently delayed due to high demand. 24hr data delay.
-  - SA: No public government API. Data flows through Informed Sources (private aggregator). Options: register as data publisher via CBS, or use fuelprice.io free API.
-  - NT: MyFuelNT site currently down (service outage). No public API. Options: wait for site recovery + scrape, or use fuelprice.io free API.
+  - VIC: Servo Saver API requires free application (check if already applied)
+  - SA: Register as data publisher via CBS/Informed Sources (free, contact cbs.sa.gov.au or informedsources.com/contact/)
+  - NT: MyFuelNT still showing errors, no usable public API
   - WA FuelWatch has no CORS headers — using allorigins.win proxy (may be unreliable)
+- **Next session ideas:**
+  - Apply for SA data publisher registration if not done
+  - Check VIC Servo Saver application status
+  - Build fuel stops along route feature (#8) — doesn't need new APIs
+  - Consider accessibility page for web apps (user mentioned interest)
 
 ---
 
@@ -66,16 +72,17 @@ Expand diesel price coverage from NSW-only to all Australian states. Each state 
 
 5. [ ] **South Australia diesel prices** — Informed Sources aggregator
    - No public government API — SA uses private aggregator model (Informed Sources)
-   - Options: (a) Register as data publisher via CBS, (b) Use fuelprice.io free API
-   - fuelprice.io covers all SA stations, free, JSON, requires signup
-   - Blocked: No direct public API; need to use fuelprice.io or register via CBS
+   - ~~fuelprice.io~~ — NOT free, A$99/month (Visser Associates), too expensive
+   - Remaining options: (a) Register as data publisher via CBS, (b) Scrape SA govt site, (c) Find alternative free API
+   - Blocked: No free public API found yet
 
 6. [ ] **Northern Territory diesel prices** — MyFuel NT
    - Website myfuelnt.nt.gov.au currently experiencing service outage
    - No public developer API found; ASP.NET MVC app with no exposed endpoints
    - Historical monthly XLSX data on data.nt.gov.au (2018-2024)
-   - Options: (a) Wait for site recovery + inspect XHR calls, (b) Use fuelprice.io free API
-   - Blocked: Site down, no public API
+   - ~~fuelprice.io~~ — NOT free, A$99/month, too expensive
+   - Remaining options: (a) Wait for site recovery + inspect XHR calls, (b) Find alternative free API
+   - Blocked: Site down, no free API
 
 7. [x] **Unified fuel price interface** — `nationalFuelApi.js`
    - Merges NSW, WA, QLD, TAS into single price feed
@@ -451,4 +458,4 @@ brand-tan: #D4C4A8       (Sandstone)
 
 ---
 
-*Last updated: 4 Feb 2026 (TAS added, VIC/SA/NT research complete)*
+*Last updated: 10 Feb 2026 (Location search fix, fuelprice.io ruled out, SA/NT research updated)*
