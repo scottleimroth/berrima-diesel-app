@@ -5,6 +5,10 @@ const API_KEY = import.meta.env.VITE_HERE_API_KEY
 const ROUTING_BASE_URL = 'https://router.hereapi.com/v8'
 const GEOCODE_BASE_URL = 'https://geocode.search.hereapi.com/v1'
 const AUTOSUGGEST_BASE_URL = 'https://autosuggest.search.hereapi.com/v1'
+const NOMINATIM_BASE_URL = 'https://nominatim.openstreetmap.org'
+
+// Center of Australia — used as default geographic bias for search relevance
+const AUSTRALIA_CENTER = '-25.2744,133.7751'
 
 /**
  * Calculate a weight-aware route for caravans, motorhomes, and tow vehicles.
@@ -119,19 +123,33 @@ export async function geocodeAddress(query) {
       params: {
         apiKey: API_KEY,
         q: query,
+        at: AUSTRALIA_CENTER,
         in: 'countryCode:AUS',
         limit: 5,
       },
     })
 
-    return (response.data.items || []).map((item) => ({
+    const results = (response.data.items || []).map((item) => ({
       id: item.id,
       title: item.title,
       address: item.address?.label || item.title,
       position: item.position,
     }))
+
+    // Fallback to Nominatim if HERE geocoding returns nothing
+    if (results.length === 0) {
+      return searchNominatim(query)
+    }
+
+    return results
   } catch (error) {
     console.error('Error geocoding address:', error)
+    try {
+      const nominatimResults = await searchNominatim(query)
+      if (nominatimResults.length > 0) return nominatimResults
+    } catch (nominatimError) {
+      console.error('Nominatim fallback also failed:', nominatimError)
+    }
     return getDemoSuggestions(query)
   }
 }
@@ -153,16 +171,14 @@ export async function getAddressSuggestions(query, near = null) {
   }
 
   try {
-    // Try autosuggest first
+    // Try autosuggest first — `at` param is critical for geographic relevance
+    const atParam = near ? `${near.lat},${near.lng}` : AUSTRALIA_CENTER
     const params = {
       apiKey: API_KEY,
       q: query,
+      at: atParam,
       in: 'countryCode:AUS',
       limit: 5,
-    }
-
-    if (near) {
-      params.at = `${near.lat},${near.lng}`
     }
 
     const response = await axios.get(`${AUTOSUGGEST_BASE_URL}/autosuggest`, { params })
@@ -176,12 +192,13 @@ export async function getAddressSuggestions(query, near = null) {
         position: item.position,
       }))
 
-    // If autosuggest returns no results, try geocoding as fallback
+    // If autosuggest returns no results, try HERE geocoding
     if (results.length === 0) {
       const geocodeResponse = await axios.get(`${GEOCODE_BASE_URL}/geocode`, {
         params: {
           apiKey: API_KEY,
           q: query,
+          at: atParam,
           in: 'countryCode:AUS',
           limit: 5,
         },
@@ -195,9 +212,21 @@ export async function getAddressSuggestions(query, near = null) {
       }))
     }
 
+    // If HERE APIs both fail, try OpenStreetMap Nominatim as final fallback
+    if (results.length === 0) {
+      results = await searchNominatim(query)
+    }
+
     return results
   } catch (error) {
     console.error('Error getting address suggestions:', error)
+    // On network/API error, try Nominatim before falling back to demo
+    try {
+      const nominatimResults = await searchNominatim(query)
+      if (nominatimResults.length > 0) return nominatimResults
+    } catch (nominatimError) {
+      console.error('Nominatim fallback also failed:', nominatimError)
+    }
     return getDemoSuggestions(query)
   }
 }
@@ -236,6 +265,55 @@ function processRouteResponse(route) {
     })),
     warnings: section.notices || [],
   }
+}
+
+/**
+ * Search OpenStreetMap Nominatim for Australian locations.
+ * Reliable fallback for small towns that HERE doesn't index well.
+ */
+async function searchNominatim(query) {
+  const response = await axios.get(`${NOMINATIM_BASE_URL}/search`, {
+    params: {
+      q: query,
+      countrycodes: 'au',
+      format: 'json',
+      addressdetails: 1,
+      limit: 5,
+    },
+    headers: {
+      'User-Agent': 'BerrimaDieselApp/1.0',
+    },
+  })
+
+  return (response.data || [])
+    .filter((item) => item.lat && item.lon)
+    .map((item) => {
+      const addr = item.address || {}
+      const state = addr.state ? abbreviateState(addr.state) : ''
+      const town = addr.city || addr.town || addr.village || addr.hamlet || item.name || query
+      const title = state ? `${town}, ${state}` : town
+
+      return {
+        id: `nom-${item.place_id}`,
+        title,
+        address: item.display_name,
+        position: { lat: parseFloat(item.lat), lng: parseFloat(item.lon) },
+      }
+    })
+}
+
+function abbreviateState(stateName) {
+  const stateMap = {
+    'New South Wales': 'NSW',
+    'Victoria': 'VIC',
+    'Queensland': 'QLD',
+    'South Australia': 'SA',
+    'Western Australia': 'WA',
+    'Tasmania': 'TAS',
+    'Northern Territory': 'NT',
+    'Australian Capital Territory': 'ACT',
+  }
+  return stateMap[stateName] || stateName
 }
 
 // Demo data for when API key is not configured
