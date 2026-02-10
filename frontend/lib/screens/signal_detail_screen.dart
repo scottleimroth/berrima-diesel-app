@@ -7,9 +7,9 @@ class SignalDetailScreen extends ConsumerWidget {
   final int signalId;
 
   const SignalDetailScreen({
-    Key? key,
+    super.key,
     required this.signalId,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
