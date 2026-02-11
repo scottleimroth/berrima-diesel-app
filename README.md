@@ -18,8 +18,12 @@ Diesel Price Tracker & 4WD, Caravan & Motorhome Route Planner for Berrima Diesel
 ## Features
 
 ### Diesel Price Finder
-- Diesel prices across NSW, WA, QLD, and TAS (5,000+ stations)
-- NSW: Real-time via FuelCheck API | WA: Daily via FuelWatch | QLD: Monthly via Open Data | TAS: Real-time via TAS FuelCheck
+- Diesel prices across NSW, ACT, QLD, VIC, WA, and TAS (8,300+ stations)
+- NSW/ACT: Real-time via FuelCheck API
+- QLD: Monthly via Open Data
+- VIC: 24h delayed via Servo Saver API
+- WA: Daily via FuelWatch
+- TAS: Real-time via TAS FuelCheck
 - State selector or search all states at once
 - Sort by price or distance, filter by radius
 - Map and list views
@@ -38,7 +42,7 @@ Diesel Price Tracker & 4WD, Caravan & Motorhome Route Planner for Berrima Diesel
 - **Frontend**: React 18 + Vite + Tailwind CSS
 - **Maps**: Leaflet.js
 - **Routing**: HERE Platform API (weight-aware routing for caravans & motorhomes)
-- **Fuel Prices**: NSW FuelCheck API, WA FuelWatch RSS, QLD Open Data CKAN API, TAS FuelCheck API
+- **Fuel Prices**: NSW FuelCheck API, QLD Open Data CKAN API, VIC Servo Saver API, WA FuelWatch RSS, TAS FuelCheck API
 - **Styling**: Australian heritage color scheme (Berrima sandstone, ochre, eucalyptus)
 
 ## Local Development
