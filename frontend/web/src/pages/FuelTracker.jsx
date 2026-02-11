@@ -210,6 +210,17 @@ function FuelTracker() {
             />
           </div>
         )}
+
+        {/* Data Attribution Footer */}
+        <div className="mt-8 pt-4 border-t border-brand-tan/30 text-xs text-brand-gray/70 text-center">
+          <p>
+            NSW/ACT data: © State of NSW (FuelCheck). QLD data: © State of Queensland. WA data: © FuelWatch WA.{' '}
+            TAS data: © State of Tasmania. VIC data: © State of Victoria accessed via Victorian Government Service Victoria Platform.
+          </p>
+          <p className="mt-1">
+            All fuel prices are provided by state government sources and displayed under their respective open data licenses.
+          </p>
+        </div>
       </div>
     </div>
   )
