@@ -2,26 +2,24 @@
 
 ## Last Session
 
-- **Date:** 2026-02-10
-- **Summary:** Fixed route planner location search (small towns not found), researched SA/NT fuel APIs and fuelprice.io pricing.
+- **Date:** 2026-02-11
+- **Summary:** VIC Servo Saver API key received, waiting for developer documentation PDF to build integration.
 - **Key changes:**
-  - Fixed location search: added `at` parameter (Australia center) to HERE Autosuggest/Geocode APIs for geographic relevance
-  - Added OpenStreetMap Nominatim as fallback geocoder for small Australian towns (Eden, Bombala, etc.)
-  - Added Nominatim service worker caching to `vite.config.js`
-  - Researched fuelprice.io — NOT free, A$99/month (Visser Associates), ruled out
-  - Researched SA CBS data publisher registration — free path via Informed Sources
-  - Confirmed MyFuelNT still broken, found internal API endpoints but no usable JSON API
-- **Stopped at:** Location search fix deployed. SA/VIC/NT fuel APIs still blocked on applications/registrations.
+  - Received VIC Servo Saver API key: `892b24b117ea6ae7c95f356035b04d16`
+  - Tested common API endpoint patterns but none worked without documentation
+  - Confirmed documentation is sent separately via email as "Servo Saver Open API Developer Documentation" PDF
+- **Stopped at:** Need developer PDF to get base URL, endpoints, authentication headers, and response format.
 - **Blockers:**
-  - VIC: Servo Saver API requires free application (check if already applied)
+  - VIC: Have API key, need developer documentation PDF from email to build integration
   - SA: Register as data publisher via CBS/Informed Sources (free, contact cbs.sa.gov.au or informedsources.com/contact/)
   - NT: MyFuelNT still showing errors, no usable public API
   - WA FuelWatch has no CORS headers — using allorigins.win proxy (may be unreliable)
-- **Next session ideas:**
-  - Apply for SA data publisher registration if not done
-  - Check VIC Servo Saver application status
-  - Build fuel stops along route feature (#8) — doesn't need new APIs
-  - Consider accessibility page for web apps (user mentioned interest)
+- **Next steps:**
+  - Find VIC Servo Saver developer PDF in email, extract API details
+  - Build `vicFuelApi.js` service once docs are available
+  - Integrate VIC into `nationalFuelApi.js`
+  - Add VIC API key to `.env` and `CREDENTIALS.md`
+  - Test VIC fuel service and deploy
 
 ---
 
@@ -63,12 +61,11 @@ Expand diesel price coverage from NSW-only to all Australian states. Each state 
    - Implementation: `tasFuelApi.js` — same format as NSW FuelCheck
 
 4. [ ] **Victoria diesel prices** — Servo Saver API (Service Victoria)
-   - API exists, free, requires application at service.vic.gov.au
+   - API key received: `892b24b117ea6ae7c95f356035b04d16`
    - Format: JSON, CC-BY-4.0 licence, 24-hour data delay
-   - Base URL/endpoints provided only after approval (not public)
-   - Apply at: https://service.vic.gov.au/find-services/transport-and-driving/servo-saver/help-centre/servo-saver-public-api/apply-for-servo-saver-public-api
+   - Base URL/endpoints provided in "Servo Saver Open API Developer Documentation" PDF (sent via email)
    - Contact: fuel.program@service.vic.gov.au
-   - Blocked: Need to apply and wait for approval (delays due to high demand)
+   - Blocked: Need to locate developer PDF in email to get API endpoints and authentication details
 
 5. [ ] **South Australia diesel prices** — Informed Sources aggregator
    - No public government API — SA uses private aggregator model (Informed Sources)
