@@ -35,6 +35,7 @@ jobs:
         env:
           VITE_HERE_API_KEY: ${{ secrets.VITE_HERE_API_KEY }}
           VITE_NSW_FUEL_API_KEY: ${{ secrets.VITE_NSW_FUEL_API_KEY }}
+          VITE_VIC_FUEL_API_KEY: ${{ secrets.VITE_VIC_FUEL_API_KEY }}
           VITE_DEFAULT_LAT: "-34.4794"
           VITE_DEFAULT_LNG: "150.3369"
         run: npm run build
