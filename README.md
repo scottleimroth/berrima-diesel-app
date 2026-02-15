@@ -100,6 +100,33 @@ Diesel Price Tracker, Route Planner & Touring Tools for 4WD, Caravan & Motorhome
 - Quick reference table plus detailed state rules
 - SA is the only state with a specific 100 km/h towing limit
 
+### Flood & Weather Warnings
+- BOM flood warnings and severe weather alerts
+- Links to official BOM flood warning pages for all states
+- Auto-refreshes every 10 minutes
+
+### Water Points
+- Find drinking water refill points from OpenStreetMap
+- Potable/non-potable indicators
+
+### Gas Bottle Refills
+- Find LPG and camping gas refill stations
+- Shows fuel stations with LPG and dedicated gas shops
+
+### Workshop Finder
+- Find mechanics, diesel specialists, and tyre shops
+- Features Berrima Diesel Service as the premier diesel specialist
+- Tags for diesel and 4WD specialists
+
+### WiFi Hotspots
+- Find free public WiFi near you
+- Venue type labels (library, cafe, caravan park, etc.)
+- Free-only filter
+
+### Laundromat Finder
+- Find laundromats and laundry facilities for long-term touring
+- Opening hours and self-service indicators
+
 ### Pre-Trip Checklists
 - Vehicle, caravan, packing, and campsite setup checklists
 - Add custom items, progress saved to localStorage

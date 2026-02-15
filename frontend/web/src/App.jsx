@@ -17,6 +17,12 @@ import TripJournal from './pages/TripJournal'
 import SolarEstimator from './pages/SolarEstimator'
 import TowingSpeedLimits from './pages/TowingSpeedLimits'
 import ServiceTracker from './pages/ServiceTracker'
+import WaterPoints from './pages/WaterPoints'
+import GasRefills from './pages/GasRefills'
+import WorkshopFinder from './pages/WorkshopFinder'
+import WifiHotspots from './pages/WifiHotspots'
+import Laundromats from './pages/Laundromats'
+import FloodWarnings from './pages/FloodWarnings'
 
 function App() {
   return (
@@ -40,6 +46,12 @@ function App() {
           <Route path="/solar-estimator" element={<SolarEstimator />} />
           <Route path="/towing-speed-limits" element={<TowingSpeedLimits />} />
           <Route path="/service-tracker" element={<ServiceTracker />} />
+          <Route path="/water-points" element={<WaterPoints />} />
+          <Route path="/gas-refills" element={<GasRefills />} />
+          <Route path="/workshops" element={<WorkshopFinder />} />
+          <Route path="/wifi" element={<WifiHotspots />} />
+          <Route path="/laundromats" element={<Laundromats />} />
+          <Route path="/flood-warnings" element={<FloodWarnings />} />
         </Routes>
       </main>
       <Footer />

@@ -2,33 +2,33 @@
 
 ## Last Session
 
-- **Date:** 2026-02-15
-- **Summary:** Built 6 more touring tools across Phases 2-6 — app now has 16 pages total!
+- **Date:** 2026-02-16
+- **Summary:** Built 6 more touring tools — app now has 22 pages total!
 - **Key achievements:**
-  - ✅ Built Dump Points locator (OSM Overpass API, grey water/chemical/cassette filters)
-  - ✅ Built Fuel Economy Tracker (fill-up logging, L/100km calculation, cost tracking)
-  - ✅ Built Trip Journal (entries with location, rating, tags, odometer, notes)
-  - ✅ Built Solar Panel Estimator (panel/battery presets, AU sun hours, load calculator)
-  - ✅ Built Towing Speed Limits reference (all 8 states/territories, quick ref table)
-  - ✅ Built Vehicle Service Tracker (service history, reminders, vehicle presets)
-  - ✅ Extended overpassApi.js with findDumpPoints() function
-  - ✅ Updated App.jsx with 6 new routes (16 total)
-  - ✅ Updated Header.jsx tools dropdown (13 tool links)
-  - ✅ Updated Home.jsx touring tools grid (13 tool cards)
+  - ✅ Built Water Points locator (OSM Overpass API, potable/non-potable)
+  - ✅ Built Gas Bottle Refills locator (OSM Overpass API, LPG stations + gas shops)
+  - ✅ Built Workshop Finder (OSM Overpass API, diesel/4WD specialist tags, Berrima Diesel featured)
+  - ✅ Built WiFi Hotspots locator (OSM Overpass API, venue types, free filter)
+  - ✅ Built Laundromat Finder (OSM Overpass API, self-service indicators)
+  - ✅ Built Flood & Weather Warnings (BOM RSS feeds via proxy, severity levels)
+  - ✅ Extended overpassApi.js with 5 new functions (water, gas, workshops, wifi, laundromats)
+  - ✅ Updated App.jsx with 6 new routes (22 total)
+  - ✅ Updated Header.jsx tools dropdown (19 tool links)
+  - ✅ Updated Home.jsx touring tools grid (19 tool cards)
   - ✅ Updated README.md with all new features
   - ✅ Clean production build verified
-- **New pages:** 6 (DumpPoints, FuelEconomy, TripJournal, SolarEstimator, TowingSpeedLimits, ServiceTracker)
-- **Total pages:** 16
-- **Stopped at:** All features built and building clean. Ready to commit and deploy.
+- **New pages:** 6 (WaterPoints, GasRefills, WorkshopFinder, WifiHotspots, Laundromats, FloodWarnings)
+- **Total pages:** 22
+- **Stopped at:** All features built and building clean. Committed and pushed.
 - **Blockers:**
   - SA: No free public fuel API (Informed Sources is private, fuelprice.io is $99/mo)
   - NT: MyFuelNT still down, no public API, no recent datasets on data.nt.gov.au
   - WA FuelWatch has no CORS headers — still using allorigins.win proxy
 - **Next steps:**
-  - Phase 2 remaining: pet-friendly filter, water points, gas refills
-  - Phase 3 remaining: road conditions, flood warnings, mobile coverage, water crossing depth
+  - Phase 2 remaining: pet-friendly filter
+  - Phase 3 remaining: road conditions, mobile coverage, water crossing depth
   - Phase 5 remaining: multi-stop planner, vehicle profiles, offline improvements
-  - Phase 6 remaining: community data, speed cameras, Play Store TWA, push notifications, elevation profile, workshop locator, fuel price history, WiFi hotspots, laundromat locator
+  - Phase 6 remaining: community data, speed cameras, Play Store TWA, push notifications, elevation profile, fuel price history
 
 ---
 
@@ -145,13 +145,13 @@ Essential services and facilities for diesel vehicle tourers.
     - Source: OSM tags, community databases, park websites
     - Implementation: Filter toggle on campground finder page
 
-13. [ ] **Water points and potable water** — Drinking water refill locations
+13. [x] **Water points and potable water** — Drinking water refill locations (2026-02-16)
     - Source: National Public Toilet Map (many list water availability)
     - Source: OSM nodes tagged `amenity=drinking_water`
     - Implementation: Layer on existing map or dedicated section
     - Show distance from current location or along route
 
-14. [ ] **Gas bottle refill locator** — LPG/camping gas refill stations
+14. [x] **Gas bottle refill locator** — LPG/camping gas refill stations (2026-02-16)
     - Source: LPG station data from fuel price APIs (filter for LPG fuel type)
     - Source: OSM nodes tagged `fuel:lpg=yes` or `shop=gas`
     - Source: Swap'n'Go locator data
@@ -188,7 +188,7 @@ Real-time safety information for touring.
     - Total fire ban day alerts
     - Smoke/air quality warnings
 
-18. [ ] **Flood warnings** — BOM flood data
+18. [x] **Flood warnings** — BOM flood data (2026-02-16)
     - API: BOM warning feeds (RSS/JSON)
     - Data: Current flood warnings by river catchment
     - Implementation: Flood warning overlay on map
@@ -331,7 +331,7 @@ Longer-term features requiring more infrastructure.
     - Warn about long descents (brake fade risk) and steep climbs (fuel/power impact)
     - Implementation: Chart component below route map
 
-36. [ ] **Diesel mechanic / workshop locator** — Find help on the road
+36. [x] **Diesel mechanic / workshop locator** — Find help on the road (2026-02-16)
     - Find diesel mechanics and workshops near current location or along route
     - Source: Google Places API or OSM `shop=car_repair` / `service:vehicle:diesel=yes`
     - Filter by: diesel specialist, 4WD specialist, caravan/trailer service
@@ -352,14 +352,14 @@ Longer-term features requiring more infrastructure.
     - Source: State road authority regulations (static reference data)
     - Implementation: Reference page `TowingLimits.jsx`
 
-39. [ ] **Free WiFi hotspot locator** — Stay connected on the road
+39. [x] **Free WiFi hotspot locator** — Stay connected on the road (2026-02-16)
     - Find free public WiFi near current location or along route
     - Source: OSM nodes tagged `internet_access=wlan` / `internet_access:fee=no`
     - Libraries, shopping centres, McDonald's, caravan parks
     - Useful for remote area travellers needing to upload/download
     - Implementation: Map layer or dedicated section
 
-40. [ ] **Laundromat locator** — Essential for long-term tourers
+40. [x] **Laundromat locator** — Essential for long-term tourers (2026-02-16)
     - Find laundromats and laundry facilities near current location
     - Source: OSM nodes tagged `shop=laundry` or `amenity=laundry`
     - Include caravan park laundry facilities where known
@@ -405,6 +405,15 @@ Longer-term features requiring more infrastructure.
 - [x] Vehicle Service Tracker — service history, reminders, vehicle presets (2026-02-15)
 - [x] Header navigation expanded to 13 tool links (2026-02-15)
 - [x] Home page expanded to 13 touring tool cards (2026-02-15)
+- [x] Water Points locator — OSM Overpass API with potable/non-potable (2026-02-16)
+- [x] Gas Bottle Refills locator — OSM Overpass API for LPG stations (2026-02-16)
+- [x] Workshop Finder — OSM Overpass API with diesel/4WD specialist tags (2026-02-16)
+- [x] WiFi Hotspots locator — OSM Overpass API with venue types (2026-02-16)
+- [x] Laundromat Finder — OSM Overpass API with self-service indicators (2026-02-16)
+- [x] Flood & Weather Warnings — BOM RSS feeds via proxy (2026-02-16)
+- [x] Extended overpassApi.js with 5 new finder functions (2026-02-16)
+- [x] Header navigation expanded to 19 tool links (2026-02-16)
+- [x] Home page expanded to 19 touring tool cards (2026-02-16)
 
 ---
 
@@ -476,6 +485,12 @@ Longer-term features requiring more infrastructure.
 | `frontend/web/src/pages/SolarEstimator.jsx` | Solar panel estimator page |
 | `frontend/web/src/pages/TowingSpeedLimits.jsx` | Towing speed limits reference page |
 | `frontend/web/src/pages/ServiceTracker.jsx` | Vehicle service tracker page |
+| `frontend/web/src/pages/WaterPoints.jsx` | Water points locator page |
+| `frontend/web/src/pages/GasRefills.jsx` | Gas bottle refill locator page |
+| `frontend/web/src/pages/WorkshopFinder.jsx` | Workshop/mechanic finder page |
+| `frontend/web/src/pages/WifiHotspots.jsx` | WiFi hotspot locator page |
+| `frontend/web/src/pages/Laundromats.jsx` | Laundromat finder page |
+| `frontend/web/src/pages/FloodWarnings.jsx` | Flood & weather warnings page |
 | `frontend/web/src/hooks/useInstallPrompt.js` | PWA install prompt hook |
 | `frontend/web/vite.config.js` | Vite + PWA config |
 | `.github/workflows/deploy.yml` | GitHub Actions deploy workflow |
@@ -508,4 +523,4 @@ brand-tan: #D4C4A8       (Sandstone)
 
 ---
 
-*Last updated: 15 Feb 2026 (16 pages total — 6 new: dump points, fuel economy, trip journal, solar estimator, towing speed limits, service tracker)*
+*Last updated: 16 Feb 2026 (22 pages total — 6 new: water points, gas refills, workshop finder, WiFi hotspots, laundromats, flood warnings)*
