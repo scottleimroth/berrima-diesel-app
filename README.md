@@ -69,6 +69,37 @@ Diesel Price Tracker, Route Planner & Touring Tools for 4WD, Caravan & Motorhome
 - Vehicle presets for popular 4WDs (LandCruiser, HiLux, Ranger, Patrol, etc.)
 - Payload breakdown with accessories, cargo, passengers, and towing
 
+### Dump Points
+- Find sanitary dump stations for RVs, caravans, and motorhomes
+- Data from OpenStreetMap (grey water, chemical toilet, cassette)
+- Filter by free/paid, adjustable search radius
+
+### Fuel Economy Tracker
+- Log fill-ups with odometer, litres, cost, and station
+- Calculates L/100km between full-tank fill-ups
+- Tracks best, worst, and average economy plus total spending
+
+### Solar Panel Estimator
+- Calculate daily solar production vs power consumption
+- Panel and battery presets for common touring setups
+- Australian peak sun hours by region
+- Add common or custom power loads (fridge, lights, Starlink, CPAP, etc.)
+
+### Vehicle Service Tracker
+- Log oil changes, services, tyre rotations, and more
+- Service reminders by km and time interval
+- Vehicle presets for popular 4WDs (LandCruiser, HiLux, Ranger, Patrol, etc.)
+
+### Trip Journal
+- Record daily travel entries with location, rating, tags, and notes
+- Track distance via odometer readings
+- Edit, delete, and expand entries
+
+### Towing Speed Limits
+- State-by-state speed limits for vehicles towing trailers/caravans
+- Quick reference table plus detailed state rules
+- SA is the only state with a specific 100 km/h towing limit
+
 ### Pre-Trip Checklists
 - Vehicle, caravan, packing, and campsite setup checklists
 - Add custom items, progress saved to localStorage

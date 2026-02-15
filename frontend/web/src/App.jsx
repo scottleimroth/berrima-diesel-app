@@ -11,6 +11,12 @@ import RestAreas from './pages/RestAreas'
 import TyrePressure from './pages/TyrePressure'
 import WeightCalculator from './pages/WeightCalculator'
 import Checklists from './pages/Checklists'
+import DumpPoints from './pages/DumpPoints'
+import FuelEconomy from './pages/FuelEconomy'
+import TripJournal from './pages/TripJournal'
+import SolarEstimator from './pages/SolarEstimator'
+import TowingSpeedLimits from './pages/TowingSpeedLimits'
+import ServiceTracker from './pages/ServiceTracker'
 
 function App() {
   return (
@@ -28,6 +34,12 @@ function App() {
           <Route path="/tyre-pressure" element={<TyrePressure />} />
           <Route path="/weight-calculator" element={<WeightCalculator />} />
           <Route path="/checklists" element={<Checklists />} />
+          <Route path="/dump-points" element={<DumpPoints />} />
+          <Route path="/fuel-economy" element={<FuelEconomy />} />
+          <Route path="/trip-journal" element={<TripJournal />} />
+          <Route path="/solar-estimator" element={<SolarEstimator />} />
+          <Route path="/towing-speed-limits" element={<TowingSpeedLimits />} />
+          <Route path="/service-tracker" element={<ServiceTracker />} />
         </Routes>
       </main>
       <Footer />
