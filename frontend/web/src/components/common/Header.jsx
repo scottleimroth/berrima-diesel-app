@@ -10,8 +10,14 @@ const TOOL_LINKS = [
   { to: '/bushfires', label: 'Bushfire Info', icon: '🔥' },
   { to: '/campgrounds', label: 'Campgrounds', icon: '⛺' },
   { to: '/rest-areas', label: 'Rest Areas', icon: '🅿️' },
+  { to: '/dump-points', label: 'Dump Points', icon: '🚮' },
   { to: '/tyre-pressure', label: 'Tyre Pressure', icon: '🛞' },
   { to: '/weight-calculator', label: 'Weight Calculator', icon: '⚖️' },
+  { to: '/fuel-economy', label: 'Fuel Economy', icon: '⛽' },
+  { to: '/solar-estimator', label: 'Solar Estimator', icon: '☀️' },
+  { to: '/service-tracker', label: 'Service Tracker', icon: '🔧' },
+  { to: '/trip-journal', label: 'Trip Journal', icon: '📓' },
+  { to: '/towing-speed-limits', label: 'Speed Limits', icon: '🚦' },
   { to: '/checklists', label: 'Checklists', icon: '✅' },
 ]
 

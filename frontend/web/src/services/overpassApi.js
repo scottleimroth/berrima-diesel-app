@@ -127,6 +127,59 @@ export async function findCampgrounds(lat, lng, radiusKm = 50) {
  * @param {number} radiusKm
  * @returns {Promise<Array>}
  */
+/**
+ * Find dump points (sanitary dump stations) near a location
+ * @param {number} lat
+ * @param {number} lng
+ * @param {number} radiusKm
+ * @returns {Promise<Array>}
+ */
+export async function findDumpPoints(lat, lng, radiusKm = 100) {
+  const radiusM = radiusKm * 1000
+  const ql = `
+    [out:json][timeout:25];
+    (
+      node["amenity"="sanitary_dump_station"](around:${radiusM},${lat},${lng});
+      way["amenity"="sanitary_dump_station"](around:${radiusM},${lat},${lng});
+      node["sanitary_dump_station"="yes"](around:${radiusM},${lat},${lng});
+      way["sanitary_dump_station"="yes"](around:${radiusM},${lat},${lng});
+    );
+    out center body;
+  `
+
+  const data = await query(ql)
+  const elements = data.elements || []
+
+  return elements
+    .map((el) => {
+      const elLat = el.lat || el.center?.lat
+      const elLng = el.lon || el.center?.lon
+      if (!elLat || !elLng) return null
+
+      const tags = el.tags || {}
+      return {
+        id: el.id,
+        name: tags.name || 'Dump Point',
+        lat: elLat,
+        lng: elLng,
+        distance: Math.round(haversine(lat, lng, elLat, elLng) * 10) / 10,
+        fee: tags.fee === 'yes' ? 'Paid' : tags.fee === 'no' ? 'Free' : 'Unknown',
+        access: tags.access || 'unknown',
+        operator: tags.operator || null,
+        website: tags.website || tags['contact:website'] || null,
+        facilities: {
+          water: tags.drinking_water === 'yes' || tags.water_point === 'yes',
+          grey_water: tags['waste_disposal:grey_water'] === 'yes',
+          chemical_toilet: tags['waste_disposal:chemical_toilet'] === 'yes',
+          cassette: tags['waste_disposal:cassette'] === 'yes',
+        },
+        source: 'osm',
+      }
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.distance - b.distance)
+}
+
 export async function findRestAreas(lat, lng, radiusKm = 50) {
   const radiusM = radiusKm * 1000
   const ql = `

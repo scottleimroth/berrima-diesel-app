@@ -3,38 +3,32 @@
 ## Last Session
 
 - **Date:** 2026-02-15
-- **Summary:** Massive feature expansion — built 7 new pages across Phases 2-5!
+- **Summary:** Built 6 more touring tools across Phases 2-6 — app now has 16 pages total!
 - **Key achievements:**
-  - ✅ Investigated SA + NT fuel scraping — confirmed no free public APIs exist
-  - ✅ Built Weather Forecast page (Open-Meteo BOM API, 7-day forecast, current conditions)
-  - ✅ Built Bushfire & Emergency Info page (NSW RFS live incidents, all state fire service links)
-  - ✅ Built Campground Finder (OSM Overpass API, facility filters, free/paid filter)
-  - ✅ Built Rest Areas page (OSM Overpass API, facilities info, driver fatigue tips)
-  - ✅ Built Tyre Pressure Calculator (terrain modes, tyre presets, temp/altitude adjustment)
-  - ✅ Built Weight Distribution Calculator (GVM/GCM compliance, vehicle presets, payload breakdown)
-  - ✅ Built Pre-Trip Checklists (4 default lists, custom items, localStorage persistence)
-  - ✅ Created 3 new API services: weatherApi.js, bushfireApi.js, overpassApi.js
-  - ✅ Created useChecklists.js hook for persistent checklist state
-  - ✅ Updated App.jsx with 7 new routes
-  - ✅ Updated Header.jsx with "Tools" dropdown menu (desktop + mobile)
-  - ✅ Updated Home.jsx with full touring tools grid section
-  - ✅ Added PWA service worker caching for weather, bushfire, and overpass APIs
+  - ✅ Built Dump Points locator (OSM Overpass API, grey water/chemical/cassette filters)
+  - ✅ Built Fuel Economy Tracker (fill-up logging, L/100km calculation, cost tracking)
+  - ✅ Built Trip Journal (entries with location, rating, tags, odometer, notes)
+  - ✅ Built Solar Panel Estimator (panel/battery presets, AU sun hours, load calculator)
+  - ✅ Built Towing Speed Limits reference (all 8 states/territories, quick ref table)
+  - ✅ Built Vehicle Service Tracker (service history, reminders, vehicle presets)
+  - ✅ Extended overpassApi.js with findDumpPoints() function
+  - ✅ Updated App.jsx with 6 new routes (16 total)
+  - ✅ Updated Header.jsx tools dropdown (13 tool links)
+  - ✅ Updated Home.jsx touring tools grid (13 tool cards)
   - ✅ Updated README.md with all new features
   - ✅ Clean production build verified
-- **New pages:** 7 (Weather, Bushfires, Campgrounds, Rest Areas, Tyre Pressure, Weight Calculator, Checklists)
-- **New files:** 10 (7 pages, 3 services, 1 hook) — total app now has 10 pages
+- **New pages:** 6 (DumpPoints, FuelEconomy, TripJournal, SolarEstimator, TowingSpeedLimits, ServiceTracker)
+- **Total pages:** 16
 - **Stopped at:** All features built and building clean. Ready to commit and deploy.
 - **Blockers:**
   - SA: No free public fuel API (Informed Sources is private, fuelprice.io is $99/mo)
   - NT: MyFuelNT still down, no public API, no recent datasets on data.nt.gov.au
   - WA FuelWatch has no CORS headers — still using allorigins.win proxy
 - **Next steps:**
-  - Commit and deploy all new features
-  - Test all pages on live site
-  - Phase 2 remaining: dump points locator, pet-friendly filter, water points, gas refills
-  - Phase 3 remaining: road conditions, flood warnings, mobile coverage
-  - Phase 4 remaining: fuel economy tracker, service tracker, solar estimator
-  - Phase 5 remaining: trip journal, multi-stop planner, vehicle profiles, offline improvements
+  - Phase 2 remaining: pet-friendly filter, water points, gas refills
+  - Phase 3 remaining: road conditions, flood warnings, mobile coverage, water crossing depth
+  - Phase 5 remaining: multi-stop planner, vehicle profiles, offline improvements
+  - Phase 6 remaining: community data, speed cameras, Play Store TWA, push notifications, elevation profile, workshop locator, fuel price history, WiFi hotspots, laundromat locator
 
 ---
 
@@ -129,7 +123,7 @@ Essential services and facilities for diesel vehicle tourers.
    - Implementation: New page `RestAreas.jsx` with map markers and list view
    - Filter by facilities, distance from route, vehicle size suitability
 
-10. [ ] **Dump points locator** — Caravan/motorhome waste disposal
+10. [x] **Dump points locator** — Caravan/motorhome waste disposal (2026-02-15)
     - API: National Public Toilet Map + community databases
     - URL: `https://toiletmap.gov.au/api/` (Australian Government)
     - Data: Dump point locations, types (black water, grey water), access restrictions
@@ -237,7 +231,7 @@ Calculators and references specific to diesel vehicles.
     - Warning when approaching or exceeding limits
     - Implementation: Tool page `WeightCalculator.jsx`
 
-23. [ ] **Enhanced fuel economy tracker** — Trip logging
+23. [x] **Enhanced fuel economy tracker** — Trip logging (2026-02-15)
     - Log fill-ups: litres, cost, odometer reading
     - Calculate: L/100km, cost/km, running averages
     - Compare economy across different conditions (highway vs towing vs off-road)
@@ -245,14 +239,14 @@ Calculators and references specific to diesel vehicles.
     - Chart fuel economy trends over time
     - Implementation: Enhance existing fuel consumption calculator
 
-24. [ ] **Vehicle service tracker** — Maintenance reminders
+24. [x] **Vehicle service tracker** — Maintenance reminders (2026-02-15)
     - Log: Oil changes, filter replacements, tyre rotations
     - Set interval reminders by km or time
     - Common diesel service intervals as presets
     - Store in localStorage
     - Implementation: Page `ServiceTracker.jsx`
 
-25. [ ] **Solar panel output estimator**
+25. [x] **Solar panel output estimator** (2026-02-15)
     - Input: Panel wattage, panel type (mono/poly), angle, location
     - API: Open-Meteo solar radiation data (`shortwave_radiation`)
     - Calculate: Expected daily output (Wh) based on location and season
@@ -274,7 +268,7 @@ Pre-trip preparation and on-trip recording tools.
     - Store in localStorage
     - Implementation: Page `Checklists.jsx`
 
-27. [ ] **Trip journal** — Log entries along the way
+27. [x] **Trip journal** — Log entries along the way (2026-02-15)
     - Date/time stamped entries with location
     - Photo references (store filenames, not actual photos)
     - Campsite ratings and notes
@@ -351,7 +345,7 @@ Longer-term features requiring more infrastructure.
     - Source: Store price snapshots in localStorage over time, or use fuelprice.io historical API
     - Implementation: Chart on station detail view
 
-38. [ ] **Towing speed limit reference by state** — Quick legal reference
+38. [x] **Towing speed limit reference by state** — Quick legal reference (2026-02-15)
     - Speed limits vary by state for vehicles towing trailers/caravans
     - Table: state-by-state speed limits for towing (highway, rural, urban)
     - Include GVM/ATM thresholds that trigger different limits
@@ -403,6 +397,14 @@ Longer-term features requiring more infrastructure.
 - [x] Header navigation dropdown for all touring tools (2026-02-15)
 - [x] Home page updated with full touring tools grid (2026-02-15)
 - [x] PWA caching for weather, bushfire, and overpass APIs (2026-02-15)
+- [x] Dump Points locator — OSM Overpass API with findDumpPoints() (2026-02-15)
+- [x] Fuel Economy Tracker — fill-up logging, L/100km, cost tracking (2026-02-15)
+- [x] Trip Journal — entries with location, rating, tags, odometer (2026-02-15)
+- [x] Solar Panel Estimator — panel/battery presets, AU sun hours, load calc (2026-02-15)
+- [x] Towing Speed Limits reference — all 8 states/territories (2026-02-15)
+- [x] Vehicle Service Tracker — service history, reminders, vehicle presets (2026-02-15)
+- [x] Header navigation expanded to 13 tool links (2026-02-15)
+- [x] Home page expanded to 13 touring tool cards (2026-02-15)
 
 ---
 
@@ -459,7 +461,7 @@ Longer-term features requiring more infrastructure.
 | `frontend/web/src/pages/FuelTracker.jsx` | Main fuel tracker page (national) |
 | `frontend/web/src/services/weatherApi.js` | Open-Meteo BOM weather API |
 | `frontend/web/src/services/bushfireApi.js` | NSW RFS bushfire incidents |
-| `frontend/web/src/services/overpassApi.js` | OSM Overpass API for campgrounds/rest areas |
+| `frontend/web/src/services/overpassApi.js` | OSM Overpass API for campgrounds/rest areas/dump points |
 | `frontend/web/src/hooks/useChecklists.js` | Pre-trip checklist localStorage hook |
 | `frontend/web/src/pages/Weather.jsx` | Weather forecast page |
 | `frontend/web/src/pages/Bushfires.jsx` | Bushfire & emergency info page |
@@ -468,6 +470,12 @@ Longer-term features requiring more infrastructure.
 | `frontend/web/src/pages/TyrePressure.jsx` | Tyre pressure calculator page |
 | `frontend/web/src/pages/WeightCalculator.jsx` | Weight distribution calculator page |
 | `frontend/web/src/pages/Checklists.jsx` | Pre-trip checklists page |
+| `frontend/web/src/pages/DumpPoints.jsx` | Dump points locator page |
+| `frontend/web/src/pages/FuelEconomy.jsx` | Fuel economy tracker page |
+| `frontend/web/src/pages/TripJournal.jsx` | Trip journal page |
+| `frontend/web/src/pages/SolarEstimator.jsx` | Solar panel estimator page |
+| `frontend/web/src/pages/TowingSpeedLimits.jsx` | Towing speed limits reference page |
+| `frontend/web/src/pages/ServiceTracker.jsx` | Vehicle service tracker page |
 | `frontend/web/src/hooks/useInstallPrompt.js` | PWA install prompt hook |
 | `frontend/web/vite.config.js` | Vite + PWA config |
 | `.github/workflows/deploy.yml` | GitHub Actions deploy workflow |
@@ -500,4 +508,4 @@ brand-tan: #D4C4A8       (Sandstone)
 
 ---
 
-*Last updated: 15 Feb 2026 (7 new pages: weather, bushfires, campgrounds, rest areas, tyre pressure, weight calc, checklists)*
+*Last updated: 15 Feb 2026 (16 pages total — 6 new: dump points, fuel economy, trip journal, solar estimator, towing speed limits, service tracker)*
