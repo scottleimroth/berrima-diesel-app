@@ -4,7 +4,7 @@
 
 **Cross-Platform Web App** — Works on desktop, tablet, and mobile. Installable as a PWA.
 
-Diesel Price Tracker & 4WD, Caravan & Motorhome Route Planner for Berrima Diesel Service. Working exclusively on diesel since 1956.
+Diesel Price Tracker, Route Planner & Touring Tools for 4WD, Caravan & Motorhome travellers. Built by Berrima Diesel Service — working exclusively on diesel since 1956.
 
 ---
 
@@ -37,12 +37,52 @@ Diesel Price Tracker & 4WD, Caravan & Motorhome Route Planner for Berrima Diesel
 - Turn-by-turn directions
 - Save favourite routes
 
+### Weather Forecast
+- 7-day Australian forecast from Bureau of Meteorology data (via Open-Meteo)
+- Current conditions: temperature, humidity, wind, UV index
+- Location search and GPS support
+
+### Bushfire & Emergency Info
+- Live incident data from NSW Rural Fire Service
+- Emergency warning, Watch & Act, and Advice alerts
+- Links to all 8 state/territory fire services
+- Auto-refreshes every 5 minutes
+
+### Campground Finder
+- Search campgrounds and caravan parks from OpenStreetMap
+- Filter by: free/paid, toilets, water, power, pet-friendly, showers
+- Distance-based search with adjustable radius
+
+### Rest Areas
+- Find roadside rest stops and lay-bys
+- Facility info: toilets, water, shelter, picnic tables, BBQ
+- Driver fatigue tips
+
+### Tyre Pressure Calculator
+- Recommended pressures for highway, gravel, sand, mud, and rock
+- Adjusts for temperature, altitude, and towing load
+- Presets for popular 4WD tyres (BFG KO2, Cooper AT3, Toyo AT3, etc.)
+
+### Weight Distribution Calculator
+- GVM and GCM compliance checking
+- Visual progress bars with overweight warnings
+- Vehicle presets for popular 4WDs (LandCruiser, HiLux, Ranger, Patrol, etc.)
+- Payload breakdown with accessories, cargo, passengers, and towing
+
+### Pre-Trip Checklists
+- Vehicle, caravan, packing, and campsite setup checklists
+- Add custom items, progress saved to localStorage
+- Reset individual lists or all at once
+
 ## Tech Stack
 
 - **Frontend**: React 18 + Vite + Tailwind CSS
 - **Maps**: Leaflet.js
 - **Routing**: HERE Platform API (weight-aware routing for caravans & motorhomes)
-- **Fuel Prices**: NSW FuelCheck API, QLD Open Data CKAN API, VIC Servo Saver API, WA FuelWatch RSS, TAS FuelCheck API
+- **Fuel Prices**: NSW FuelCheck, QLD Open Data CKAN, VIC Servo Saver, WA FuelWatch RSS, TAS FuelCheck
+- **Weather**: Open-Meteo BOM API
+- **Bushfires**: NSW RFS GeoJSON feed
+- **Campgrounds/Rest Areas**: OpenStreetMap Overpass API
 - **Styling**: Australian heritage color scheme (Berrima sandstone, ochre, eucalyptus)
 
 ## Local Development
