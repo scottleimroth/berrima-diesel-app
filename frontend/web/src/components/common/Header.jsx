@@ -1,16 +1,39 @@
 import { NavLink } from 'react-router-dom'
-import { Compass, Download, Menu, Smartphone, X } from 'lucide-react'
-import { useState } from 'react'
+import { Compass, Menu, Smartphone, X, ChevronDown } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
 import { useInstallPrompt } from '../../hooks/useInstallPrompt'
 
 const BASE_URL = import.meta.env.BASE_URL || '/'
 
+const TOOL_LINKS = [
+  { to: '/weather', label: 'Weather Forecast', icon: '🌤️' },
+  { to: '/bushfires', label: 'Bushfire Info', icon: '🔥' },
+  { to: '/campgrounds', label: 'Campgrounds', icon: '⛺' },
+  { to: '/rest-areas', label: 'Rest Areas', icon: '🅿️' },
+  { to: '/tyre-pressure', label: 'Tyre Pressure', icon: '🛞' },
+  { to: '/weight-calculator', label: 'Weight Calculator', icon: '⚖️' },
+  { to: '/checklists', label: 'Checklists', icon: '✅' },
+]
+
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [toolsOpen, setToolsOpen] = useState(false)
   const [bannerDismissed, setBannerDismissed] = useState(false)
   const { canInstall, promptInstall } = useInstallPrompt()
+  const dropdownRef = useRef(null)
 
   const showBanner = canInstall && !bannerDismissed
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setToolsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   return (
     <header className="bg-gradient-to-r from-brand-navy to-brand-blue text-white sticky top-0 z-50 shadow-lg">
@@ -64,6 +87,40 @@ function Header() {
               <Compass size={20} />
               <span>Trip Planner</span>
             </NavLink>
+
+            {/* Tools Dropdown */}
+            <div ref={dropdownRef} className="relative">
+              <button
+                onClick={() => setToolsOpen(!toolsOpen)}
+                className={`flex items-center gap-1 px-4 py-2 rounded-lg transition-colors font-semibold ${
+                  toolsOpen ? 'bg-brand-yellow/20' : 'hover:bg-brand-yellow/20'
+                } text-white`}
+              >
+                <span>Tools</span>
+                <ChevronDown size={16} className={`transition-transform ${toolsOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {toolsOpen && (
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-brand-tan/50 py-2 z-50">
+                  {TOOL_LINKS.map((link) => (
+                    <NavLink
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setToolsOpen(false)}
+                      className={({ isActive }) =>
+                        `flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                          isActive
+                            ? 'bg-brand-yellow/20 text-brand-navy font-bold'
+                            : 'text-brand-brown hover:bg-brand-cream'
+                        }`
+                      }
+                    >
+                      <span className="text-base">{link.icon}</span>
+                      <span>{link.label}</span>
+                    </NavLink>
+                  ))}
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -109,6 +166,28 @@ function Header() {
               <Compass size={20} />
               <span>Trip Planner</span>
             </NavLink>
+
+            {/* Mobile Tools Section */}
+            <div className="border-t border-brand-yellow/20 mt-2 pt-2">
+              <p className="px-4 py-1 text-xs text-brand-yellow/60 uppercase tracking-wide">Touring Tools</p>
+              {TOOL_LINKS.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors font-medium ${
+                      isActive
+                        ? 'bg-brand-yellow text-brand-navy'
+                        : 'text-white hover:bg-brand-yellow/20'
+                    }`
+                  }
+                >
+                  <span className="text-base">{link.icon}</span>
+                  <span className="text-sm">{link.label}</span>
+                </NavLink>
+              ))}
+            </div>
           </nav>
         )}
       </div>

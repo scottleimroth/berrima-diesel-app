@@ -1,6 +1,65 @@
 import { Link } from 'react-router-dom'
 import { Clock, Phone, Award, Users, Compass } from 'lucide-react'
 
+const TOOL_CARDS = [
+  {
+    to: '/weather',
+    icon: '🌤️',
+    color: 'bg-blue-500',
+    borderHover: 'hover:border-blue-400',
+    title: 'Weather Forecast',
+    description: '7-day Australian forecast from BOM data. Check conditions before you travel.',
+  },
+  {
+    to: '/bushfires',
+    icon: '🔥',
+    color: 'bg-red-500',
+    borderHover: 'hover:border-red-400',
+    title: 'Bushfire Info',
+    description: 'Live emergency incidents from NSW RFS. Links to all state fire services.',
+  },
+  {
+    to: '/campgrounds',
+    icon: '⛺',
+    color: 'bg-brand-eucalyptus',
+    borderHover: 'hover:border-brand-eucalyptus',
+    title: 'Campground Finder',
+    description: 'Find campgrounds and caravan parks. Filter by facilities, fees, and distance.',
+  },
+  {
+    to: '/rest-areas',
+    icon: '🅿️',
+    color: 'bg-brand-ochre',
+    borderHover: 'hover:border-brand-ochre',
+    title: 'Rest Areas',
+    description: 'Find roadside rest stops for a safe break. Facilities and distance info.',
+  },
+  {
+    to: '/tyre-pressure',
+    icon: '🛞',
+    color: 'bg-brand-brown',
+    borderHover: 'hover:border-brand-brown',
+    title: 'Tyre Pressure Calculator',
+    description: 'Pressure recommendations for highway, gravel, sand, and mud. Tyre presets included.',
+  },
+  {
+    to: '/weight-calculator',
+    icon: '⚖️',
+    color: 'bg-brand-navy',
+    borderHover: 'hover:border-brand-navy',
+    title: 'Weight Calculator',
+    description: 'Check GVM and GCM compliance. Vehicle presets for popular 4WDs.',
+  },
+  {
+    to: '/checklists',
+    icon: '✅',
+    color: 'bg-brand-gold',
+    borderHover: 'hover:border-brand-gold',
+    title: 'Pre-Trip Checklists',
+    description: 'Vehicle, caravan, packing, and campsite checklists. Add your own items.',
+  },
+]
+
 function Home() {
   return (
     <div>
@@ -19,8 +78,8 @@ function Home() {
               When You Think Diesel – Think Berrima Diesel
             </p>
             <p className="text-white mb-10 max-w-2xl mx-auto text-lg">
-              Australia's Premier 4WD Diesel Turbo Centre. Helping tourers, caravanners, and adventurers
-              get the most out of their diesel vehicles since 1956.
+              Australia's Premier 4WD Diesel Turbo Centre. Free touring tools for caravanners,
+              motorhomers, and 4WD adventurers.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -44,14 +103,14 @@ function Home() {
         </div>
       </section>
 
-      {/* Features Section - Warm cream background */}
+      {/* Main Features - 2 columns */}
       <section className="py-16 bg-brand-cream">
         <div className="container mx-auto px-4">
           <h2 className="font-headline text-3xl font-bold text-center mb-4 text-brand-brown">
             Tools for Touring Travellers
           </h2>
           <p className="text-center text-brand-gray mb-12 max-w-2xl mx-auto">
-            Free tools to help you plan your next adventure - find cheap diesel and plan routes for your caravan, motorhome, or 4WD
+            Free tools to help you plan your next adventure — find cheap diesel, plan routes, check weather, and more.
           </p>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Diesel Price Tracker */}
@@ -68,8 +127,7 @@ function Home() {
                 Diesel Price Finder
               </h3>
               <p className="text-brand-gray mb-4">
-                Find the cheapest diesel across Australia. Prices from NSW, WA, QLD, and TAS
-                sorted by price or distance.
+                Find the cheapest diesel across Australia. 8,300+ stations across NSW, ACT, QLD, VIC, WA, and TAS.
               </p>
               <ul className="text-sm text-brand-gray space-y-2">
                 <li className="flex items-center gap-2">
@@ -122,8 +180,37 @@ function Home() {
         </div>
       </section>
 
-      {/* About Section - Heritage earth tones */}
+      {/* Touring Tools Grid */}
       <section className="py-16 bg-brand-light">
+        <div className="container mx-auto px-4">
+          <h2 className="font-headline text-3xl font-bold text-center mb-4 text-brand-brown">
+            More Touring Tools
+          </h2>
+          <p className="text-center text-brand-gray mb-12 max-w-2xl mx-auto">
+            Everything you need for a safe and well-planned trip across Australia.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            {TOOL_CARDS.map((tool) => (
+              <Link
+                key={tool.to}
+                to={tool.to}
+                className={`group bg-white rounded-xl p-5 hover:shadow-lg transition-all border-2 border-brand-tan ${tool.borderHover} shadow`}
+              >
+                <div className={`w-12 h-12 ${tool.color} rounded-lg flex items-center justify-center mb-3 shadow text-2xl`}>
+                  {tool.icon}
+                </div>
+                <h3 className="font-headline text-lg font-bold mb-2 text-brand-brown group-hover:text-brand-ochre transition-colors">
+                  {tool.title}
+                </h3>
+                <p className="text-sm text-brand-gray">{tool.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section - Heritage earth tones */}
+      <section className="py-16 bg-brand-cream">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-3 gap-8 mb-12">

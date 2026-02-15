@@ -2,36 +2,39 @@
 
 ## Last Session
 
-- **Date:** 2026-02-11
-- **Summary:** VIC Servo Saver API fully integrated, deployed, and LIVE! 🎉
+- **Date:** 2026-02-15
+- **Summary:** Massive feature expansion — built 7 new pages across Phases 2-5!
 - **Key achievements:**
-  - ✅ Received VIC Servo Saver API key (`892b24b117ea6ae7c95f356035b04d16`)
-  - ✅ Reviewed full API documentation PDF (29 pages)
-  - ✅ Created `vicFuelApi.js` service with complete integration
-  - ✅ Implemented UUID v4 transaction ID generation for request tracing
-  - ✅ Implemented client-side distance calculation (API returns all VIC stations)
-  - ✅ Added 1-hour caching strategy (data has 24h delay)
-  - ✅ Implemented rate limit handling (10 requests per 60 seconds)
-  - ✅ Integrated VIC into `nationalFuelApi.js`
-  - ✅ Updated STATE_CONFIG to mark VIC as available
-  - ✅ Added CC-BY-4.0 attribution footer for all state data sources
-  - ✅ Added API documentation PDF to `.gitignore`
-  - ✅ Updated GitHub Actions workflow with VIC API key
-  - ✅ Added `VITE_VIC_FUEL_API_KEY` to GitHub Secrets
-  - ✅ Updated README with new coverage stats (8,300+ stations)
-  - ✅ Successfully deployed to production via GitHub Actions
-- **Commits pushed:** 4 commits (VIC integration, attribution footer, workflow update, README update)
-- **Coverage increased:** 5 states → 6 states (NSW, ACT, QLD, VIC, WA, TAS)
-- **Station count:** 5,000+ → 8,300+ stations (66% increase!)
-- **Stopped at:** VIC integration LIVE at https://scottleimroth.com/berrima-diesel-app/
+  - ✅ Investigated SA + NT fuel scraping — confirmed no free public APIs exist
+  - ✅ Built Weather Forecast page (Open-Meteo BOM API, 7-day forecast, current conditions)
+  - ✅ Built Bushfire & Emergency Info page (NSW RFS live incidents, all state fire service links)
+  - ✅ Built Campground Finder (OSM Overpass API, facility filters, free/paid filter)
+  - ✅ Built Rest Areas page (OSM Overpass API, facilities info, driver fatigue tips)
+  - ✅ Built Tyre Pressure Calculator (terrain modes, tyre presets, temp/altitude adjustment)
+  - ✅ Built Weight Distribution Calculator (GVM/GCM compliance, vehicle presets, payload breakdown)
+  - ✅ Built Pre-Trip Checklists (4 default lists, custom items, localStorage persistence)
+  - ✅ Created 3 new API services: weatherApi.js, bushfireApi.js, overpassApi.js
+  - ✅ Created useChecklists.js hook for persistent checklist state
+  - ✅ Updated App.jsx with 7 new routes
+  - ✅ Updated Header.jsx with "Tools" dropdown menu (desktop + mobile)
+  - ✅ Updated Home.jsx with full touring tools grid section
+  - ✅ Added PWA service worker caching for weather, bushfire, and overpass APIs
+  - ✅ Updated README.md with all new features
+  - ✅ Clean production build verified
+- **New pages:** 7 (Weather, Bushfires, Campgrounds, Rest Areas, Tyre Pressure, Weight Calculator, Checklists)
+- **New files:** 10 (7 pages, 3 services, 1 hook) — total app now has 10 pages
+- **Stopped at:** All features built and building clean. Ready to commit and deploy.
 - **Blockers:**
-  - SA: Register as data publisher via CBS/Informed Sources (free, contact cbs.sa.gov.au or informedsources.com/contact/)
-  - NT: MyFuelNT still showing errors, no usable public API
-  - WA FuelWatch has no CORS headers — using allorigins.win proxy (may be unreliable)
+  - SA: No free public fuel API (Informed Sources is private, fuelprice.io is $99/mo)
+  - NT: MyFuelNT still down, no public API, no recent datasets on data.nt.gov.au
+  - WA FuelWatch has no CORS headers — still using allorigins.win proxy
 - **Next steps:**
-  - Manually verify VIC integration on live site
-  - Start SA API registration process
-  - Monitor VIC API rate limits and performance
+  - Commit and deploy all new features
+  - Test all pages on live site
+  - Phase 2 remaining: dump points locator, pet-friendly filter, water points, gas refills
+  - Phase 3 remaining: road conditions, flood warnings, mobile coverage
+  - Phase 4 remaining: fuel economy tracker, service tracker, solar estimator
+  - Phase 5 remaining: trip journal, multi-stop planner, vehicle profiles, offline improvements
 
 ---
 
@@ -40,6 +43,13 @@
 ### Working Features
 - **Diesel Price Finder** — National diesel prices covering NSW (3,200+ stations, real-time), ACT (via NSW), QLD (1,500+ stations, monthly), VIC (2,000+ stations, 24h delayed), WA (500+ stations, daily), TAS (75+ stations, real-time). Total: 8,300+ stations across 6 states/territories! State selector, map/list views, price alerts, bookmarks, radius filter, data attribution footer.
 - **4WD, Caravan & Motorhome Route Planner** — HERE Routing API with weight-aware routing (works nationally), vehicle presets, avoid options, fuel consumption calc, turn-by-turn, saved routes
+- **Weather Forecast** — 7-day Australian forecast via Open-Meteo BOM API. Current conditions, temperature, humidity, wind, UV index. Location search and GPS support.
+- **Bushfire & Emergency Info** — Live NSW RFS incident feed with alert levels (Emergency, Watch & Act, Advice). Links to all 8 state/territory fire services. Auto-refreshes every 5 minutes.
+- **Campground Finder** — OSM Overpass API campground/caravan park search. Filter by free/paid, toilets, water, power, pet-friendly, showers. Adjustable radius.
+- **Rest Areas** — OSM Overpass API rest area search. Facility info (toilets, water, shelter, BBQ). Driver fatigue tips.
+- **Tyre Pressure Calculator** — Terrain-adjusted pressure recommendations (highway, gravel, sand, mud, rock). Tyre presets for popular 4WD tyres. Temperature and altitude adjustment.
+- **Weight Distribution Calculator** — GVM/GCM compliance checker. Vehicle presets for popular 4WDs. Payload breakdown with visual progress bars.
+- **Pre-Trip Checklists** — 4 default checklists (vehicle, caravan, packing, campsite). Custom items. Progress saved to localStorage.
 - **PWA** — Installable on Android/iOS, offline caching, fullscreen mode
 - **GitHub Pages Deployment** — Auto-deploys on push to main via GitHub Actions
 
@@ -112,7 +122,7 @@ Expand diesel price coverage from NSW-only to all Australian states. Each state 
 ### Phase 2: Touring Infrastructure
 Essential services and facilities for diesel vehicle tourers.
 
-9. [ ] **Rest areas database** — National Rest Areas
+9. [x] **Rest areas database** — National Rest Areas (2026-02-15)
    - API: National Freight Data Hub / data.gov.au
    - URL: `https://data.gov.au/dataset/` (search "rest areas")
    - Data: Locations, facilities (toilets, water, shade, parking bays), vehicle suitability
@@ -126,7 +136,7 @@ Essential services and facilities for diesel vehicle tourers.
     - Supplement with: Camps Australia Wide data, WikiCamps community data
     - Implementation: Page `DumpPoints.jsx` with map, filter by type
 
-11. [ ] **Campground finder** — Free camps and caravan parks
+11. [x] **Campground finder** — Free camps and caravan parks (2026-02-15)
     - API: OpenStreetMap Overpass API for campground POIs
     - URL: `https://overpass-api.de/api/interpreter`
     - Query: `node["tourism"="camp_site"](bbox);` for campgrounds in area
@@ -159,7 +169,7 @@ Essential services and facilities for diesel vehicle tourers.
 ### Phase 3: Safety & Conditions
 Real-time safety information for touring.
 
-15. [ ] **Weather forecasts along route** — BOM weather via Open-Meteo
+15. [x] **Weather forecasts along route** — BOM weather via Open-Meteo (2026-02-15)
     - API: Open-Meteo (free, no auth, uses BOM data for Australia)
     - URL: `https://api.open-meteo.com/v1/bom`
     - Data: Temperature, rain, wind, UV index, storm warnings
@@ -176,7 +186,7 @@ Real-time safety information for touring.
     - Alert if planned route has current closures or incidents
     - Show flood/fire road closures
 
-17. [ ] **Bushfire information** — Emergency fire feeds
+17. [x] **Bushfire information** — Emergency fire feeds (2026-02-15)
     - API: NSW RFS GeoJSON feed for current fires
     - URL: `https://www.rfs.nsw.gov.au/feeds/majorIncidents.json`
     - Similar feeds available from CFA (VIC), QFES (QLD), DFES (WA)
@@ -212,14 +222,14 @@ Real-time safety information for touring.
 ### Phase 4: Vehicle Tools
 Calculators and references specific to diesel vehicles.
 
-21. [ ] **Tyre pressure calculator** — Altitude and load adjusted
+21. [x] **Tyre pressure calculator** — Altitude and load adjusted (2026-02-15)
     - Input: Tyre size, load weight, altitude, temperature
     - Calculate: Recommended PSI adjusting for conditions
     - Reference tables for common 4WD tyres (BFG KO2, Cooper AT3, etc.)
     - Separate pressures for highway vs off-road vs sand
     - Implementation: Tool page `TyrePressure.jsx`
 
-22. [ ] **Weight distribution calculator** — GVM/GCM compliance
+22. [x] **Weight distribution calculator** — GVM/GCM compliance (2026-02-15)
     - Input: Vehicle tare, accessories, cargo, tow ball weight
     - Calculate: Axle loads, GVM remaining, GCM compliance
     - Vehicle presets matching existing route planner profiles
@@ -256,7 +266,7 @@ Calculators and references specific to diesel vehicles.
 ### Phase 5: Trip Planning
 Pre-trip preparation and on-trip recording tools.
 
-26. [ ] **Pre-trip checklists** — Customisable departure checklists
+26. [x] **Pre-trip checklists** — Customisable departure checklists (2026-02-15)
     - Default checklists: Vehicle check, caravan check, packing list, campsite setup
     - Customisable items (add/remove/reorder)
     - Check-off with timestamps
@@ -383,6 +393,16 @@ Longer-term features requiring more infrastructure.
 - [x] TAS FuelCheck API integration — real-time TAS diesel prices (2026-02-04)
 - [x] Deep API research for VIC, SA, NT fuel data sources (2026-02-04)
 - [x] VIC Servo Saver API integration — 24h delayed VIC diesel prices (2026-02-11)
+- [x] Weather Forecast page — Open-Meteo BOM API, 7-day forecast (2026-02-15)
+- [x] Bushfire & Emergency Info page — NSW RFS live incidents (2026-02-15)
+- [x] Campground Finder page — OSM Overpass API with facility filters (2026-02-15)
+- [x] Rest Areas page — OSM Overpass API with driver fatigue tips (2026-02-15)
+- [x] Tyre Pressure Calculator — terrain, temperature, altitude, load adjustments (2026-02-15)
+- [x] Weight Distribution Calculator — GVM/GCM compliance with vehicle presets (2026-02-15)
+- [x] Pre-Trip Checklists — 4 default lists with custom items, localStorage (2026-02-15)
+- [x] Header navigation dropdown for all touring tools (2026-02-15)
+- [x] Home page updated with full touring tools grid (2026-02-15)
+- [x] PWA caching for weather, bushfire, and overpass APIs (2026-02-15)
 
 ---
 
@@ -437,6 +457,17 @@ Longer-term features requiring more infrastructure.
 | `frontend/web/src/hooks/useVehicleProfile.js` | Vehicle dimension presets |
 | `frontend/web/src/pages/RoutePlanner.jsx` | Main route planner page |
 | `frontend/web/src/pages/FuelTracker.jsx` | Main fuel tracker page (national) |
+| `frontend/web/src/services/weatherApi.js` | Open-Meteo BOM weather API |
+| `frontend/web/src/services/bushfireApi.js` | NSW RFS bushfire incidents |
+| `frontend/web/src/services/overpassApi.js` | OSM Overpass API for campgrounds/rest areas |
+| `frontend/web/src/hooks/useChecklists.js` | Pre-trip checklist localStorage hook |
+| `frontend/web/src/pages/Weather.jsx` | Weather forecast page |
+| `frontend/web/src/pages/Bushfires.jsx` | Bushfire & emergency info page |
+| `frontend/web/src/pages/Campgrounds.jsx` | Campground finder page |
+| `frontend/web/src/pages/RestAreas.jsx` | Rest areas page |
+| `frontend/web/src/pages/TyrePressure.jsx` | Tyre pressure calculator page |
+| `frontend/web/src/pages/WeightCalculator.jsx` | Weight distribution calculator page |
+| `frontend/web/src/pages/Checklists.jsx` | Pre-trip checklists page |
 | `frontend/web/src/hooks/useInstallPrompt.js` | PWA install prompt hook |
 | `frontend/web/vite.config.js` | Vite + PWA config |
 | `.github/workflows/deploy.yml` | GitHub Actions deploy workflow |
@@ -469,4 +500,4 @@ brand-tan: #D4C4A8       (Sandstone)
 
 ---
 
-*Last updated: 10 Feb 2026 (Location search fix, fuelprice.io ruled out, SA/NT research updated)*
+*Last updated: 15 Feb 2026 (7 new pages: weather, bushfires, campgrounds, rest areas, tyre pressure, weight calc, checklists)*

@@ -75,6 +75,30 @@ export default defineConfig({
               expiration: { maxEntries: 500, maxAgeSeconds: 60 * 60 * 24 * 7 },
             },
           },
+          {
+            urlPattern: /^https:\/\/api\.open-meteo\.com\/.*/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'weather-api-cache',
+              expiration: { maxEntries: 20, maxAgeSeconds: 30 * 60 },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/www\.rfs\.nsw\.gov\.au\/.*/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'bushfire-api-cache',
+              expiration: { maxEntries: 5, maxAgeSeconds: 5 * 60 },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/overpass-api\.de\/.*/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'overpass-api-cache',
+              expiration: { maxEntries: 30, maxAgeSeconds: 30 * 60 },
+            },
+          },
         ],
       },
       manifest: {
