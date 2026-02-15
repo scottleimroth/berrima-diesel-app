@@ -8,16 +8,22 @@ const BASE_URL = import.meta.env.BASE_URL || '/'
 const TOOL_LINKS = [
   { to: '/weather', label: 'Weather Forecast', icon: '🌤️' },
   { to: '/bushfires', label: 'Bushfire Info', icon: '🔥' },
+  { to: '/flood-warnings', label: 'Flood Warnings', icon: '🌊' },
   { to: '/campgrounds', label: 'Campgrounds', icon: '⛺' },
   { to: '/rest-areas', label: 'Rest Areas', icon: '🅿️' },
   { to: '/dump-points', label: 'Dump Points', icon: '🚮' },
+  { to: '/water-points', label: 'Water Points', icon: '💧' },
+  { to: '/gas-refills', label: 'Gas Refills', icon: '🔥' },
   { to: '/tyre-pressure', label: 'Tyre Pressure', icon: '🛞' },
   { to: '/weight-calculator', label: 'Weight Calculator', icon: '⚖️' },
   { to: '/fuel-economy', label: 'Fuel Economy', icon: '⛽' },
   { to: '/solar-estimator', label: 'Solar Estimator', icon: '☀️' },
   { to: '/service-tracker', label: 'Service Tracker', icon: '🔧' },
+  { to: '/workshops', label: 'Workshop Finder', icon: '🏭' },
   { to: '/trip-journal', label: 'Trip Journal', icon: '📓' },
   { to: '/towing-speed-limits', label: 'Speed Limits', icon: '🚦' },
+  { to: '/wifi', label: 'WiFi Hotspots', icon: '📶' },
+  { to: '/laundromats', label: 'Laundromats', icon: '👕' },
   { to: '/checklists', label: 'Checklists', icon: '✅' },
 ]
 
