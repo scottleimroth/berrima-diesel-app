@@ -80,7 +80,7 @@ const TOOL_CARDS = [
     color: 'bg-slate-600',
     borderHover: 'hover:border-slate-500',
     title: 'Service Tracker',
-    description: 'Track vehicle service history and get reminders for next service.',
+    description: 'Track vehicle service history and see when next service is due.',
   },
   {
     to: '/trip-journal',
