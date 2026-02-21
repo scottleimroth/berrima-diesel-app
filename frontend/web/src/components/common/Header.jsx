@@ -19,7 +19,6 @@ const TOOL_LINKS = [
   { to: '/fuel-economy', label: 'Fuel Economy', icon: '⛽' },
   { to: '/solar-estimator', label: 'Solar Estimator', icon: '☀️' },
   { to: '/service-tracker', label: 'Service Tracker', icon: '🔧' },
-  { to: '/workshops', label: 'Workshop Finder', icon: '🏭' },
   { to: '/trip-journal', label: 'Trip Journal', icon: '📓' },
   { to: '/towing-speed-limits', label: 'Speed Limits', icon: '🚦' },
   { to: '/wifi', label: 'WiFi Hotspots', icon: '📶' },
@@ -124,7 +123,7 @@ function Header() {
                     </NavLink>
                   ))}
                   <div className="px-4 py-1.5 text-xs font-bold text-brand-ochre uppercase tracking-wide border-t border-brand-tan/30 mt-1 pt-2">Find Nearby</div>
-                  {TOOL_LINKS.filter(l => ['/campgrounds', '/rest-areas', '/dump-points', '/water-points', '/gas-refills', '/workshops', '/wifi', '/laundromats'].includes(l.to)).map((link) => (
+                  {TOOL_LINKS.filter(l => ['/campgrounds', '/rest-areas', '/dump-points', '/water-points', '/gas-refills', '/wifi', '/laundromats'].includes(l.to)).map((link) => (
                     <NavLink key={link.to} to={link.to} onClick={() => setToolsOpen(false)}
                       className={({ isActive }) => `flex items-center gap-3 px-4 py-2 text-sm transition-colors ${isActive ? 'bg-brand-yellow/20 text-brand-navy font-bold' : 'text-brand-brown hover:bg-brand-cream'}`}
                     >
@@ -202,7 +201,7 @@ function Header() {
                 </NavLink>
               ))}
               <p className="px-4 py-1.5 text-xs text-brand-yellow/60 uppercase tracking-wide font-bold mt-2">Find Nearby</p>
-              {TOOL_LINKS.filter(l => ['/campgrounds', '/rest-areas', '/dump-points', '/water-points', '/gas-refills', '/workshops', '/wifi', '/laundromats'].includes(l.to)).map((link) => (
+              {TOOL_LINKS.filter(l => ['/campgrounds', '/rest-areas', '/dump-points', '/water-points', '/gas-refills', '/wifi', '/laundromats'].includes(l.to)).map((link) => (
                 <NavLink key={link.to} to={link.to} onClick={() => setMobileMenuOpen(false)}
                   className={({ isActive }) => `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors font-medium ${isActive ? 'bg-brand-yellow text-brand-navy' : 'text-white hover:bg-brand-yellow/20'}`}
                 >

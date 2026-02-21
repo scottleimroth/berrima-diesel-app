@@ -113,11 +113,6 @@ Diesel Price Tracker, Route Planner & Touring Tools for 4WD, Caravan & Motorhome
 - Find LPG and camping gas refill stations
 - Shows fuel stations with LPG and dedicated gas shops
 
-### Workshop Finder
-- Find mechanics, diesel specialists, and tyre shops
-- Features Berrima Diesel Service as the premier diesel specialist
-- Tags for diesel and 4WD specialists
-
 ### WiFi Hotspots
 - Find free public WiFi near you
 - Venue type labels (library, cafe, caravan park, etc.)
