@@ -90,11 +90,6 @@ Diesel Price Tracker, Route Planner & Touring Tools for 4WD, Caravan & Motorhome
 - Shows when next service is due by km and time interval
 - Vehicle presets for popular 4WDs (LandCruiser, HiLux, Ranger, Patrol, etc.)
 
-### Trip Journal
-- Record daily travel entries with location, rating, tags, and notes
-- Track distance via odometer readings
-- Edit, delete, and expand entries
-
 ### Towing Speed Limits
 - State-by-state speed limits for vehicles towing trailers/caravans
 - Quick reference table plus detailed state rules
