@@ -104,27 +104,38 @@ function Header() {
             <div ref={dropdownRef} className="relative">
               <button
                 onClick={() => setToolsOpen(!toolsOpen)}
-                className={`flex items-center gap-1 px-4 py-2 rounded-lg transition-colors font-semibold ${
-                  toolsOpen ? 'bg-brand-yellow/20' : 'hover:bg-brand-yellow/20'
-                } text-white`}
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg transition-colors font-semibold ${
+                  toolsOpen ? 'bg-brand-yellow text-brand-navy' : 'hover:bg-brand-yellow/20 text-white'
+                }`}
               >
-                <span>Tools</span>
+                <span>Touring Tools</span>
+                <span className="bg-brand-yellow/30 text-xs font-bold px-1.5 py-0.5 rounded-full">{TOOL_LINKS.length}</span>
                 <ChevronDown size={16} className={`transition-transform ${toolsOpen ? 'rotate-180' : ''}`} />
               </button>
               {toolsOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-brand-tan/50 py-2 z-50">
-                  {TOOL_LINKS.map((link) => (
-                    <NavLink
-                      key={link.to}
-                      to={link.to}
-                      onClick={() => setToolsOpen(false)}
-                      className={({ isActive }) =>
-                        `flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
-                          isActive
-                            ? 'bg-brand-yellow/20 text-brand-navy font-bold'
-                            : 'text-brand-brown hover:bg-brand-cream'
-                        }`
-                      }
+                <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-brand-tan/50 py-2 z-50 max-h-[70vh] overflow-y-auto">
+                  <div className="px-4 py-1.5 text-xs font-bold text-brand-ochre uppercase tracking-wide">Safety & Weather</div>
+                  {TOOL_LINKS.filter(l => ['/weather', '/bushfires', '/flood-warnings'].includes(l.to)).map((link) => (
+                    <NavLink key={link.to} to={link.to} onClick={() => setToolsOpen(false)}
+                      className={({ isActive }) => `flex items-center gap-3 px-4 py-2 text-sm transition-colors ${isActive ? 'bg-brand-yellow/20 text-brand-navy font-bold' : 'text-brand-brown hover:bg-brand-cream'}`}
+                    >
+                      <span className="text-base">{link.icon}</span>
+                      <span>{link.label}</span>
+                    </NavLink>
+                  ))}
+                  <div className="px-4 py-1.5 text-xs font-bold text-brand-ochre uppercase tracking-wide border-t border-brand-tan/30 mt-1 pt-2">Find Nearby</div>
+                  {TOOL_LINKS.filter(l => ['/campgrounds', '/rest-areas', '/dump-points', '/water-points', '/gas-refills', '/workshops', '/wifi', '/laundromats'].includes(l.to)).map((link) => (
+                    <NavLink key={link.to} to={link.to} onClick={() => setToolsOpen(false)}
+                      className={({ isActive }) => `flex items-center gap-3 px-4 py-2 text-sm transition-colors ${isActive ? 'bg-brand-yellow/20 text-brand-navy font-bold' : 'text-brand-brown hover:bg-brand-cream'}`}
+                    >
+                      <span className="text-base">{link.icon}</span>
+                      <span>{link.label}</span>
+                    </NavLink>
+                  ))}
+                  <div className="px-4 py-1.5 text-xs font-bold text-brand-ochre uppercase tracking-wide border-t border-brand-tan/30 mt-1 pt-2">Vehicle & Trip</div>
+                  {TOOL_LINKS.filter(l => ['/tyre-pressure', '/weight-calculator', '/fuel-economy', '/solar-estimator', '/service-tracker', '/trip-journal', '/towing-speed-limits', '/checklists'].includes(l.to)).map((link) => (
+                    <NavLink key={link.to} to={link.to} onClick={() => setToolsOpen(false)}
+                      className={({ isActive }) => `flex items-center gap-3 px-4 py-2 text-sm transition-colors ${isActive ? 'bg-brand-yellow/20 text-brand-navy font-bold' : 'text-brand-brown hover:bg-brand-cream'}`}
                     >
                       <span className="text-base">{link.icon}</span>
                       <span>{link.label}</span>
@@ -181,19 +192,28 @@ function Header() {
 
             {/* Mobile Tools Section */}
             <div className="border-t border-brand-yellow/20 mt-2 pt-2">
-              <p className="px-4 py-1 text-xs text-brand-yellow/60 uppercase tracking-wide">Touring Tools</p>
-              {TOOL_LINKS.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={({ isActive }) =>
-                    `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors font-medium ${
-                      isActive
-                        ? 'bg-brand-yellow text-brand-navy'
-                        : 'text-white hover:bg-brand-yellow/20'
-                    }`
-                  }
+              <p className="px-4 py-1.5 text-xs text-brand-yellow/60 uppercase tracking-wide font-bold">Safety & Weather</p>
+              {TOOL_LINKS.filter(l => ['/weather', '/bushfires', '/flood-warnings'].includes(l.to)).map((link) => (
+                <NavLink key={link.to} to={link.to} onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) => `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors font-medium ${isActive ? 'bg-brand-yellow text-brand-navy' : 'text-white hover:bg-brand-yellow/20'}`}
+                >
+                  <span className="text-base">{link.icon}</span>
+                  <span className="text-sm">{link.label}</span>
+                </NavLink>
+              ))}
+              <p className="px-4 py-1.5 text-xs text-brand-yellow/60 uppercase tracking-wide font-bold mt-2">Find Nearby</p>
+              {TOOL_LINKS.filter(l => ['/campgrounds', '/rest-areas', '/dump-points', '/water-points', '/gas-refills', '/workshops', '/wifi', '/laundromats'].includes(l.to)).map((link) => (
+                <NavLink key={link.to} to={link.to} onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) => `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors font-medium ${isActive ? 'bg-brand-yellow text-brand-navy' : 'text-white hover:bg-brand-yellow/20'}`}
+                >
+                  <span className="text-base">{link.icon}</span>
+                  <span className="text-sm">{link.label}</span>
+                </NavLink>
+              ))}
+              <p className="px-4 py-1.5 text-xs text-brand-yellow/60 uppercase tracking-wide font-bold mt-2">Vehicle & Trip</p>
+              {TOOL_LINKS.filter(l => ['/tyre-pressure', '/weight-calculator', '/fuel-economy', '/solar-estimator', '/service-tracker', '/trip-journal', '/towing-speed-limits', '/checklists'].includes(l.to)).map((link) => (
+                <NavLink key={link.to} to={link.to} onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) => `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors font-medium ${isActive ? 'bg-brand-yellow text-brand-navy' : 'text-white hover:bg-brand-yellow/20'}`}
                 >
                   <span className="text-base">{link.icon}</span>
                   <span className="text-sm">{link.label}</span>
