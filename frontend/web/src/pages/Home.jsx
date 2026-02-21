@@ -123,14 +123,6 @@ const TOOL_CARDS = [
     description: 'Find LPG and camping gas refill stations near you.',
   },
   {
-    to: '/workshops',
-    icon: '🏭',
-    color: 'bg-zinc-600',
-    borderHover: 'hover:border-zinc-500',
-    title: 'Workshop Finder',
-    description: 'Find mechanics, diesel specialists, and tyre shops on the road.',
-  },
-  {
     to: '/wifi',
     icon: '📶',
     color: 'bg-violet-500',
@@ -312,7 +304,7 @@ function Home() {
               Find Nearby
             </h3>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {TOOL_CARDS.filter(t => ['/campgrounds', '/rest-areas', '/dump-points', '/water-points', '/gas-refills', '/workshops', '/wifi', '/laundromats'].includes(t.to)).map((tool) => (
+              {TOOL_CARDS.filter(t => ['/campgrounds', '/rest-areas', '/dump-points', '/water-points', '/gas-refills', '/wifi', '/laundromats'].includes(t.to)).map((tool) => (
                 <Link key={tool.to} to={tool.to}
                   className={`group bg-white rounded-xl p-5 hover:shadow-lg transition-all border-2 border-brand-tan ${tool.borderHover} shadow`}
                 >

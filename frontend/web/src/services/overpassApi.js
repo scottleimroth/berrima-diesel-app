@@ -261,50 +261,6 @@ export async function findGasRefills(lat, lng, radiusKm = 100) {
     .sort((a, b) => a.distance - b.distance)
 }
 
-/**
- * Find car repair workshops near a location
- */
-export async function findWorkshops(lat, lng, radiusKm = 50) {
-  const radiusM = radiusKm * 1000
-  const ql = `
-    [out:json][timeout:25];
-    (
-      node["shop"="car_repair"](around:${radiusM},${lat},${lng});
-      way["shop"="car_repair"](around:${radiusM},${lat},${lng});
-      node["craft"="car_repair"](around:${radiusM},${lat},${lng});
-      node["shop"="tyres"](around:${radiusM},${lat},${lng});
-    );
-    out center body;
-  `
-
-  const data = await query(ql)
-  const elements = data.elements || []
-
-  return elements
-    .map((el) => {
-      const elLat = el.lat || el.center?.lat
-      const elLng = el.lon || el.center?.lon
-      if (!elLat || !elLng) return null
-
-      const tags = el.tags || {}
-      return {
-        id: el.id,
-        name: tags.name || 'Workshop',
-        lat: elLat,
-        lng: elLng,
-        distance: Math.round(haversine(lat, lng, elLat, elLng) * 10) / 10,
-        type: tags.shop === 'tyres' ? 'tyre_shop' : 'mechanic',
-        diesel: tags['service:vehicle:diesel'] === 'yes',
-        fourwd: tags['service:vehicle:4wd'] === 'yes' || tags['service:vehicle:4x4'] === 'yes',
-        website: tags.website || tags['contact:website'] || null,
-        phone: tags.phone || tags['contact:phone'] || null,
-        opening_hours: tags.opening_hours || null,
-        source: 'osm',
-      }
-    })
-    .filter(Boolean)
-    .sort((a, b) => a.distance - b.distance)
-}
 
 /**
  * Find free WiFi hotspots near a location
