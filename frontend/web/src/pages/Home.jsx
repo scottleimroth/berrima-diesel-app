@@ -83,14 +83,6 @@ const TOOL_CARDS = [
     description: 'Track vehicle service history and see when next service is due.',
   },
   {
-    to: '/trip-journal',
-    icon: '📓',
-    color: 'bg-indigo-500',
-    borderHover: 'hover:border-indigo-400',
-    title: 'Trip Journal',
-    description: 'Record your travels, favourite camps, road conditions, and memories.',
-  },
-  {
     to: '/towing-speed-limits',
     icon: '🚦',
     color: 'bg-rose-600',
@@ -323,7 +315,7 @@ function Home() {
               Vehicle & Trip
             </h3>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {TOOL_CARDS.filter(t => ['/tyre-pressure', '/weight-calculator', '/fuel-economy', '/solar-estimator', '/service-tracker', '/trip-journal', '/towing-speed-limits', '/checklists'].includes(t.to)).map((tool) => (
+              {TOOL_CARDS.filter(t => ['/tyre-pressure', '/weight-calculator', '/fuel-economy', '/solar-estimator', '/service-tracker', '/towing-speed-limits', '/checklists'].includes(t.to)).map((tool) => (
                 <Link key={tool.to} to={tool.to}
                   className={`group bg-white rounded-xl p-5 hover:shadow-lg transition-all border-2 border-brand-tan ${tool.borderHover} shadow`}
                 >
