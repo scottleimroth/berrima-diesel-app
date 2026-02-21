@@ -9,7 +9,7 @@
 
 import axios from 'axios'
 
-const API_BASE = 'https://api.open-meteo.com/v1/bom'
+const API_BASE = 'https://api.open-meteo.com/v1/forecast'
 
 /**
  * Get 7-day weather forecast for a location
@@ -49,7 +49,19 @@ export async function getWeatherForecast(latitude, longitude) {
     },
   })
 
-  return response.data
+  // Ensure numeric fields have safe defaults (prevents crash when fields are null/undefined)
+  const data = response.data
+  if (data.current) {
+    data.current.temperature_2m = data.current.temperature_2m ?? 0
+    data.current.apparent_temperature = data.current.apparent_temperature ?? 0
+    data.current.relative_humidity_2m = data.current.relative_humidity_2m ?? 0
+    data.current.wind_speed_10m = data.current.wind_speed_10m ?? 0
+    data.current.wind_direction_10m = data.current.wind_direction_10m ?? 0
+    data.current.wind_gusts_10m = data.current.wind_gusts_10m ?? 0
+    data.current.uv_index = data.current.uv_index ?? 0
+    data.current.weather_code = data.current.weather_code ?? 0
+  }
+  return data
 }
 
 /**
