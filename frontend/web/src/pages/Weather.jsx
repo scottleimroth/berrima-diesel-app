@@ -165,8 +165,9 @@ function Weather() {
                   </div>
                   <div className="divide-y divide-brand-tan/20">
                     {daily.time.map((date, i) => {
-                      const weatherInfo = getWeatherDescription(daily.weather_code[i])
-                      const uv = getUVLevel(daily.uv_index_max[i])
+                      const weatherInfo = getWeatherDescription(daily.weather_code[i] ?? 0)
+                      const uvVal = daily.uv_index_max[i] ?? 0
+                      const uv = getUVLevel(uvVal)
                       return (
                         <div key={date} className="px-5 py-4 flex items-center gap-4">
                           <div className="w-24 flex-shrink-0">
@@ -189,7 +190,7 @@ function Weather() {
                                 <Wind size={10} />
                                 {Math.round(daily.wind_speed_10m_max[i])} km/h
                               </span>
-                              <span className={`${uv.color}`}>UV {daily.uv_index_max[i].toFixed(0)}</span>
+                              <span className={`${uv.color}`}>UV {uvVal.toFixed(0)}</span>
                             </div>
                           </div>
                           <div className="text-right flex-shrink-0">
