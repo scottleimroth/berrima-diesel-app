@@ -308,10 +308,17 @@ function FuelEconomy() {
             <div className="text-center py-12">
               <Fuel size={48} className="text-brand-tan mx-auto mb-3" />
               <p className="text-brand-gray mb-2">No fill-ups logged yet.</p>
-              <p className="text-sm text-brand-gray/60">
-                Tap "Log Fill-Up" to start tracking your diesel economy. You'll need at least 2 full-tank
+              <p className="text-sm text-brand-gray/60 mb-6">
+                Log your fill-ups to track diesel economy over time. You'll need at least 2 full-tank
                 fill-ups to calculate L/100km.
               </p>
+              <button
+                onClick={() => setShowForm(true)}
+                className="inline-flex items-center gap-2 bg-brand-yellow hover:bg-brand-gold text-brand-navy px-8 py-3 rounded-xl font-bold transition-colors shadow"
+              >
+                <Plus size={20} />
+                Log Your First Fill-Up
+              </button>
             </div>
           )}
 
