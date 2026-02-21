@@ -291,40 +291,6 @@ function RoutePlanner() {
               </div>
             )}
 
-            {/* Empty State */}
-            {!routeData && !loading && !error && (
-              <div className="bg-white rounded-xl shadow-sm p-8 text-center border border-brand-tan/50">
-                <div className="w-20 h-20 bg-brand-ochre/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-10 h-10 text-brand-ochre" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="2" y="6" width="14" height="10" rx="2"/>
-                    <path d="M16 10h4l2 2v4a2 2 0 01-2 2h-4"/>
-                    <circle cx="6" cy="18" r="2"/>
-                    <circle cx="18" cy="18" r="2"/>
-                    <path d="M8 18h8"/>
-                  </svg>
-                </div>
-                <h3 className="font-headline text-xl font-bold text-brand-brown mb-2">
-                  Plan Your Adventure
-                </h3>
-                <p className="text-brand-gray mb-4">
-                  Set up your rig dimensions first, then enter your route to find the best path for your caravan, motorhome, or 4WD.
-                </p>
-                <div className="flex justify-center gap-4">
-                  <button
-                    onClick={() => setActiveTab('vehicle')}
-                    className="px-4 py-2 bg-brand-yellow text-brand-brown rounded-lg text-sm font-medium hover:bg-brand-gold transition-colors"
-                  >
-                    Set Up My Rig
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('route')}
-                    className="px-4 py-2 bg-brand-eucalyptus text-white rounded-lg text-sm font-medium hover:bg-brand-brown transition-colors"
-                  >
-                    Enter Route
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>

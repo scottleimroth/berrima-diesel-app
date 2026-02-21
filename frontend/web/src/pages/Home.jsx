@@ -276,31 +276,71 @@ function Home() {
         </div>
       </section>
 
-      {/* Touring Tools Grid */}
+      {/* Touring Tools Grid - Categorized */}
       <section className="py-16 bg-brand-light">
         <div className="container mx-auto px-4">
           <h2 className="font-headline text-3xl font-bold text-center mb-4 text-brand-brown">
-            More Touring Tools
+            Touring Tools
           </h2>
           <p className="text-center text-brand-gray mb-12 max-w-2xl mx-auto">
-            Everything you need for a safe and well-planned trip across Australia.
+            {TOOL_CARDS.length} free tools for a safe and well-planned trip across Australia.
           </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            {TOOL_CARDS.map((tool) => (
-              <Link
-                key={tool.to}
-                to={tool.to}
-                className={`group bg-white rounded-xl p-5 hover:shadow-lg transition-all border-2 border-brand-tan ${tool.borderHover} shadow`}
-              >
-                <div className={`w-12 h-12 ${tool.color} rounded-lg flex items-center justify-center mb-3 shadow text-2xl`}>
-                  {tool.icon}
-                </div>
-                <h3 className="font-headline text-lg font-bold mb-2 text-brand-brown group-hover:text-brand-ochre transition-colors">
-                  {tool.title}
-                </h3>
-                <p className="text-sm text-brand-gray">{tool.description}</p>
-              </Link>
-            ))}
+
+          {/* Safety & Weather */}
+          <div className="max-w-5xl mx-auto mb-10">
+            <h3 className="font-headline text-lg font-bold text-brand-ochre mb-4 flex items-center gap-2">
+              <span className="w-8 h-0.5 bg-brand-ochre"></span>
+              Safety & Weather
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {TOOL_CARDS.filter(t => ['/weather', '/bushfires', '/flood-warnings'].includes(t.to)).map((tool) => (
+                <Link key={tool.to} to={tool.to}
+                  className={`group bg-white rounded-xl p-5 hover:shadow-lg transition-all border-2 border-brand-tan ${tool.borderHover} shadow`}
+                >
+                  <div className={`w-12 h-12 ${tool.color} rounded-lg flex items-center justify-center mb-3 shadow text-2xl`}>{tool.icon}</div>
+                  <h3 className="font-headline text-lg font-bold mb-2 text-brand-brown group-hover:text-brand-ochre transition-colors">{tool.title}</h3>
+                  <p className="text-sm text-brand-gray">{tool.description}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Find Nearby */}
+          <div className="max-w-5xl mx-auto mb-10">
+            <h3 className="font-headline text-lg font-bold text-brand-ochre mb-4 flex items-center gap-2">
+              <span className="w-8 h-0.5 bg-brand-ochre"></span>
+              Find Nearby
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {TOOL_CARDS.filter(t => ['/campgrounds', '/rest-areas', '/dump-points', '/water-points', '/gas-refills', '/workshops', '/wifi', '/laundromats'].includes(t.to)).map((tool) => (
+                <Link key={tool.to} to={tool.to}
+                  className={`group bg-white rounded-xl p-5 hover:shadow-lg transition-all border-2 border-brand-tan ${tool.borderHover} shadow`}
+                >
+                  <div className={`w-12 h-12 ${tool.color} rounded-lg flex items-center justify-center mb-3 shadow text-2xl`}>{tool.icon}</div>
+                  <h3 className="font-headline text-lg font-bold mb-2 text-brand-brown group-hover:text-brand-ochre transition-colors">{tool.title}</h3>
+                  <p className="text-sm text-brand-gray">{tool.description}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Vehicle & Trip */}
+          <div className="max-w-5xl mx-auto">
+            <h3 className="font-headline text-lg font-bold text-brand-ochre mb-4 flex items-center gap-2">
+              <span className="w-8 h-0.5 bg-brand-ochre"></span>
+              Vehicle & Trip
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {TOOL_CARDS.filter(t => ['/tyre-pressure', '/weight-calculator', '/fuel-economy', '/solar-estimator', '/service-tracker', '/trip-journal', '/towing-speed-limits', '/checklists'].includes(t.to)).map((tool) => (
+                <Link key={tool.to} to={tool.to}
+                  className={`group bg-white rounded-xl p-5 hover:shadow-lg transition-all border-2 border-brand-tan ${tool.borderHover} shadow`}
+                >
+                  <div className={`w-12 h-12 ${tool.color} rounded-lg flex items-center justify-center mb-3 shadow text-2xl`}>{tool.icon}</div>
+                  <h3 className="font-headline text-lg font-bold mb-2 text-brand-brown group-hover:text-brand-ochre transition-colors">{tool.title}</h3>
+                  <p className="text-sm text-brand-gray">{tool.description}</p>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
