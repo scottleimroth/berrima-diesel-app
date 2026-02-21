@@ -87,7 +87,7 @@ Diesel Price Tracker, Route Planner & Touring Tools for 4WD, Caravan & Motorhome
 
 ### Vehicle Service Tracker
 - Log oil changes, services, tyre rotations, and more
-- Service reminders by km and time interval
+- Shows when next service is due by km and time interval
 - Vehicle presets for popular 4WDs (LandCruiser, HiLux, Ranger, Patrol, etc.)
 
 ### Trip Journal

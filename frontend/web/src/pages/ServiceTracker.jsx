@@ -173,7 +173,7 @@ function ServiceTracker() {
             Vehicle Service Tracker
           </h1>
           <p className="text-brand-gray">
-            Track service history and get reminders for your next service.
+            Track service history and see when your next service is due.
           </p>
         </div>
       </div>
