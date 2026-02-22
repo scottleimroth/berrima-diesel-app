@@ -107,7 +107,6 @@ function Header() {
                 }`}
               >
                 <span>Touring Tools</span>
-                <span className="bg-brand-yellow/30 text-xs font-bold px-1.5 py-0.5 rounded-full">{TOOL_LINKS.length}</span>
                 <ChevronDown size={16} className={`transition-transform ${toolsOpen ? 'rotate-180' : ''}`} />
               </button>
               {toolsOpen && (

@@ -100,7 +100,7 @@ function RoutePlanner() {
             Caravan & Touring Route Planner
           </h1>
           <p className="text-brand-gray">
-            Plan your trip with your rig dimensions in mind. Find low bridges, check clearances, and discover diesel stops along the way.
+            Plan your trip with your rig dimensions in mind. Route data may not include all restrictions — always observe road signs and check with local authorities.
           </p>
         </div>
       </div>

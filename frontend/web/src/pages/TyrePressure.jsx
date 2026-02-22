@@ -130,6 +130,9 @@ function TyrePressure() {
                 Rear pressure increased for towing load
               </p>
             )}
+            <p className="text-xs text-brand-gray/60 text-center mt-3">
+              Guide only — always check your vehicle's tyre placard for manufacturer recommendations.
+            </p>
           </div>
 
           {/* Tyre Selection */}

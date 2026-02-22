@@ -21,6 +21,8 @@ import GasRefills from './pages/GasRefills'
 import WifiHotspots from './pages/WifiHotspots'
 import Laundromats from './pages/Laundromats'
 import FloodWarnings from './pages/FloodWarnings'
+import Privacy from './pages/Privacy'
+import Terms from './pages/Terms'
 
 function App() {
   return (
@@ -48,6 +50,8 @@ function App() {
           <Route path="/wifi" element={<WifiHotspots />} />
           <Route path="/laundromats" element={<Laundromats />} />
           <Route path="/flood-warnings" element={<FloodWarnings />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
         </Routes>
       </main>
       <Footer />

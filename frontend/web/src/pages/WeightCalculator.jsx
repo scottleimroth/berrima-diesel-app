@@ -330,6 +330,12 @@ function WeightCalculator() {
             <RotateCcw size={14} />
             Reset to defaults
           </button>
+
+          <p className="text-xs text-brand-gray/70 text-center mt-8">
+            Vehicle weights are approximate and vary by model year, variant, and options.
+            Always check your vehicle's compliance plate for actual GVM, GCM, and tare weight.
+            This calculator is a guide only — not a substitute for weighbridge measurements.
+          </p>
         </div>
       </div>
     </div>

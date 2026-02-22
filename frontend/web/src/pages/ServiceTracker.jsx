@@ -487,6 +487,8 @@ function ServiceTracker() {
 
           <p className="text-xs text-brand-gray/70 text-center mt-8">
             Data stored locally on your device. Not synced across devices.
+            Service interval presets are general estimates only — always follow your vehicle
+            manufacturer's service schedule. Incorrect intervals may void your warranty.
           </p>
         </div>
       </div>

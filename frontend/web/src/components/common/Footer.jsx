@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Phone, MapPin, Globe, Clock } from 'lucide-react'
 
 function Footer() {
@@ -72,8 +73,19 @@ function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-brand-yellow/30 mt-8 pt-6 text-center text-white/60 text-sm">
+        {/* Disclaimer & Copyright */}
+        <div className="border-t border-brand-yellow/30 mt-8 pt-6 text-center text-white/60 text-xs space-y-2">
+          <p>
+            All tools and information on this site are provided for general guidance only and should not be relied
+            upon as a substitute for professional advice, manufacturer specifications, or official government sources.
+            Location data is crowd-sourced from OpenStreetMap and may be incomplete or outdated.
+            Use all tools at your own risk.
+          </p>
+          <p className="flex items-center justify-center gap-3">
+            <Link to="/privacy" className="underline hover:text-brand-yellow transition-colors">Privacy Policy</Link>
+            <span>·</span>
+            <Link to="/terms" className="underline hover:text-brand-yellow transition-colors">Terms of Use</Link>
+          </p>
           <p>&copy; {currentYear} DEEZELPRO Pty Ltd. All rights reserved.</p>
         </div>
       </div>
