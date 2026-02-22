@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Clock, Phone, Award, Users, Compass } from 'lucide-react'
+import { Clock, Phone, Award, Users, Compass, ChevronDown } from 'lucide-react'
 
 const TOOL_CARDS = [
   {
@@ -56,7 +56,7 @@ const TOOL_CARDS = [
     color: 'bg-brand-navy',
     borderHover: 'hover:border-brand-navy',
     title: 'Weight Calculator',
-    description: 'Check GVM and GCM compliance. Vehicle presets for popular 4WDs.',
+    description: 'Estimate GVM and GCM loads. Vehicle presets for popular 4WDs.',
   },
   {
     to: '/fuel-economy',
@@ -178,6 +178,13 @@ function Home() {
                 <Compass size={24} />
                 Plan Your Trip
               </Link>
+              <a
+                href="#touring-tools"
+                className="inline-flex items-center justify-center gap-2 text-white hover:text-brand-yellow px-8 py-4 rounded-lg font-bold transition-colors text-lg border-2 border-white/30 hover:border-brand-yellow/50"
+              >
+                <ChevronDown size={24} />
+                Touring Tools
+              </a>
             </div>
           </div>
         </div>
@@ -239,7 +246,7 @@ function Home() {
                 4WD, Caravan & Motorhome Route Planner
               </h3>
               <p className="text-brand-gray mb-4">
-                Plan routes for your caravan, motorhome, or 4WD rig. Accounts for height and weight restrictions.
+                Plan routes for your caravan, motorhome, or 4WD rig. Route data may not include all restrictions — always observe road signs.
               </p>
               <ul className="text-sm text-brand-gray space-y-2">
                 <li className="flex items-center gap-2">
@@ -261,7 +268,7 @@ function Home() {
       </section>
 
       {/* Touring Tools Grid - Categorized */}
-      <section className="py-16 bg-brand-light">
+      <section id="touring-tools" className="py-16 bg-brand-light scroll-mt-16">
         <div className="container mx-auto px-4">
           <h2 className="font-headline text-3xl font-bold text-center mb-4 text-brand-brown">
             Touring Tools

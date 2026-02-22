@@ -219,6 +219,7 @@ function FuelTracker() {
           </p>
           <p className="mt-1">
             All fuel prices are provided by state government sources and displayed under their respective open data licenses.
+            Prices may not reflect real-time changes — verify at the station before filling up.
           </p>
         </div>
       </div>

@@ -189,6 +189,7 @@ function GasRefills() {
 
           <p className="text-xs text-brand-gray/70 text-center mt-8">
             Data from OpenStreetMap contributors. Not all LPG stations may be listed.
+            Always follow manufacturer instructions and Australian gas safety standards when handling LPG equipment.
           </p>
         </div>
       </div>

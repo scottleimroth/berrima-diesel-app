@@ -164,6 +164,7 @@ function WaterPoints() {
 
           <p className="text-xs text-brand-gray/70 text-center mt-8">
             Data from OpenStreetMap contributors. Not all water points may be listed.
+            Water quality information is crowd-sourced and may be outdated — always verify water is safe before drinking.
           </p>
         </div>
       </div>

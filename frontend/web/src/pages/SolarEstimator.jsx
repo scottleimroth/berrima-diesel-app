@@ -350,6 +350,10 @@ function SolarEstimator() {
           {/* Tips */}
           <div className="bg-white rounded-xl shadow border border-brand-tan/50 p-6">
             <h3 className="font-headline text-lg font-bold text-brand-brown mb-3">Solar Tips</h3>
+            <p className="text-xs text-brand-gray/70 mb-3 bg-brand-cream rounded-lg px-3 py-2">
+              Estimates are approximate and vary with weather, panel condition, temperature, and installation angle.
+              Consult a solar specialist for system design decisions.
+            </p>
             <ul className="space-y-2 text-sm text-brand-gray">
               <li className="flex items-start gap-2">
                 <span className="w-2 h-2 bg-brand-yellow rounded-full mt-1.5 flex-shrink-0"></span>

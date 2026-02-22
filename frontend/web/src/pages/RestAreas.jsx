@@ -174,6 +174,9 @@ function RestAreas() {
                     If you feel drowsy, pull over and have a 20-minute power nap
                   </li>
                 </ul>
+                <p className="text-xs text-brand-gray/60 mt-3 border-t border-brand-tan/30 pt-2">
+                  Based on Australian road safety guidelines. Individual needs vary — if you feel tired, stop immediately.
+                </p>
               </div>
             </>
           )}

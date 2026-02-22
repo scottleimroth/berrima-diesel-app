@@ -257,9 +257,22 @@ function TowingSpeedLimits() {
             </ul>
           </div>
 
-          <p className="text-xs text-brand-gray/70 text-center mt-8">
-            Information current as of 2025. Always check current state legislation before travel. This is general guidance only, not legal advice.
-          </p>
+          <div className="text-xs text-brand-gray/70 text-center mt-8 space-y-2">
+            <p>
+              Information current as of 2025. Always check current state legislation before travel. This is general guidance only, not legal advice.
+            </p>
+            <p>
+              Official sources:{' '}
+              <a href="https://www.nsw.gov.au/driving-boating-and-transport" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-ochre">Transport for NSW</a>{' · '}
+              <a href="https://www.vicroads.vic.gov.au" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-ochre">VicRoads</a>{' · '}
+              <a href="https://www.tmr.qld.gov.au" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-ochre">TMR QLD</a>{' · '}
+              <a href="https://www.sa.gov.au/topics/driving-and-transport" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-ochre">SA Transport</a>{' · '}
+              <a href="https://www.mainroads.wa.gov.au" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-ochre">Main Roads WA</a>{' · '}
+              <a href="https://www.transport.tas.gov.au" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-ochre">Transport TAS</a>{' · '}
+              <a href="https://nt.gov.au/driving" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-ochre">NT Transport</a>{' · '}
+              <a href="https://www.accesscanberra.act.gov.au" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-ochre">Access Canberra</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
