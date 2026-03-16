@@ -109,8 +109,8 @@ export default defineConfig({
         background_color: '#FDF6E3',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/berrima-diesel-app/',
-        scope: '/berrima-diesel-app/',
+        start_url: '/',
+        scope: '/',
         categories: ['business', 'navigation', 'utilities'],
         icons: [
           {
