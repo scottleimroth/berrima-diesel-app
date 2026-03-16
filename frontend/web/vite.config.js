@@ -139,7 +139,7 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/berrima-diesel-app/',
+  base: '/',
   server: {
     port: 3000,
     open: true
