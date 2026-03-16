@@ -1,6 +1,6 @@
 # Berrima Diesel - Touring Tools
 
-[![Launch Web App](https://img.shields.io/badge/Launch-Web_App-blue?style=for-the-badge)](https://scottleimroth.github.io/berrima-diesel-app/)
+[![Launch Web App](https://img.shields.io/badge/Launch-Web_App-blue?style=for-the-badge)](https://app.berrimadiesel.com/)
 
 **Cross-Platform Web App** — Works on desktop, tablet, and mobile. Installable as a PWA.
 
@@ -12,7 +12,7 @@ Diesel Price Tracker, Route Planner & Touring Tools for 4WD, Caravan & Motorhome
 
 | Platform | How to Get It |
 |----------|---------------|
-| Web App | [Launch in browser](https://scottleimroth.github.io/berrima-diesel-app/) — no install needed |
+| Web App | [Launch in browser](https://app.berrimadiesel.com/) — no install needed |
 | Mobile (PWA) | Open the link above on your phone and tap "Add to Home Screen" |
 
 ## Features

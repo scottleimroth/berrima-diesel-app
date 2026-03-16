@@ -107,7 +107,7 @@ berrima-diesel-app/
 
 - **Development:** `npm run dev` in frontend/web/
 - **Production:** Push to main triggers GitHub Actions deploy to GitHub Pages
-- **Domain:** scottleimroth.github.io/berrima-diesel-app/
+- **Domain:** app.berrimadiesel.com
 
 ---
 
