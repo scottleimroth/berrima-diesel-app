@@ -371,49 +371,47 @@ function Home() {
             </div>
 
             <div className="bg-white rounded-xl shadow-lg border-l-4 border-brand-ochre overflow-hidden">
-              <div className="md:flex">
-                {/* Shop Photo */}
-                <div className="md:w-2/5 flex-shrink-0">
-                  <img
-                    src={`${import.meta.env.BASE_URL}berrima-shop.jpg`}
-                    alt="Berrima Diesel Service Workshop"
-                    className="w-full h-full object-cover min-h-[250px]"
-                    onError={(e) => {
-                      e.target.onerror = null
-                      e.target.style.display = 'none'
-                    }}
-                  />
-                </div>
-                {/* Story Content */}
-                <div className="p-8 md:w-3/5">
-                  <h3 className="font-headline text-2xl font-bold mb-4 text-brand-brown">Our Story</h3>
-                  <p className="text-brand-gray mb-4">
-                    Berrima Diesel Service began in 1956 when Reinhard Leimroth was sent to Australia
-                    by Robert Bosch to troubleshoot problem diesel engines. What started as a
-                    troubleshooting mission became a family legacy.
-                  </p>
-                  <p className="text-brand-gray mb-6">
-                    Today, sons Andrew and Scott, along with grandsons Trent and Baden, continue the
-                    tradition in the historic township of Berrima, NSW. We've helped thousands of
-                    tourers get their rigs running perfectly for their next adventure.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <a
-                      href="tel:0248771256"
-                      className="inline-flex items-center justify-center gap-2 bg-brand-yellow hover:bg-brand-gold text-brand-brown px-6 py-3 rounded-lg font-bold transition-colors shadow"
-                    >
-                      <Phone size={20} />
-                      (02) 4877 1256
-                    </a>
-                    <a
-                      href="https://berrimadiesel.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 bg-brand-brown hover:bg-brand-ochre text-white px-6 py-3 rounded-lg font-bold transition-colors shadow"
-                    >
-                      Visit Website
-                    </a>
-                  </div>
+              {/* Shop Photo - Full width above text */}
+              <div>
+                <img
+                  src={`${import.meta.env.BASE_URL}berrima-shop.jpg`}
+                  alt="Berrima Diesel Service Workshop"
+                  className="w-full object-cover max-h-[350px]"
+                  onError={(e) => {
+                    e.target.onerror = null
+                    e.target.style.display = 'none'
+                  }}
+                />
+              </div>
+              {/* Story Content */}
+              <div className="p-8">
+                <h3 className="font-headline text-2xl font-bold mb-4 text-brand-brown">Our Story</h3>
+                <p className="text-brand-gray mb-4">
+                  Berrima Diesel Service began in 1956 when Reinhard Leimroth was sent to Australia
+                  by Robert Bosch to troubleshoot problem diesel engines. What started as a
+                  troubleshooting mission became a family legacy.
+                </p>
+                <p className="text-brand-gray mb-6">
+                  Today, son Andrew, along with grandsons Trent, Baden and John Paul, continue the
+                  tradition in the historic township of Berrima, NSW. We've helped thousands of
+                  tourers get their rigs running perfectly for their next adventure.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="tel:0248771256"
+                    className="inline-flex items-center justify-center gap-2 bg-brand-yellow hover:bg-brand-gold text-brand-brown px-6 py-3 rounded-lg font-bold transition-colors shadow"
+                  >
+                    <Phone size={20} />
+                    (02) 4877 1256
+                  </a>
+                  <a
+                    href="https://berrimadiesel.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-brand-brown hover:bg-brand-ochre text-white px-6 py-3 rounded-lg font-bold transition-colors shadow"
+                  >
+                    Visit Website
+                  </a>
                 </div>
               </div>
             </div>
