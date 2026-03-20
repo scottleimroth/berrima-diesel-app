@@ -122,9 +122,9 @@ function Bushfires() {
                       <p className="text-xs text-brand-gray">Size: {incident.size}</p>
                     )}
 
-                    {incident.updated && (
+                    {incident.updated && !isNaN(incident.updated) && (
                       <p className="text-xs text-brand-gray/60 mt-2">
-                        Updated: {new Date(incident.updated).toLocaleString('en-AU')}
+                        Updated: {incident.updated.toLocaleString('en-AU')}
                       </p>
                     )}
 

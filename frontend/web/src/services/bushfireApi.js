@@ -67,7 +67,7 @@ export async function fetchBushfireIncidents() {
           source: 'NSW RFS',
           lat,
           lng,
-          updated: props.pubDate || null,
+          updated: parseRFSDate(props.pubDate),
           type: extractFireType(props.category),
           size: props.size || '',
           responsible: props.responsibleAgency || 'NSW RFS',
@@ -92,6 +92,20 @@ function categoriseAlertLevel(category) {
   if (cat.includes('advice')) return 'advice'
   if (cat.includes('not applicable')) return 'info'
   return 'advice'
+}
+
+/**
+ * Parse RFS pubDate format "DD/MM/YYYY HH:MM:SS AM/PM" into a valid Date
+ */
+function parseRFSDate(dateStr) {
+  if (!dateStr) return null
+  const match = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{2}):(\d{2})\s*(AM|PM)$/i)
+  if (!match) return null
+  const [, day, month, year, rawHour, min, sec, ampm] = match
+  let hour = parseInt(rawHour, 10)
+  if (ampm.toUpperCase() === 'PM' && hour !== 12) hour += 12
+  if (ampm.toUpperCase() === 'AM' && hour === 12) hour = 0
+  return new Date(year, month - 1, day, hour, min, sec)
 }
 
 /**
