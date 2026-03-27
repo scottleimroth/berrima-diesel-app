@@ -9,6 +9,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,svg,woff2}'],
         globIgnores: ['**/data/outages.json'],
         runtimeCaching: [
