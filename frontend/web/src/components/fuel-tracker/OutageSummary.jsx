@@ -10,7 +10,6 @@ function OutageSummary({ summary, minutesAgo, isStale, stationCount }) {
         <div className="flex-1">
           <p className="text-sm font-bold text-red-700">
             Fuel Crisis: {summary.totalOutages} stations reported out of fuel
-            {summary.dieselOutages > 0 && ` (${summary.dieselOutages} diesel)`}
           </p>
           {stationCount > 0 && (
             <p className="text-xs text-red-600 mt-1">
