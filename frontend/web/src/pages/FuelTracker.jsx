@@ -17,7 +17,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorDisplay from '../components/common/ErrorDisplay'
 
 function FuelTracker() {
-  const [viewMode, setViewMode] = useState('list') // 'list' or 'map'
+  const [viewMode, setViewMode] = useState('map') // 'list' or 'map'
   const [sortBy, setSortBy] = useState('price')
   const [fuelType, setFuelType] = useState('DL')
   const [radius, setRadius] = useState(50)
