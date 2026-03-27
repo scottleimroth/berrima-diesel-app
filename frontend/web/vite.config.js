@@ -11,9 +11,20 @@ export default defineConfig({
       workbox: {
         skipWaiting: true,
         clientsClaim: true,
+        cleanupOutdatedCaches: true,
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,svg,woff2}'],
         globIgnores: ['**/data/outages.json'],
         runtimeCaching: [
+          {
+            // outages.json must ALWAYS hit network — never serve stale cache
+            urlPattern: /\/data\/outages\.json/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'outage-data-cache',
+              expiration: { maxEntries: 1, maxAgeSeconds: 5 * 60 },
+              networkTimeoutSeconds: 10,
+            },
+          },
           {
             urlPattern: /^https:\/\/api\.onegov\.nsw\.gov\.au\/.*/i,
             handler: 'NetworkFirst',
