@@ -12,8 +12,11 @@ function StationList({ stations, bookmarks, userLocation, priceAlerts, outages }
         <h3 className="font-headline text-xl font-bold text-brand-brown mb-2">
           No Stations Found
         </h3>
-        <p className="text-brand-gray">
+        <p className="text-brand-gray mb-3">
           Try expanding your search radius or searching in a different area.
+        </p>
+        <p className="text-sm text-brand-gray/70">
+          If prices usually show here, the fuel price API may be temporarily unavailable. Try again in a minute.
         </p>
       </div>
     )
@@ -57,7 +60,7 @@ function StationList({ stations, bookmarks, userLocation, priceAlerts, outages }
             isBookmarked={bookmarks.isBookmarked(station.code)}
             onToggleBookmark={bookmarks.toggleBookmark}
             isBelowAlert={priceAlerts?.enabled && station.price <= priceAlerts?.targetPrice}
-            outage={outages?.stationOutages?.[station.code] || null}
+            outage={outages?.outages?.[station.code] || null}
             staleStatus={getStaleStatus(station)}
           />
         ))}

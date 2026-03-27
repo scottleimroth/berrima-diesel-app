@@ -243,7 +243,7 @@ function FuelTracker() {
         ) : stationsError ? (
           <ErrorDisplay
             title="Unable to load prices"
-            message="There was an error fetching fuel prices. Please try again."
+            message={stationsError?.message || 'API temporarily unavailable — try again in a minute'}
             onRetry={refetch}
           />
         ) : viewMode === 'list' ? (

@@ -219,7 +219,7 @@ function Home() {
               <ul className="text-sm text-brand-gray space-y-2">
                 <li className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-brand-ochre rounded-full"></span>
-                  Live fuel outage warnings
+                  <span className="font-bold" style={{ color: '#c41230' }}>Live fuel outage warnings</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-brand-ochre rounded-full"></span>
