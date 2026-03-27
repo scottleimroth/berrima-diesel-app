@@ -189,6 +189,56 @@ function PriceMap({ stations, center, bookmarks, outages }) {
         )
       })}
 
+      {/* Matched Outage Markers — stations outside the price search radius */}
+      {(() => {
+        const stationCodes = new Set(stations.map(s => s.code))
+        return Object.entries(outages?.outages || {}).map(([code, outage]) => {
+          if (stationCodes.has(code) || stationCodes.has(Number(code))) return null
+          if (!outage.lat || !outage.lng) return null
+          const hoursAgo = outage.lastConfirmed
+            ? Math.floor((Date.now() - new Date(outage.lastConfirmed).getTime()) / 3600000)
+            : null
+
+          return (
+            <Marker
+              key={`outage-${code}`}
+              position={[outage.lat, outage.lng]}
+              icon={unmatchedOutageIcon}
+            >
+              <Popup>
+                <div className="min-w-[180px]">
+                  <div className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded mb-2">
+                    REPORTED OUT OF FUEL
+                  </div>
+                  <div className="font-bold text-base text-brand-brown">
+                    {outage.stationName || 'Unknown Station'}
+                  </div>
+                  <div className="text-xs text-red-600 mt-1">
+                    {outage.fuelTypes?.join(', ')}
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    {hoursAgo !== null && hoursAgo < 1
+                      ? 'Reported less than 1 hour ago'
+                      : hoursAgo !== null
+                      ? `Reported ${hoursAgo}h ago`
+                      : 'Recently reported'}
+                    {outage.confidence === 'high' && ' · Multiple reports'}
+                  </div>
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${outage.lat},${outage.lng}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center bg-brand-brown text-white px-4 py-2 rounded text-sm font-medium hover:bg-brand-ochre transition-colors mt-3"
+                  >
+                    Get Directions
+                  </a>
+                </div>
+              </Popup>
+            </Marker>
+          )
+        })
+      })()}
+
       {/* Unmatched Outage Markers */}
       {(outages?.unmatchedOutages || []).map((report, i) => {
         if (!report.lat || !report.lng) return null

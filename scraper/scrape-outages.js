@@ -236,6 +236,8 @@ function matchOutages(outageReports, govStations) {
       } else {
         matched[bestMatch.code] = {
           stationName: bestMatch.name,
+          lat: bestMatch.lat,
+          lng: bestMatch.lng,
           fuelTypes: [...report.fuelTypes],
           status: report.status || 'no_fuel',
           confidence: 'medium',
@@ -270,6 +272,42 @@ function matchOutages(outageReports, govStations) {
   }
 
   return { matched, unmatched }
+}
+
+// --- Geocoding for outages missing coordinates ---
+
+/**
+ * Geocode outage reports that have an address but no lat/lng using Nominatim.
+ * Nominatim rate limit: 1 request/second. Only geocode up to maxGeocode reports.
+ */
+async function geocodeMissingCoords(reports, maxGeocode = 50) {
+  const needsGeocoding = reports.filter(r => (!r.lat || !r.lng) && r.address)
+  if (needsGeocoding.length === 0) return
+
+  console.log(`[Geocode] ${needsGeocoding.length} reports need geocoding, processing up to ${maxGeocode}`)
+  let geocoded = 0
+
+  for (const report of needsGeocoding.slice(0, maxGeocode)) {
+    try {
+      const query = encodeURIComponent(`${report.address}, Australia`)
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1&countrycodes=au`,
+        { headers: { 'User-Agent': 'BerrimaDiesel-FuelTracker/1.0 (community fuel availability tool)' } }
+      )
+      if (res.ok) {
+        const results = await res.json()
+        if (results.length > 0) {
+          report.lat = parseFloat(results[0].lat)
+          report.lng = parseFloat(results[0].lon)
+          geocoded++
+        }
+      }
+      // Respect rate limit
+      await new Promise(r => setTimeout(r, 1100))
+    } catch { /* skip failed geocode */ }
+  }
+
+  console.log(`[Geocode] Successfully geocoded ${geocoded}/${Math.min(needsGeocoding.length, maxGeocode)} reports`)
 }
 
 // --- Main ---
@@ -318,7 +356,26 @@ async function main() {
   // 3. Match outages to government station IDs
   const { matched, unmatched } = matchOutages(allReports, allGovStations)
   const matchedCount = Object.keys(matched).length
-  console.log(`[Main] Matched: ${matchedCount}, Unmatched: ${unmatched.length}`)
+
+  // Diagnostic: lat/lng coverage
+  const matchedWithCoords = Object.values(matched).filter(o => o.lat && o.lng).length
+  const unmatchedWithCoords = unmatched.filter(r => r.lat && r.lng).length
+  const unmatchedNoCoords = unmatched.filter(r => !r.lat || !r.lng).length
+  console.log(`[Main] Matched: ${matchedCount} (${matchedWithCoords} with lat/lng)`)
+  console.log(`[Main] Unmatched: ${unmatched.length} (${unmatchedWithCoords} with lat/lng, ${unmatchedNoCoords} without)`)
+
+  // Breakdown by source
+  const sourceCounts = {}
+  for (const r of allReports) {
+    sourceCounts[r.source] = (sourceCounts[r.source] || 0) + 1
+  }
+  for (const [src, count] of Object.entries(sourceCounts)) {
+    const withCoords = allReports.filter(r => r.source === src && r.lat && r.lng).length
+    console.log(`[Main]   ${src}: ${count} reports (${withCoords} with coords)`)
+  }
+
+  // Geocode unmatched outages that have addresses but no coordinates
+  await geocodeMissingCoords(unmatched)
 
   // Count diesel outages
   const dieselOutages = Object.values(matched).filter(o =>
@@ -330,16 +387,30 @@ async function main() {
     lastScraped: new Date().toISOString(),
     sources: activeSources,
     stationOutages: matched,
-    unmatchedOutages: unmatched.slice(0, 100).map(r => ({
-      stationName: r.stationName,
-      brand: r.brand,
-      lat: r.lat,
-      lng: r.lng,
-      fuelTypes: r.fuelTypes,
-      status: r.status,
-      lastReportAt: r.lastReportAt,
-      source: r.source,
-    })),
+    // Include all unmatched outages that have coordinates (mappable),
+    // plus up to 50 without coordinates for the count
+    unmatchedOutages: [
+      ...unmatched.filter(r => r.lat && r.lng).map(r => ({
+        stationName: r.stationName,
+        brand: r.brand,
+        lat: r.lat,
+        lng: r.lng,
+        fuelTypes: r.fuelTypes,
+        status: r.status,
+        lastReportAt: r.lastReportAt,
+        source: r.source,
+      })),
+      ...unmatched.filter(r => !r.lat || !r.lng).slice(0, 50).map(r => ({
+        stationName: r.stationName,
+        brand: r.brand,
+        lat: null,
+        lng: null,
+        fuelTypes: r.fuelTypes,
+        status: r.status,
+        lastReportAt: r.lastReportAt,
+        source: r.source,
+      })),
+    ],
     summary: {
       totalOutages: matchedCount + unmatched.length,
       dieselOutages,
