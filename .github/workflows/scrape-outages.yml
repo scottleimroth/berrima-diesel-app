@@ -33,7 +33,11 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           git add frontend/web/public/data/outages.json
-          git diff --staged --quiet || {
+          if ! git diff --staged --quiet; then
             git commit -m "[skip ci] data: update fuel outages $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            git push --force-with-lease origin main
-          }
+            git pull --no-rebase origin main || true
+            git checkout --theirs frontend/web/public/data/outages.json
+            git add frontend/web/public/data/outages.json
+            git commit --amend --no-edit || true
+            git push origin main
+          fi
