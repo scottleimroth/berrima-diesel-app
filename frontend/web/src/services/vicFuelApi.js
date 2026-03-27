@@ -77,7 +77,6 @@ async function fetchVICData() {
 
   const response = await axios.get(`${VIC_API_BASE}/fuel/prices`, {
     headers: {
-      'User-Agent': 'BerrimaDieselApp/1.0',
       'x-consumer-id': VIC_API_KEY,
       'x-transactionid': generateUUID(),
     },

@@ -280,9 +280,6 @@ async function searchNominatim(query) {
       addressdetails: 1,
       limit: 5,
     },
-    headers: {
-      'User-Agent': 'BerrimaDieselApp/1.0',
-    },
   })
 
   return (response.data || [])
