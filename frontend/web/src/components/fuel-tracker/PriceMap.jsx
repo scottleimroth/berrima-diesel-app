@@ -49,6 +49,31 @@ const createPriceIcon = (price, isBookmarked, rank, hasOutage, staleStatus) => {
   })
 }
 
+// Unmatched outage marker — dimmer red circle with "!" to distinguish from matched
+const unmatchedOutageIcon = L.divIcon({
+  className: 'unmatched-outage-marker',
+  html: `
+    <div style="
+      background: #b91c1c;
+      opacity: 0.75;
+      border: 2px dashed #fca5a5;
+      color: white;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      transform: translate(-50%, -50%);
+    ">!</div>
+  `,
+  iconSize: [26, 26],
+  iconAnchor: [13, 13],
+})
+
 const userLocationIcon = L.divIcon({
   className: 'user-location-marker',
   html: `
@@ -155,6 +180,52 @@ function PriceMap({ stations, center, bookmarks, outages }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block text-center bg-brand-brown text-white px-4 py-2 rounded text-sm font-medium hover:bg-brand-ochre transition-colors"
+                >
+                  Get Directions
+                </a>
+              </div>
+            </Popup>
+          </Marker>
+        )
+      })}
+
+      {/* Unmatched Outage Markers */}
+      {(outages?.unmatchedOutages || []).map((report, i) => {
+        if (!report.lat || !report.lng) return null
+        const reportedAt = report.lastReportAt ? new Date(report.lastReportAt) : null
+        const hoursAgo = reportedAt
+          ? Math.floor((Date.now() - reportedAt.getTime()) / 3600000)
+          : null
+
+        return (
+          <Marker
+            key={`unmatched-${i}`}
+            position={[report.lat, report.lng]}
+            icon={unmatchedOutageIcon}
+          >
+            <Popup>
+              <div className="min-w-[180px]">
+                <div className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded mb-2">
+                  REPORTED OUT OF FUEL
+                </div>
+                <div className="font-bold text-base text-brand-brown">
+                  {report.stationName || 'Unknown Station'}
+                </div>
+                {report.brand && (
+                  <div className="text-brand-gray text-sm">{report.brand}</div>
+                )}
+                <div className="text-xs text-red-600 mt-2">
+                  {hoursAgo !== null && hoursAgo < 1
+                    ? 'Reported less than 1 hour ago'
+                    : hoursAgo !== null
+                    ? `Reported ${hoursAgo}h ago`
+                    : 'Recently reported'}
+                </div>
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${report.lat},${report.lng}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-center bg-brand-brown text-white px-4 py-2 rounded text-sm font-medium hover:bg-brand-ochre transition-colors mt-3"
                 >
                   Get Directions
                 </a>

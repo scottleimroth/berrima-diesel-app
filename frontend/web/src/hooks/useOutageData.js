@@ -43,6 +43,7 @@ export function useOutageData() {
 
   return {
     outages: data?.stationOutages || {},
+    unmatchedOutages: data?.unmatchedOutages || [],
     summary: data?.summary || null,
     lastScraped,
     isStale,
