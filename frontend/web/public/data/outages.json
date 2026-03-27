@@ -1,9 +1,27 @@
 {
-  "lastScraped": "2026-03-27T04:08:47.590Z",
+  "lastScraped": "2026-03-27T05:54:51.789Z",
   "sources": [
     "fuelalert.io"
   ],
   "stationOutages": {
+    "176": {
+      "stationName": "7-Eleven Blacktown",
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T05:01:12.120446+00:00",
+      "lastConfirmed": "2026-03-27T05:01:12.120446+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
     "201": {
       "stationName": "7-Eleven Blacktown East",
       "fuelTypes": [
@@ -26,7 +44,7 @@
         "super98"
       ],
       "status": "no_fuel",
-      "confidence": "medium",
+      "confidence": "low",
       "firstReported": "2026-03-26T23:54:39.316527+00:00",
       "lastConfirmed": "2026-03-26T23:54:39.316527+00:00",
       "sources": [
@@ -39,7 +57,7 @@
         "diesel"
       ],
       "status": "no_fuel",
-      "confidence": "high",
+      "confidence": "medium",
       "firstReported": "2026-03-27T03:03:02.050294+00:00",
       "lastConfirmed": "2026-03-27T03:03:02.050294+00:00",
       "sources": [
@@ -77,15 +95,96 @@
         "fuelalert.io"
       ]
     },
+    "18788": {
+      "stationName": "7-Eleven Braddon",
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T04:50:38.829173+00:00",
+      "lastConfirmed": "2026-03-27T04:50:38.829173+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
+    "18791": {
+      "stationName": "7-Eleven Giralang",
+      "fuelTypes": [
+        "diesel",
+        "super98",
+        "unleaded"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T04:49:34.174631+00:00",
+      "lastConfirmed": "2026-03-27T04:49:34.174631+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
+    "18797": {
+      "stationName": "7-Eleven Wanniassa",
+      "fuelTypes": [
+        "diesel",
+        "super98"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T04:51:50.901028+00:00",
+      "lastConfirmed": "2026-03-27T04:51:50.901028+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
+    "18803": {
+      "stationName": "Ampol Foodary Kambah",
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T04:52:30.109688+00:00",
+      "lastConfirmed": "2026-03-27T04:52:30.109688+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
+    "QLD-61401359": {
+      "stationName": "Ampol Eagle Farm",
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T05:22:42.325532+00:00",
+      "lastConfirmed": "2026-03-27T05:22:42.325532+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
     "QLD-61401541": {
       "stationName": "Ampol Foodary Hamilton",
       "fuelTypes": [
         "diesel"
       ],
       "status": "no_fuel",
-      "confidence": "high",
+      "confidence": "medium",
       "firstReported": "2026-03-27T03:08:33.650333+00:00",
       "lastConfirmed": "2026-03-27T03:08:33.650333+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
+    "QLD-61401348": {
+      "stationName": "U-Go Lutwyche",
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T05:44:30.930598+00:00",
+      "lastConfirmed": "2026-03-27T05:44:30.930598+00:00",
       "sources": [
         "fuelalert.io"
       ]
@@ -114,6 +213,18 @@
       ],
       "status": "no_fuel",
       "lastReportAt": "2026-03-26T12:43:09.937329+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -37.9092231,
+      "lng": 144.6770169,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-27T04:31:44.021518+00:00",
       "source": "fuelalert.io"
     },
     {
@@ -175,18 +286,6 @@
       ],
       "status": "no_fuel",
       "lastReportAt": "2026-03-26T08:38:58.500714+00:00",
-      "source": "fuelalert.io"
-    },
-    {
-      "stationName": "Coles Express",
-      "brand": "Coles Express",
-      "lat": -34.8287246,
-      "lng": 138.6717842,
-      "fuelTypes": [
-        "diesel"
-      ],
-      "status": "no_fuel",
-      "lastReportAt": "2026-03-25T10:21:49.348485+00:00",
       "source": "fuelalert.io"
     },
     {
@@ -265,23 +364,6 @@
       "source": "fuelalert.io"
     },
     {
-      "stationName": "OTR O'Halloran Hill",
-      "brand": "OTR",
-      "lat": -35.0711097,
-      "lng": 138.5546177,
-      "fuelTypes": [
-        "e10",
-        "lpg",
-        "diesel",
-        "super98",
-        "unleaded",
-        "premium95"
-      ],
-      "status": "no_fuel",
-      "lastReportAt": "2026-03-26T06:37:08.150195+00:00",
-      "source": "fuelalert.io"
-    },
-    {
       "stationName": "BP",
       "brand": "BP",
       "lat": -34.3125101,
@@ -296,18 +378,6 @@
       ],
       "status": "no_fuel",
       "lastReportAt": "2026-03-25T13:41:07.357227+00:00",
-      "source": "fuelalert.io"
-    },
-    {
-      "stationName": "7-Eleven",
-      "brand": "7-Eleven",
-      "lat": -38.2278914,
-      "lng": 145.046145,
-      "fuelTypes": [
-        "diesel"
-      ],
-      "status": "no_fuel",
-      "lastReportAt": "2026-03-25T05:59:16.802535+00:00",
       "source": "fuelalert.io"
     },
     {
@@ -410,6 +480,23 @@
       "source": "fuelalert.io"
     },
     {
+      "stationName": "Coles Express Phillip",
+      "brand": "Shell",
+      "lat": -35.3500802,
+      "lng": 149.085087,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-27T05:40:33.911668+00:00",
+      "source": "fuelalert.io"
+    },
+    {
       "stationName": "Fast Fuel",
       "brand": "",
       "lat": -37.7855356,
@@ -504,23 +591,6 @@
       "source": "fuelalert.io"
     },
     {
-      "stationName": "Hunts Fuel",
-      "brand": "Hunts fuel",
-      "lat": -32.7332842,
-      "lng": 138.6121624,
-      "fuelTypes": [
-        "e10",
-        "lpg",
-        "diesel",
-        "super98",
-        "unleaded",
-        "premium95"
-      ],
-      "status": "no_fuel",
-      "lastReportAt": "2026-03-26T05:46:21.685388+00:00",
-      "source": "fuelalert.io"
-    },
-    {
       "stationName": "7-Eleven",
       "brand": "7-Eleven",
       "lat": -38.0591385,
@@ -554,23 +624,6 @@
       ],
       "status": "no_fuel",
       "lastReportAt": "2026-03-25T12:25:41.553988+00:00",
-      "source": "fuelalert.io"
-    },
-    {
-      "stationName": "Puma",
-      "brand": "Puma",
-      "lat": -37.8399731,
-      "lng": 144.7486214,
-      "fuelTypes": [
-        "e10",
-        "lpg",
-        "diesel",
-        "super98",
-        "unleaded",
-        "premium95"
-      ],
-      "status": "no_fuel",
-      "lastReportAt": "2026-03-26T23:13:00.698825+00:00",
       "source": "fuelalert.io"
     },
     {
@@ -750,23 +803,6 @@
       "source": "fuelalert.io"
     },
     {
-      "stationName": "OTR Sheidow Park",
-      "brand": "OTR",
-      "lat": -35.0757799,
-      "lng": 138.5224056,
-      "fuelTypes": [
-        "e10",
-        "lpg",
-        "diesel",
-        "super98",
-        "unleaded",
-        "premium95"
-      ],
-      "status": "no_fuel",
-      "lastReportAt": "2026-03-26T06:38:49.091027+00:00",
-      "source": "fuelalert.io"
-    },
-    {
       "stationName": "Petrol Station",
       "brand": "",
       "lat": -38.4588649,
@@ -814,8 +850,8 @@
     }
   ],
   "summary": {
-    "totalOutages": 58,
-    "dieselOutages": 5,
-    "lastUpdated": "2026-03-27T04:08:47.591Z"
+    "totalOutages": 61,
+    "dieselOutages": 12,
+    "lastUpdated": "2026-03-27T05:54:51.789Z"
   }
 }
