@@ -214,9 +214,13 @@ function Home() {
                 Diesel Price Finder
               </h3>
               <p className="text-brand-gray mb-4">
-                Find the cheapest diesel across Australia. 8,300+ stations across NSW, ACT, QLD, VIC, WA, and TAS.
+                Find the cheapest diesel across Australia. 8,300+ stations with live outage warnings so you know which servos actually have fuel.
               </p>
               <ul className="text-sm text-brand-gray space-y-2">
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-brand-ochre rounded-full"></span>
+                  Live fuel outage warnings
+                </li>
                 <li className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-brand-ochre rounded-full"></span>
                   GPS location or manual search

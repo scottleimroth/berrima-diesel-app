@@ -1,0 +1,40 @@
+name: Scrape Fuel Outages
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Every 30 minutes
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd scraper
+          npm ci
+
+      - name: Run scraper
+        run: |
+          cd scraper
+          node scrape-outages.js
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add frontend/web/public/data/outages.json
+          git diff --staged --quiet || {
+            git pull --rebase origin main
+            git commit -m "[skip ci] data: update fuel outages $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          }

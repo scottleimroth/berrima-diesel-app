@@ -1,0 +1,16 @@
+{
+  "name": "berrima-diesel-scraper",
+  "version": "1.0.0",
+  "description": "Fuel outage data scraper for Berrima Diesel app",
+  "private": true,
+  "scripts": {
+    "scrape": "node scrape-outages.js",
+    "explore": "node explore-endpoints.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "puppeteer": "^22.0.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  }
+}

@@ -1,15 +1,18 @@
 import { useState } from 'react'
-import { MapPin, Navigation, List, Map as MapIcon } from 'lucide-react'
+import { MapPin, Navigation, List, Map as MapIcon, EyeOff, Eye } from 'lucide-react'
 import { useFuelPrices, useFuelTypes } from '../hooks/useFuelPrices'
 import { useGeolocation } from '../hooks/useGeolocation'
 import { useBookmarks } from '../hooks/useBookmarks'
 import { usePriceAlerts } from '../hooks/usePriceAlerts'
+import { useOutageData } from '../hooks/useOutageData'
 import { STATE_CONFIG } from '../services/nationalFuelApi'
+import { getStaleStatus, staleComparator } from '../utils/staleDetection'
 import FuelSearch from '../components/fuel-tracker/FuelSearch'
 import StationList from '../components/fuel-tracker/StationList'
 import FilterBar from '../components/fuel-tracker/FilterBar'
 import PriceAlertBar from '../components/fuel-tracker/PriceAlertBar'
 import PriceMap from '../components/fuel-tracker/PriceMap'
+import OutageSummary from '../components/fuel-tracker/OutageSummary'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorDisplay from '../components/common/ErrorDisplay'
 
@@ -19,6 +22,7 @@ function FuelTracker() {
   const [fuelType, setFuelType] = useState('DL')
   const [radius, setRadius] = useState(50)
   const [state, setState] = useState('ALL')
+  const [hideUnavailable, setHideUnavailable] = useState(false)
 
   const {
     location,
@@ -39,19 +43,42 @@ function FuelTracker() {
   const { data: fuelTypes } = useFuelTypes()
   const bookmarks = useBookmarks()
   const priceAlerts = usePriceAlerts()
+  const outageData = useOutageData()
 
   // Filter stations by radius
-  const filteredStations = stations
+  let filteredStations = stations
     ? stations.filter((station) => station.distance <= radius)
     : []
 
-  // Re-sort if needed (API returns sorted by price or distance)
+  // Optionally hide stations with outage reports or stale data
+  if (hideUnavailable) {
+    filteredStations = filteredStations.filter((station) => {
+      const hasOutage = !!outageData.outages[station.code]
+      const stale = getStaleStatus(station)
+      return !hasOutage && stale.status === 'fresh'
+    })
+  }
+
+  // Sort: primary sort by user preference, secondary sort pushes stale/outage stations lower
   const sortedStations = [...filteredStations].sort((a, b) => {
-    if (sortBy === 'price') {
-      return a.price - b.price
-    }
+    // First: push stations with outage reports to bottom
+    const aOutage = outageData.outages[a.code] ? 1 : 0
+    const bOutage = outageData.outages[b.code] ? 1 : 0
+    if (aOutage !== bOutage) return aOutage - bOutage
+
+    // Second: push stale stations lower
+    const staleSort = staleComparator(a, b)
+    if (staleSort !== 0) return staleSort
+
+    // Then sort by user preference
+    if (sortBy === 'price') return a.price - b.price
     return a.distance - b.distance
   })
+
+  // Count outages in current results
+  const outageCount = sortedStations.filter(
+    (s) => !!outageData.outages[s.code]
+  ).length
 
   // Count stations per state for the info bar
   const stateBreakdown = sortedStations.reduce((acc, s) => {
@@ -117,6 +144,16 @@ function FuelTracker() {
 
       {/* Price Alerts & View Toggle */}
       <div className="container mx-auto px-4 py-4">
+        {/* Outage Summary */}
+        {outageData.hasData && (
+          <OutageSummary
+            summary={outageData.summary}
+            minutesAgo={outageData.minutesAgo}
+            isStale={outageData.isStale}
+            stationCount={outageCount}
+          />
+        )}
+
         {/* Price Alert Bar */}
         <PriceAlertBar
           alerts={priceAlerts.alerts}
@@ -157,30 +194,46 @@ function FuelTracker() {
             )}
           </div>
 
-          {/* View Mode Toggle */}
-          <div className="flex items-center bg-brand-tan/30 rounded-lg p-1">
+          <div className="flex items-center gap-2">
+            {/* Hide unavailable toggle */}
             <button
-              onClick={() => setViewMode('list')}
-              className={`flex items-center gap-1 px-3 py-1.5 rounded text-sm font-medium transition-colors ${
-                viewMode === 'list'
-                  ? 'bg-white text-brand-brown shadow-sm'
-                  : 'text-brand-gray hover:text-brand-brown'
+              onClick={() => setHideUnavailable(!hideUnavailable)}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                hideUnavailable
+                  ? 'bg-red-100 text-red-700'
+                  : 'bg-brand-tan/30 text-brand-gray hover:text-brand-brown'
               }`}
+              title={hideUnavailable ? 'Show all stations' : 'Hide possibly unavailable stations'}
             >
-              <List size={16} />
-              List
+              {hideUnavailable ? <EyeOff size={14} /> : <Eye size={14} />}
+              {hideUnavailable ? 'Showing available only' : 'Show all'}
             </button>
-            <button
-              onClick={() => setViewMode('map')}
-              className={`flex items-center gap-1 px-3 py-1.5 rounded text-sm font-medium transition-colors ${
-                viewMode === 'map'
-                  ? 'bg-white text-brand-brown shadow-sm'
-                  : 'text-brand-gray hover:text-brand-brown'
-              }`}
-            >
-              <MapIcon size={16} />
-              Map
-            </button>
+
+            {/* View Mode Toggle */}
+            <div className="flex items-center bg-brand-tan/30 rounded-lg p-1">
+              <button
+                onClick={() => setViewMode('list')}
+                className={`flex items-center gap-1 px-3 py-1.5 rounded text-sm font-medium transition-colors ${
+                  viewMode === 'list'
+                    ? 'bg-white text-brand-brown shadow-sm'
+                    : 'text-brand-gray hover:text-brand-brown'
+                }`}
+              >
+                <List size={16} />
+                List
+              </button>
+              <button
+                onClick={() => setViewMode('map')}
+                className={`flex items-center gap-1 px-3 py-1.5 rounded text-sm font-medium transition-colors ${
+                  viewMode === 'map'
+                    ? 'bg-white text-brand-brown shadow-sm'
+                    : 'text-brand-gray hover:text-brand-brown'
+                }`}
+              >
+                <MapIcon size={16} />
+                Map
+              </button>
+            </div>
           </div>
         </div>
 
@@ -199,6 +252,7 @@ function FuelTracker() {
             bookmarks={bookmarks}
             userLocation={location}
             priceAlerts={priceAlerts.alerts}
+            outages={outageData}
           />
         ) : (
           <div className="h-[500px] md:h-[600px] rounded-xl overflow-hidden shadow-lg border border-brand-tan/50">
@@ -207,6 +261,7 @@ function FuelTracker() {
               center={location}
               bookmarks={bookmarks}
               priceAlerts={priceAlerts.alerts}
+              outages={outageData}
             />
           </div>
         )}
@@ -221,6 +276,16 @@ function FuelTracker() {
             All fuel prices are provided by state government sources and displayed under their respective open data licenses.
             Prices may not reflect real-time changes — verify at the station before filling up.
           </p>
+          {outageData.hasData && (
+            <p className="mt-1">
+              Fuel availability reports sourced from community data.
+              {outageData.minutesAgo !== null && (
+                <span> Updated {outageData.minutesAgo < 60
+                  ? `${outageData.minutesAgo} minutes`
+                  : `${Math.floor(outageData.minutesAgo / 60)}h`} ago.</span>
+              )}
+            </p>
+          )}
         </div>
       </div>
     </div>

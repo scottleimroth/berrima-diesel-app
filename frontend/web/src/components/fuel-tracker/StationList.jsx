@@ -1,7 +1,8 @@
 import { Fuel } from 'lucide-react'
 import StationCard from './StationCard'
+import { getStaleStatus } from '../../utils/staleDetection'
 
-function StationList({ stations, bookmarks, userLocation, priceAlerts }) {
+function StationList({ stations, bookmarks, userLocation, priceAlerts, outages }) {
   if (!stations || stations.length === 0) {
     return (
       <div className="bg-white rounded-xl p-8 text-center border border-brand-tan/50">
@@ -56,6 +57,8 @@ function StationList({ stations, bookmarks, userLocation, priceAlerts }) {
             isBookmarked={bookmarks.isBookmarked(station.code)}
             onToggleBookmark={bookmarks.toggleBookmark}
             isBelowAlert={priceAlerts?.enabled && station.price <= priceAlerts?.targetPrice}
+            outage={outages?.stationOutages?.[station.code] || null}
+            staleStatus={getStaleStatus(station)}
           />
         ))}
       </div>

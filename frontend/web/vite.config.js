@@ -10,6 +10,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,svg,woff2}'],
+        globIgnores: ['**/data/outages.json'],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/api\.onegov\.nsw\.gov\.au\/.*/i,
