@@ -1,5 +1,5 @@
 {
-  "lastScraped": "2026-03-27T01:17:30.062Z",
+  "lastScraped": "2026-03-27T02:15:42.124Z",
   "sources": [
     "fuelalert.io"
   ],
@@ -26,7 +26,7 @@
         "super98"
       ],
       "status": "no_fuel",
-      "confidence": "high",
+      "confidence": "medium",
       "firstReported": "2026-03-26T23:54:39.316527+00:00",
       "lastConfirmed": "2026-03-26T23:54:39.316527+00:00",
       "sources": [
@@ -37,14 +37,16 @@
       "stationName": "Ampol Foodary Woollahra",
       "fuelTypes": [
         "e10",
+        "lpg",
+        "diesel",
         "super98",
         "unleaded",
         "premium95"
       ],
       "status": "no_fuel",
       "confidence": "high",
-      "firstReported": "2026-03-27T00:09:45.011183+00:00",
-      "lastConfirmed": "2026-03-27T00:09:45.011183+00:00",
+      "firstReported": "2026-03-27T02:00:14.143092+00:00",
+      "lastConfirmed": "2026-03-27T02:00:14.143092+00:00",
       "sources": [
         "fuelalert.io"
       ]
@@ -55,7 +57,7 @@
         "unleaded"
       ],
       "status": "no_fuel",
-      "confidence": "high",
+      "confidence": "medium",
       "firstReported": "2026-03-27T00:09:21.172216+00:00",
       "lastConfirmed": "2026-03-27T00:09:21.172216+00:00",
       "sources": [
@@ -351,6 +353,23 @@
       ],
       "status": "no_fuel",
       "lastReportAt": "2026-03-25T01:19:47.499863+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "BP",
+      "brand": "BP",
+      "lat": -33.8943218,
+      "lng": 151.264765,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-27T01:59:52.254968+00:00",
       "source": "fuelalert.io"
     },
     {
@@ -716,23 +735,6 @@
       "source": "fuelalert.io"
     },
     {
-      "stationName": "7-Eleven",
-      "brand": "7-Eleven",
-      "lat": -33.780271,
-      "lng": 150.8502796,
-      "fuelTypes": [
-        "e10",
-        "lpg",
-        "diesel",
-        "super98",
-        "unleaded",
-        "premium95"
-      ],
-      "status": "no_fuel",
-      "lastReportAt": "2026-03-26T01:37:16.640896+00:00",
-      "source": "fuelalert.io"
-    },
-    {
       "stationName": "Coles Express Ocean Reef",
       "brand": "Coles Express",
       "lat": -31.767393,
@@ -830,11 +832,23 @@
       "status": "no_fuel",
       "lastReportAt": "2026-03-24T23:56:10.388817+00:00",
       "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Petrol Station",
+      "brand": "",
+      "lat": -31.5520737,
+      "lng": 115.6396547,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-27T01:50:00.989108+00:00",
+      "source": "fuelalert.io"
     }
   ],
   "summary": {
-    "totalOutages": 59,
-    "dieselOutages": 3,
-    "lastUpdated": "2026-03-27T01:17:30.062Z"
+    "totalOutages": 60,
+    "dieselOutages": 4,
+    "lastUpdated": "2026-03-27T02:15:42.125Z"
   }
 }
