@@ -16,8 +16,10 @@ export function useFuelPrices(location, fuelType = 'DL', sortBy = 'price', state
     queryFn: () => getNationalFuelPrices(location.lat, location.lng, fuelType, sortBy, state),
     enabled: !!location?.lat && !!location?.lng,
     staleTime: 5 * 60 * 1000, // 5 minutes
-    cacheTime: 30 * 60 * 1000, // 30 minutes
+    gcTime: 30 * 60 * 1000, // 30 minutes
     refetchOnWindowFocus: false,
+    retry: 1,
+    retryDelay: 3000,
     ...options,
   })
 }
@@ -30,7 +32,7 @@ export function useFuelTypes() {
     queryKey: ['fuelTypes'],
     queryFn: getFuelTypes,
     staleTime: 24 * 60 * 60 * 1000, // 24 hours
-    cacheTime: 7 * 24 * 60 * 60 * 1000, // 7 days
+    gcTime: 7 * 24 * 60 * 60 * 1000, // 7 days
   })
 }
 
@@ -42,7 +44,7 @@ export function useBrands() {
     queryKey: ['brands'],
     queryFn: getBrands,
     staleTime: 24 * 60 * 60 * 1000, // 24 hours
-    cacheTime: 7 * 24 * 60 * 60 * 1000, // 7 days
+    gcTime: 7 * 24 * 60 * 60 * 1000, // 7 days
   })
 }
 

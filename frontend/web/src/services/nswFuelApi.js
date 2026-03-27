@@ -52,7 +52,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 
 /**
  * Fetch all fuel data from the public FuelCheckApp endpoint.
- * Returns cached data if still fresh.
+ * Returns cached data if still fresh. Retries once after 3s on failure.
  */
 async function fetchAllFuelData() {
   const now = Date.now()
@@ -60,26 +60,54 @@ async function fetchAllFuelData() {
     return cachedData
   }
 
-  const response = await axios.get(`${API_BASE_URL}/FuelCheckApp/v1/fuel/prices`, {
-    headers: {
-      'requesttimestamp': formatTimestamp(),
-    },
-  })
+  let lastError = null
 
-  const { stations, prices } = response.data
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      if (attempt > 0) {
+        console.log(`[NSW FuelCheck] Retry attempt ${attempt} after 3s...`)
+        await new Promise(r => setTimeout(r, 3000))
+      }
 
-  // Build a lookup map: stationcode -> array of prices
-  const priceMap = new Map()
-  for (const price of prices) {
-    if (!priceMap.has(price.stationcode)) {
-      priceMap.set(price.stationcode, [])
+      const response = await axios.get(`${API_BASE_URL}/FuelCheckApp/v1/fuel/prices`, {
+        headers: {
+          'requesttimestamp': formatTimestamp(),
+        },
+        timeout: 15000,
+      })
+
+      console.log(`[NSW FuelCheck] API response status: ${response.status}, stations: ${response.data?.stations?.length || 0}`)
+
+      const { stations, prices } = response.data
+
+      if (!stations || stations.length === 0) {
+        throw new Error('API returned empty station data')
+      }
+
+      // Build a lookup map: stationcode -> array of prices
+      const priceMap = new Map()
+      for (const price of prices) {
+        if (!priceMap.has(price.stationcode)) {
+          priceMap.set(price.stationcode, [])
+        }
+        priceMap.get(price.stationcode).push(price)
+      }
+
+      cachedData = { stations, priceMap }
+      cacheTimestamp = now
+      return cachedData
+    } catch (error) {
+      const status = error.response?.status || 'N/A'
+      const code = error.code || ''
+      console.error(`[NSW FuelCheck] Attempt ${attempt + 1} failed — status: ${status}, code: ${code}, message: ${error.message}`)
+      lastError = error
     }
-    priceMap.get(price.stationcode).push(price)
   }
 
-  cachedData = { stations, priceMap }
-  cacheTimestamp = now
-  return cachedData
+  // Both attempts failed — throw so callers know this is an API error
+  const apiError = new Error(`NSW FuelCheck API unavailable: ${lastError?.message}`)
+  apiError.isApiError = true
+  throw apiError
 }
 
 /**
@@ -91,52 +119,47 @@ async function fetchAllFuelData() {
  * @returns {Promise<Array>} Array of fuel stations with prices
  */
 export async function getFuelPricesNearby(latitude, longitude, fuelType = 'DL', sortBy = 'price') {
-  try {
-    const { stations, priceMap } = await fetchAllFuelData()
+  const { stations, priceMap } = await fetchAllFuelData()
 
-    // Merge stations with their prices for the requested fuel type
-    const results = []
-    for (const station of stations) {
-      const stationPrices = priceMap.get(station.code) || []
-      const fuelPrice = stationPrices.find((p) => p.fueltype === fuelType)
-      if (!fuelPrice) continue // Skip stations without this fuel type
+  // Merge stations with their prices for the requested fuel type
+  const results = []
+  for (const station of stations) {
+    const stationPrices = priceMap.get(station.code) || []
+    const fuelPrice = stationPrices.find((p) => p.fueltype === fuelType)
+    if (!fuelPrice) continue // Skip stations without this fuel type
 
-      const distance = calculateDistance(
-        latitude, longitude,
-        station.location.latitude, station.location.longitude
-      )
+    const distance = calculateDistance(
+      latitude, longitude,
+      station.location.latitude, station.location.longitude
+    )
 
-      // Determine state from address (NSW FuelCheck includes ACT stations)
-      const stateCode = station.address.includes(' ACT ') ? 'ACT' : 'NSW'
+    // Determine state from address (NSW FuelCheck includes ACT stations)
+    const stateCode = station.address.includes(' ACT ') ? 'ACT' : 'NSW'
 
-      results.push({
-        code: station.code,
-        brand: station.brand,
-        name: station.name,
-        address: station.address,
-        location: station.location,
-        price: fuelPrice.price,
-        fueltype: fuelPrice.fueltype,
-        lastupdated: parseAusDate(fuelPrice.lastupdated),
-        distance,
-        isAdBlueAvailable: station.isAdBlueAvailable || false,
-        state: stateCode,
-        source: 'fuelcheck',
-      })
-    }
-
-    // Sort
-    if (sortBy === 'price') {
-      results.sort((a, b) => a.price - b.price)
-    } else {
-      results.sort((a, b) => a.distance - b.distance)
-    }
-
-    return results
-  } catch (error) {
-    console.error('Error fetching fuel prices:', error)
-    return getDemoFuelData(latitude, longitude, sortBy)
+    results.push({
+      code: station.code,
+      brand: station.brand,
+      name: station.name,
+      address: station.address,
+      location: station.location,
+      price: fuelPrice.price,
+      fueltype: fuelPrice.fueltype,
+      lastupdated: parseAusDate(fuelPrice.lastupdated),
+      distance,
+      isAdBlueAvailable: station.isAdBlueAvailable || false,
+      state: stateCode,
+      source: 'fuelcheck',
+    })
   }
+
+  // Sort
+  if (sortBy === 'price') {
+    results.sort((a, b) => a.price - b.price)
+  } else {
+    results.sort((a, b) => a.distance - b.distance)
+  }
+
+  return results
 }
 
 /**

@@ -116,7 +116,7 @@ function PriceMap({ stations, center, bookmarks, outages }) {
         const lat = station.location?.latitude || station.lat
         const lng = station.location?.longitude || station.lng
         const isBookmarked = bookmarks.isBookmarked(station.code)
-        const hasOutage = !!outages?.stationOutages?.[station.code]
+        const hasOutage = !!outages?.outages?.[station.code]
         const staleInfo = getStaleStatus(station)
 
         return (

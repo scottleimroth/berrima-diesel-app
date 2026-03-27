@@ -66,6 +66,7 @@ export function detectStateFromCoords(lat, lng) {
  */
 export async function getNationalFuelPrices(latitude, longitude, fuelType = 'DL', sortBy = 'price', state = 'ALL') {
   const fetchFns = []
+  const errors = []
 
   // Determine which APIs to call based on selected state
   if (state === 'ALL' || state === 'NSW' || state === 'ACT') {
@@ -78,6 +79,7 @@ export async function getNationalFuelPrices(latitude, longitude, fuelType = 'DL'
         })
         .catch((error) => {
           console.error('NSW/ACT fetch error:', error)
+          errors.push('NSW')
           return []
         })
     )
@@ -88,6 +90,7 @@ export async function getNationalFuelPrices(latitude, longitude, fuelType = 'DL'
       getWAFuelPricesNearby(latitude, longitude, fuelType, sortBy)
         .catch((error) => {
           console.error('WA fetch error:', error)
+          errors.push('WA')
           return []
         })
     )
@@ -98,6 +101,7 @@ export async function getNationalFuelPrices(latitude, longitude, fuelType = 'DL'
       getQLDFuelPricesNearby(latitude, longitude, fuelType, sortBy)
         .catch((error) => {
           console.error('QLD fetch error:', error)
+          errors.push('QLD')
           return []
         })
     )
@@ -108,6 +112,7 @@ export async function getNationalFuelPrices(latitude, longitude, fuelType = 'DL'
       getTASFuelPricesNearby(latitude, longitude, fuelType, sortBy)
         .catch((error) => {
           console.error('TAS fetch error:', error)
+          errors.push('TAS')
           return []
         })
     )
@@ -118,6 +123,7 @@ export async function getNationalFuelPrices(latitude, longitude, fuelType = 'DL'
       getVICFuelPricesNearby(latitude, longitude, fuelType === 'DL' ? 'DSL' : fuelType, sortBy)
         .catch((error) => {
           console.error('VIC fetch error:', error)
+          errors.push('VIC')
           return []
         })
     )
@@ -128,6 +134,16 @@ export async function getNationalFuelPrices(latitude, longitude, fuelType = 'DL'
 
   // Merge all results into a single array
   const allStations = results.flat()
+
+  // If a specific state was selected and it failed, throw so the user sees the error
+  if (state !== 'ALL' && errors.length > 0 && allStations.length === 0) {
+    throw new Error(`${errors.join(', ')} fuel price API temporarily unavailable — try again in a minute`)
+  }
+
+  // If ALL states were selected and ALL failed, throw
+  if (state === 'ALL' && errors.length === fetchFns.length && allStations.length === 0) {
+    throw new Error('All fuel price APIs temporarily unavailable — try again in a minute')
+  }
 
   // Sort the combined results
   if (sortBy === 'price') {
