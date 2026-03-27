@@ -3,13 +3,18 @@ import { useQuery } from '@tanstack/react-query'
 async function fetchOutageData() {
   // Cache-bust every 5 minutes
   const cacheBuster = Math.floor(Date.now() / 300000)
-  const response = await fetch(`/data/outages.json?t=${cacheBuster}`, {
+  const response = await fetch(`/data/outages.json?v=2&t=${cacheBuster}`, {
     cache: 'no-cache',
   })
   if (!response.ok) {
+    console.error(`[Outages] Fetch failed: ${response.status} ${response.statusText}`)
     throw new Error('Failed to fetch outage data')
   }
-  return response.json()
+  const data = await response.json()
+  const matched = Object.keys(data?.stationOutages || {}).length
+  const unmatched = (data?.unmatchedOutages || []).length
+  console.log(`[Outages] Loaded: ${matched} matched, ${unmatched} unmatched, total=${data?.summary?.totalOutages}`)
+  return data
 }
 
 /**
@@ -23,9 +28,8 @@ export function useOutageData() {
     staleTime: 5 * 60 * 1000, // 5 minutes
     cacheTime: 30 * 60 * 1000,
     refetchOnWindowFocus: true,
-    retry: 1,
-    // Don't fail the app if outage data is unavailable
-    onError: () => {},
+    retry: 2,
+    onError: (err) => console.error('[Outages] Query error:', err.message),
   })
 
   const data = query.data
