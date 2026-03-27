@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'frontend/web/public/data/outages.json'
+      - 'frontend/web/public/data/**'
   workflow_dispatch:
 
 permissions:

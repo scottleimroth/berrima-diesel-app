@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import { formatDistance } from '../../utils/formatters'
+import { getStaleStatus } from '../../utils/staleDetection'
 
 // Fix for default marker icons in webpack/vite
 delete L.Icon.Default.prototype._getIconUrl
@@ -11,9 +12,18 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
 })
 
-// Custom marker icons - using heritage colors
-const createPriceIcon = (price, isBookmarked, rank) => {
-  const bgColor = rank === 1 ? '#22c55e' : rank <= 3 ? '#CC7722' : '#6B4423'  // success, ochre, brown
+// Custom marker icons - using heritage colors with outage awareness
+const createPriceIcon = (price, isBookmarked, rank, hasOutage, staleStatus) => {
+  let bgColor
+  if (hasOutage) {
+    bgColor = '#ef4444' // red - reported out of fuel
+  } else if (staleStatus === 'danger') {
+    bgColor = '#ef4444' // red - very stale
+  } else if (staleStatus === 'warning') {
+    bgColor = '#f59e0b' // amber - stale
+  } else {
+    bgColor = rank === 1 ? '#22c55e' : rank <= 3 ? '#CC7722' : '#6B4423'
+  }
   const borderColor = isBookmarked ? '#f59e0b' : bgColor
 
   return L.divIcon({
@@ -73,7 +83,7 @@ function MapUpdater({ center }) {
   return null
 }
 
-function PriceMap({ stations, center, bookmarks }) {
+function PriceMap({ stations, center, bookmarks, outages }) {
   const mapCenter = center ? [center.lat, center.lng] : [-34.4794, 150.3369]
 
   return (
@@ -106,15 +116,31 @@ function PriceMap({ stations, center, bookmarks }) {
         const lat = station.location?.latitude || station.lat
         const lng = station.location?.longitude || station.lng
         const isBookmarked = bookmarks.isBookmarked(station.code)
+        const hasOutage = !!outages?.stationOutages?.[station.code]
+        const staleInfo = getStaleStatus(station)
 
         return (
           <Marker
             key={station.code}
             position={[lat, lng]}
-            icon={createPriceIcon(station.price, isBookmarked, index + 1)}
+            icon={createPriceIcon(station.price, isBookmarked, index + 1, hasOutage, staleInfo.status)}
           >
             <Popup>
               <div className="min-w-[200px]">
+                {hasOutage && (
+                  <div className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded mb-2">
+                    REPORTED OUT OF FUEL
+                  </div>
+                )}
+                {staleInfo.status !== 'fresh' && !hasOutage && (
+                  <div className={`text-xs font-medium px-2 py-1 rounded mb-2 ${
+                    staleInfo.status === 'danger'
+                      ? 'bg-red-100 text-red-700'
+                      : 'bg-amber-100 text-amber-700'
+                  }`}>
+                    {staleInfo.message}
+                  </div>
+                )}
                 <div className="font-bold text-lg text-brand-brown">{station.name}</div>
                 <div className="text-brand-gray text-sm mb-2">{station.brand}</div>
                 <div className="text-2xl font-bold text-brand-ochre mb-2">

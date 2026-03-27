@@ -1,8 +1,18 @@
 import { MapPin, Clock, Star, Navigation, ExternalLink, Bell } from 'lucide-react'
 import { formatDistance, formatTimeAgo } from '../../utils/formatters'
+import OutageBanner from './OutageBanner'
+import StaleWarning from './StaleWarning'
 
-function StationCard({ station, isBookmarked, onToggleBookmark, rank, isBelowAlert }) {
+function StationCard({ station, isBookmarked, onToggleBookmark, rank, isBelowAlert, outage, staleStatus }) {
   const priceColor = isBelowAlert ? 'text-success' : rank === 1 ? 'text-success' : rank <= 3 ? 'text-brand-brown' : 'text-brand-gray'
+
+  const hasOutage = !!outage
+  const isStale = staleStatus && staleStatus.status !== 'fresh'
+  const borderColor = hasOutage
+    ? 'border-red-500'
+    : isStale
+    ? staleStatus.status === 'danger' ? 'border-red-400' : 'border-amber-400'
+    : isBelowAlert ? 'border-success' : 'border-brand-ochre'
 
   const getDirectionsUrl = () => {
     const lat = station.location?.latitude || station.lat
@@ -11,10 +21,16 @@ function StationCard({ station, isBookmarked, onToggleBookmark, rank, isBelowAle
   }
 
   return (
-    <div className={`bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border-l-4 overflow-hidden ${
-      isBelowAlert ? 'border-success bg-success/5' : 'border-brand-ochre'
+    <div className={`bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border-l-4 overflow-hidden ${borderColor} ${
+      isBelowAlert ? 'bg-success/5' : ''
     }`}>
       <div className="p-4">
+        {/* Outage Banner */}
+        <OutageBanner outage={outage} />
+
+        {/* Stale Warning */}
+        <StaleWarning staleStatus={staleStatus} />
+
         <div className="flex justify-between items-start gap-4">
           {/* Station Info */}
           <div className="flex-1 min-w-0">

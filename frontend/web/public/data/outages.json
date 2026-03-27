@@ -1,0 +1,840 @@
+{
+  "lastScraped": "2026-03-27T01:17:30.062Z",
+  "sources": [
+    "fuelalert.io"
+  ],
+  "stationOutages": {
+    "201": {
+      "stationName": "7-Eleven Blacktown East",
+      "fuelTypes": [
+        "e10",
+        "diesel",
+        "unleaded"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T01:00:31.842432+00:00",
+      "lastConfirmed": "2026-03-27T01:00:31.842432+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
+    "287": {
+      "stationName": "7-Eleven St Clair",
+      "fuelTypes": [
+        "diesel",
+        "super98"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-26T23:54:39.316527+00:00",
+      "lastConfirmed": "2026-03-26T23:54:39.316527+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
+    "17294": {
+      "stationName": "Ampol Foodary Woollahra",
+      "fuelTypes": [
+        "e10",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T00:09:45.011183+00:00",
+      "lastConfirmed": "2026-03-27T00:09:45.011183+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
+    "18294": {
+      "stationName": "Ampol Foodary Bondi North",
+      "fuelTypes": [
+        "unleaded"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T00:09:21.172216+00:00",
+      "lastConfirmed": "2026-03-27T00:09:21.172216+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
+    "18799": {
+      "stationName": "Ampol Foodary Calwell",
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T01:12:16.307192+00:00",
+      "lastConfirmed": "2026-03-27T01:12:16.307192+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    }
+  },
+  "unmatchedOutages": [
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -37.407001,
+      "lng": 144.980547,
+      "fuelTypes": [
+        "unleaded"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T00:08:08.808512+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Karan Awe Service Station Taynuit",
+      "brand": "BP",
+      "lat": 56.417897,
+      "lng": -5.1900832,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T12:43:09.937329+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Costco Gasoline",
+      "brand": "Costco",
+      "lat": -31.9403602,
+      "lng": 115.9518493,
+      "fuelTypes": [
+        "diesel",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-20T11:42:31.088742+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Ampol",
+      "brand": "Ampol",
+      "lat": -31.9776186,
+      "lng": 115.813663,
+      "fuelTypes": [
+        "unleaded"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T11:12:14.092815+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Caltex",
+      "brand": "Caltex",
+      "lat": -34.6032303,
+      "lng": 138.7490422,
+      "fuelTypes": [
+        "e10"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T00:43:12.781415+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven Balga",
+      "brand": "7-Eleven",
+      "lat": -31.8564856,
+      "lng": 115.8375112,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T08:34:16.477329+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -31.8480176,
+      "lng": 115.9672522,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T08:38:58.500714+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Coles Express",
+      "brand": "Coles Express",
+      "lat": -34.8287246,
+      "lng": 138.6717842,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T10:21:49.348485+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Ampol",
+      "brand": "Ampol",
+      "lat": -34.0165904,
+      "lng": 151.0123704,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T01:40:19.974945+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Vibe Petroleum",
+      "brand": "",
+      "lat": -33.6555948,
+      "lng": 115.2201346,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-27T00:26:02.237076+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Petrol Station",
+      "brand": "",
+      "lat": -37.0246504,
+      "lng": 144.5308908,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T05:15:58.736755+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "EG Ampol",
+      "brand": "Ampol",
+      "lat": -27.474683,
+      "lng": 153.1437951,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-24T21:45:43.525374+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7 Eleven",
+      "brand": "7-Eleven",
+      "lat": -31.6354216,
+      "lng": 115.7058297,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T05:43:26.435911+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -35.3804076,
+      "lng": 149.1962072,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-24T05:05:27.30793+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "OTR O'Halloran Hill",
+      "brand": "OTR",
+      "lat": -35.0711097,
+      "lng": 138.5546177,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T06:37:08.150195+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "BP",
+      "brand": "BP",
+      "lat": -34.3125101,
+      "lng": 115.1576883,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T13:41:07.357227+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -38.2278914,
+      "lng": 145.046145,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T05:59:16.802535+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Gull",
+      "brand": "",
+      "lat": -33.6556246,
+      "lng": 115.2201513,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-27T00:25:45.986899+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Ampol",
+      "brand": "Ampol",
+      "lat": -33.7143638,
+      "lng": 150.9601984,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T03:24:24.369196+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -37.8494192,
+      "lng": 144.8445691,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T01:19:47.499863+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Mobil",
+      "brand": "Mobil",
+      "lat": -31.8325765,
+      "lng": 115.9682163,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T08:41:35.449512+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Ampol",
+      "brand": "Ampol",
+      "lat": -31.9013362,
+      "lng": 115.7942264,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T13:01:45.348919+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Liberty Alstonville",
+      "brand": "Liberty",
+      "lat": -28.838164,
+      "lng": 153.4387717,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T04:27:55.648616+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Fast Fuel",
+      "brand": "",
+      "lat": -37.7855356,
+      "lng": 145.3823582,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-24T09:19:08.426272+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Costco Fuel",
+      "brand": "Costco",
+      "lat": -31.9403478,
+      "lng": 115.9518416,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-20T11:36:57.324974+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "OTR Brighton",
+      "brand": "OTR",
+      "lat": -35.0199353,
+      "lng": 138.5234936,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-24T10:23:40.078628+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Shell",
+      "brand": "Shell Australia",
+      "lat": -34.4826737,
+      "lng": 150.4173151,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T06:19:50.628422+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "BP Rosegarden",
+      "brand": "BP",
+      "lat": -31.9797308,
+      "lng": 115.7982564,
+      "fuelTypes": [
+        "unleaded"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T04:40:58.445534+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Petrol Station",
+      "brand": "",
+      "lat": -33.8743884,
+      "lng": 151.2727964,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-27T00:43:36.294552+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven Malvern Springs",
+      "brand": "7-Eleven",
+      "lat": -31.7662731,
+      "lng": 115.98557,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T02:37:58.945791+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Hunts Fuel",
+      "brand": "Hunts fuel",
+      "lat": -32.7332842,
+      "lng": 138.6121624,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T05:46:21.685388+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -38.0591385,
+      "lng": 145.4065699,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-23T19:38:49.659353+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7 Eleven",
+      "brand": "7-Eleven",
+      "lat": -31.906354,
+      "lng": 115.9309724,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T08:35:49.655963+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -37.8154477,
+      "lng": 145.0411478,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T06:29:36.347554+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -31.9717905,
+      "lng": 115.9185343,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T12:25:41.553988+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Puma",
+      "brand": "Puma",
+      "lat": -37.8399731,
+      "lng": 144.7486214,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T23:13:00.698825+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7 Eleven",
+      "brand": "7-Eleven",
+      "lat": -32.001772,
+      "lng": 115.918496,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T08:36:34.286188+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Shell",
+      "brand": "Shell",
+      "lat": -34.8889221,
+      "lng": 138.673815,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-23T00:46:17.792895+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Shell",
+      "brand": "Shell",
+      "lat": 56.2252069,
+      "lng": -3.9150831,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T12:43:00.794358+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -32.1015215,
+      "lng": 115.8018858,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T08:45:28.730419+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Petrol Station",
+      "brand": "",
+      "lat": -35.2705033,
+      "lng": 147.1171124,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T19:48:22.804422+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Ampol",
+      "brand": "Ampol",
+      "lat": -33.8581413,
+      "lng": 151.0682035,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T23:54:38.711061+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Service Station",
+      "brand": "",
+      "lat": -20.7719345,
+      "lng": 139.9821094,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T02:56:46.505274+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Liberty Oil Tapping",
+      "brand": "Liberty",
+      "lat": -31.7203455,
+      "lng": 115.7839585,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-20T11:49:31.853603+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Ampol",
+      "brand": "Ampol",
+      "lat": -37.8454146,
+      "lng": 144.9854709,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-24T06:38:55.126975+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Fast Fuel",
+      "brand": "",
+      "lat": -38.05081,
+      "lng": 145.3731544,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-24T08:33:54.483488+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -33.780271,
+      "lng": 150.8502796,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T01:37:16.640896+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Coles Express Ocean Reef",
+      "brand": "Coles Express",
+      "lat": -31.767393,
+      "lng": 115.7495658,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T08:11:09.488511+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -37.7831013,
+      "lng": 145.2677695,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T07:44:19.67643+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "7-Eleven",
+      "brand": "7-Eleven",
+      "lat": -31.9417383,
+      "lng": 115.9250517,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T12:25:14.851328+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "OTR Sheidow Park",
+      "brand": "OTR",
+      "lat": -35.0757799,
+      "lng": 138.5224056,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T06:38:49.091027+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Petrol Station",
+      "brand": "",
+      "lat": -38.4588649,
+      "lng": 144.1071296,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-26T21:54:40.004828+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "On The Run",
+      "brand": "Peregrine Corporation",
+      "lat": -35.0749329,
+      "lng": 138.590594,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-25T00:41:04.960445+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Coles Express",
+      "brand": "Shell",
+      "lat": -37.8238532,
+      "lng": 145.0583077,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-24T23:56:10.388817+00:00",
+      "source": "fuelalert.io"
+    }
+  ],
+  "summary": {
+    "totalOutages": 59,
+    "dieselOutages": 3,
+    "lastUpdated": "2026-03-27T01:17:30.062Z"
+  }
+}
