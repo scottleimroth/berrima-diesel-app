@@ -1,5 +1,5 @@
 {
-  "lastScraped": "2026-03-27T02:15:42.124Z",
+  "lastScraped": "2026-03-27T04:08:47.590Z",
   "sources": [
     "fuelalert.io"
   ],
@@ -12,7 +12,7 @@
         "unleaded"
       ],
       "status": "no_fuel",
-      "confidence": "high",
+      "confidence": "medium",
       "firstReported": "2026-03-27T01:00:31.842432+00:00",
       "lastConfirmed": "2026-03-27T01:00:31.842432+00:00",
       "sources": [
@@ -33,6 +33,19 @@
         "fuelalert.io"
       ]
     },
+    "296": {
+      "stationName": "7-Eleven Wahroonga",
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "confidence": "high",
+      "firstReported": "2026-03-27T03:03:02.050294+00:00",
+      "lastConfirmed": "2026-03-27T03:03:02.050294+00:00",
+      "sources": [
+        "fuelalert.io"
+      ]
+    },
     "17294": {
       "stationName": "Ampol Foodary Woollahra",
       "fuelTypes": [
@@ -44,7 +57,7 @@
         "premium95"
       ],
       "status": "no_fuel",
-      "confidence": "high",
+      "confidence": "medium",
       "firstReported": "2026-03-27T02:00:14.143092+00:00",
       "lastConfirmed": "2026-03-27T02:00:14.143092+00:00",
       "sources": [
@@ -64,20 +77,15 @@
         "fuelalert.io"
       ]
     },
-    "18799": {
-      "stationName": "Ampol Foodary Calwell",
+    "QLD-61401541": {
+      "stationName": "Ampol Foodary Hamilton",
       "fuelTypes": [
-        "e10",
-        "lpg",
-        "diesel",
-        "super98",
-        "unleaded",
-        "premium95"
+        "diesel"
       ],
       "status": "no_fuel",
       "confidence": "high",
-      "firstReported": "2026-03-27T01:12:16.307192+00:00",
-      "lastConfirmed": "2026-03-27T01:12:16.307192+00:00",
+      "firstReported": "2026-03-27T03:08:33.650333+00:00",
+      "lastConfirmed": "2026-03-27T03:08:33.650333+00:00",
       "sources": [
         "fuelalert.io"
       ]
@@ -254,18 +262,6 @@
       ],
       "status": "no_fuel",
       "lastReportAt": "2026-03-25T05:43:26.435911+00:00",
-      "source": "fuelalert.io"
-    },
-    {
-      "stationName": "7-Eleven",
-      "brand": "7-Eleven",
-      "lat": -35.3804076,
-      "lng": 149.1962072,
-      "fuelTypes": [
-        "diesel"
-      ],
-      "status": "no_fuel",
-      "lastReportAt": "2026-03-24T05:05:27.30793+00:00",
       "source": "fuelalert.io"
     },
     {
@@ -551,23 +547,6 @@
     {
       "stationName": "7-Eleven",
       "brand": "7-Eleven",
-      "lat": -37.8154477,
-      "lng": 145.0411478,
-      "fuelTypes": [
-        "e10",
-        "lpg",
-        "diesel",
-        "super98",
-        "unleaded",
-        "premium95"
-      ],
-      "status": "no_fuel",
-      "lastReportAt": "2026-03-26T06:29:36.347554+00:00",
-      "source": "fuelalert.io"
-    },
-    {
-      "stationName": "7-Eleven",
-      "brand": "7-Eleven",
       "lat": -31.9717905,
       "lng": 115.9185343,
       "fuelTypes": [
@@ -832,23 +811,11 @@
       "status": "no_fuel",
       "lastReportAt": "2026-03-24T23:56:10.388817+00:00",
       "source": "fuelalert.io"
-    },
-    {
-      "stationName": "Petrol Station",
-      "brand": "",
-      "lat": -31.5520737,
-      "lng": 115.6396547,
-      "fuelTypes": [
-        "diesel"
-      ],
-      "status": "no_fuel",
-      "lastReportAt": "2026-03-27T01:50:00.989108+00:00",
-      "source": "fuelalert.io"
     }
   ],
   "summary": {
-    "totalOutages": 60,
-    "dieselOutages": 4,
-    "lastUpdated": "2026-03-27T02:15:42.125Z"
+    "totalOutages": 58,
+    "dieselOutages": 5,
+    "lastUpdated": "2026-03-27T04:08:47.591Z"
   }
 }
