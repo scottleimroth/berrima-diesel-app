@@ -14,6 +14,8 @@ const path = require('path')
 const fuelalert = require('./sources/fuelalert')
 const outtafuel = require('./sources/outtafuel')
 const nofuelhere = require('./sources/nofuelhere')
+const checkpetrol = require('./sources/checkpetrol')
+const govprices = require('./sources/govprices')
 
 const OUTPUT_PATH = path.join(__dirname, '..', 'frontend', 'web', 'public', 'data', 'outages.json')
 const MAX_REPORT_AGE_HOURS = 12
@@ -248,9 +250,17 @@ function matchOutages(outageReports, govStations) {
   }
 
   // Set confidence levels
+  // Cross-source corroboration (e.g. CheckPetrol + FuelAlert) = highest confidence
   for (const outage of Object.values(matched)) {
     const ageHours = (Date.now() - new Date(outage.lastConfirmed).getTime()) / 3600000
-    if (outage.sources.length >= 2 || ageHours < 2) {
+    const hasCrowdsourcedCorroboration = outage.sources.some(s =>
+      s === 'checkpetrol.com.au' || s === 'fuelalert.io'
+    ) && outage.sources.length >= 2
+
+    if (hasCrowdsourcedCorroboration) {
+      // Multiple independent crowdsourced sources agree — strongest signal
+      outage.confidence = 'high'
+    } else if (outage.sources.length >= 2 || ageHours < 2) {
       outage.confidence = 'high'
     } else if (ageHours <= 6) {
       outage.confidence = 'medium'
@@ -273,6 +283,8 @@ async function main() {
     { name: 'fuelalert.io', fn: fuelalert.scrape },
     { name: 'outtafuel.com.au', fn: outtafuel.scrape },
     { name: 'nofuelhere.com.au', fn: nofuelhere.scrape },
+    { name: 'checkpetrol.com.au', fn: checkpetrol.scrape },
+    { name: 'govprices', fn: govprices.scrape },
   ]
 
   const allReports = []
