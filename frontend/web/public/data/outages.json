@@ -1,5 +1,5 @@
 {
-  "lastScraped": "2026-03-27T05:54:51.789Z",
+  "lastScraped": "2026-03-27T06:55:34.183Z",
   "sources": [
     "fuelalert.io"
   ],
@@ -88,7 +88,7 @@
         "unleaded"
       ],
       "status": "no_fuel",
-      "confidence": "medium",
+      "confidence": "low",
       "firstReported": "2026-03-27T00:09:21.172216+00:00",
       "lastConfirmed": "2026-03-27T00:09:21.172216+00:00",
       "sources": [
@@ -101,7 +101,7 @@
         "diesel"
       ],
       "status": "no_fuel",
-      "confidence": "high",
+      "confidence": "medium",
       "firstReported": "2026-03-27T04:50:38.829173+00:00",
       "lastConfirmed": "2026-03-27T04:50:38.829173+00:00",
       "sources": [
@@ -116,7 +116,7 @@
         "unleaded"
       ],
       "status": "no_fuel",
-      "confidence": "high",
+      "confidence": "medium",
       "firstReported": "2026-03-27T04:49:34.174631+00:00",
       "lastConfirmed": "2026-03-27T04:49:34.174631+00:00",
       "sources": [
@@ -130,7 +130,7 @@
         "super98"
       ],
       "status": "no_fuel",
-      "confidence": "high",
+      "confidence": "medium",
       "firstReported": "2026-03-27T04:51:50.901028+00:00",
       "lastConfirmed": "2026-03-27T04:51:50.901028+00:00",
       "sources": [
@@ -143,7 +143,7 @@
         "diesel"
       ],
       "status": "no_fuel",
-      "confidence": "high",
+      "confidence": "medium",
       "firstReported": "2026-03-27T04:52:30.109688+00:00",
       "lastConfirmed": "2026-03-27T04:52:30.109688+00:00",
       "sources": [
@@ -238,6 +238,18 @@
       ],
       "status": "no_fuel",
       "lastReportAt": "2026-03-20T11:42:31.088742+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "Petrol Station",
+      "brand": "",
+      "lat": -33.0825682,
+      "lng": 115.9054208,
+      "fuelTypes": [
+        "diesel"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-27T06:29:31.644629+00:00",
       "source": "fuelalert.io"
     },
     {
@@ -393,6 +405,23 @@
       "source": "fuelalert.io"
     },
     {
+      "stationName": "Birdsville Fuel Service",
+      "brand": "",
+      "lat": -25.8992053,
+      "lng": 139.3521882,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-27T06:48:02.818315+00:00",
+      "source": "fuelalert.io"
+    },
+    {
       "stationName": "Ampol",
       "brand": "Ampol",
       "lat": -33.7143638,
@@ -407,6 +436,18 @@
       ],
       "status": "no_fuel",
       "lastReportAt": "2026-03-25T03:24:24.369196+00:00",
+      "source": "fuelalert.io"
+    },
+    {
+      "stationName": "BP Watsonia",
+      "brand": "BP",
+      "lat": -37.7106152,
+      "lng": 145.0823899,
+      "fuelTypes": [
+        "unleaded"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-27T05:58:41.424089+00:00",
       "source": "fuelalert.io"
     },
     {
@@ -709,6 +750,23 @@
       "source": "fuelalert.io"
     },
     {
+      "stationName": "Birdsville Roadhouse",
+      "brand": "",
+      "lat": -25.8989448,
+      "lng": 139.3536362,
+      "fuelTypes": [
+        "e10",
+        "lpg",
+        "diesel",
+        "super98",
+        "unleaded",
+        "premium95"
+      ],
+      "status": "no_fuel",
+      "lastReportAt": "2026-03-27T06:47:54.623394+00:00",
+      "source": "fuelalert.io"
+    },
+    {
       "stationName": "Service Station",
       "brand": "",
       "lat": -20.7719345,
@@ -850,8 +908,8 @@
     }
   ],
   "summary": {
-    "totalOutages": 61,
+    "totalOutages": 65,
     "dieselOutages": 12,
-    "lastUpdated": "2026-03-27T05:54:51.789Z"
+    "lastUpdated": "2026-03-27T06:55:34.183Z"
   }
 }
