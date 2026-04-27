@@ -4,22 +4,15 @@
 
 **Cross-Platform Web App** — Works on desktop, tablet, and mobile. Installable as a PWA.
 
-<<<<<<< Updated upstream
 Diesel Price Tracker, Route Planner & Touring Tools for 4WD, Caravan & Motorhome travellers. Built by Berrima Diesel Service — working exclusively on diesel since 1956.
 
-=======
->>>>>>> Stashed changes
 ---
 
 ## Available Platforms
 
 | Platform | How to Get It |
 |----------|---------------|
-<<<<<<< Updated upstream
 | Web App | [Launch in browser](https://app.berrimadiesel.com/) — no install needed |
-=======
-| Web App | [Launch in browser](https://scottleimroth.github.io/berrima-diesel-app/) — no install needed |
->>>>>>> Stashed changes
 | Mobile (PWA) | Open the link above on your phone and tap "Add to Home Screen" |
 
 ## Features
