@@ -5,7 +5,7 @@ const STORAGE_KEY = 'berrima-fuel-log'
 
 function loadLog() {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY)
+    let stored = null; try { stored = localStorage.getItem(STORAGE_KEY) } catch {}
     return stored ? JSON.parse(stored) : []
   } catch {
     return []
@@ -13,7 +13,7 @@ function loadLog() {
 }
 
 function saveLog(log) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(log))
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(log)) } catch {}
 }
 
 function FuelEconomy() {

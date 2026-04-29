@@ -9,7 +9,7 @@ const STORAGE_KEY = 'berrima-price-alerts'
 export function usePriceAlerts() {
   const [alerts, setAlerts] = useState(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY)
+      let saved = null; try { saved = localStorage.getItem(STORAGE_KEY) } catch {}
       return saved ? JSON.parse(saved) : { enabled: false, targetPrice: 180, fuelType: 'DL' }
     } catch {
       return { enabled: false, targetPrice: 180, fuelType: 'DL' }
@@ -18,7 +18,7 @@ export function usePriceAlerts() {
 
   // Save to localStorage whenever alerts change
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(alerts))
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(alerts)) } catch {}
   }, [alerts])
 
   const setTargetPrice = useCallback((price) => {

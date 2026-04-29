@@ -5,7 +5,7 @@ const STORAGE_KEY = 'berrima-service-tracker'
 
 function loadData() {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY)
+    let stored = null; try { stored = localStorage.getItem(STORAGE_KEY) } catch {}
     return stored ? JSON.parse(stored) : { vehicle: null, services: [] }
   } catch {
     return { vehicle: null, services: [] }
@@ -13,7 +13,7 @@ function loadData() {
 }
 
 function saveData(data) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)) } catch {}
 }
 
 const VEHICLE_PRESETS = [
