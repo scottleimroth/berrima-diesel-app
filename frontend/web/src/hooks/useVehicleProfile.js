@@ -79,7 +79,7 @@ export function useVehicleProfile() {
   // Load saved profiles from localStorage on mount
   useEffect(() => {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY)
+      let stored = null; try { stored = localStorage.getItem(STORAGE_KEY) } catch {}
       if (stored) {
         setSavedProfiles(JSON.parse(stored))
       }
@@ -91,7 +91,7 @@ export function useVehicleProfile() {
   // Save profiles to localStorage whenever they change
   const persistProfiles = useCallback((profiles) => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles))
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles)) } catch {}
     } catch (error) {
       console.error('Error saving vehicle profiles:', error)
     }

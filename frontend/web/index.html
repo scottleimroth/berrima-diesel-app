@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" sizes="32x32" href="/icon-32x32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icon-180x180.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Berrima Diesel Touring Tools - Diesel Price Tracker & 4WD, Caravan & Motorhome Route Planner for 4WD, Motorhome & Camper Travellers. The Diesel Experts since 1956." />
     <meta name="theme-color" content="#6B4423" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Berrima Diesel" />
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.openstreetmap.org https://*.tile.openstreetmap.org https://www.berrimadiesel.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.onegov.nsw.gov.au https://api.allorigins.win https://www.data.qld.gov.au https://www.fuelcheck.tas.gov.au https://nominatim.openstreetmap.org https://api.open-meteo.com https://www.rfs.nsw.gov.au https://overpass-api.de https://router.hereapi.com; frame-src 'none'; object-src 'none'; base-uri 'self';" />
+
+    <!-- DNS prefetch for external APIs -->
+    <link rel="dns-prefetch" href="https://nominatim.openstreetmap.org">
+    <link rel="dns-prefetch" href="https://api.open-meteo.com">
+    <link rel="dns-prefetch" href="https://overpass-api.de">
+    <link rel="dns-prefetch" href="https://router.hereapi.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,6 +44,12 @@
     </script>
   </head>
   <body class="bg-brand-light">
+    <noscript>
+      <div style="padding: 2rem; text-align: center; font-family: system-ui, sans-serif;">
+        <h1 style="color: #6B4423; font-size: 1.5rem; margin-bottom: 1rem;">JavaScript Required</h1>
+        <p>Berrima Diesel Touring Tools requires JavaScript to function. Please enable JavaScript in your browser settings to use this app.</p>
+      </div>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

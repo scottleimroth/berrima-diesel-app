@@ -2,6 +2,13 @@ import axios from 'axios'
 import { decode } from '@here/flexpolyline'
 
 const API_KEY = import.meta.env.VITE_HERE_API_KEY
+
+/**
+ * SECURITY NOTE: The HERE Maps API key is embedded in client-side code and
+ * transmitted with every request. It will be visible in the bundled JS.
+ * Rotate it periodically, restrict it to allowed referrers in the HERE
+ * dashboard, and monitor for unexpected usage.
+ */
 const ROUTING_BASE_URL = 'https://router.hereapi.com/v8'
 const GEOCODE_BASE_URL = 'https://geocode.search.hereapi.com/v1'
 const AUTOSUGGEST_BASE_URL = 'https://autosuggest.search.hereapi.com/v1'
@@ -9,6 +16,18 @@ const NOMINATIM_BASE_URL = 'https://nominatim.openstreetmap.org'
 
 // Center of Australia — used as default geographic bias for search relevance
 const AUSTRALIA_CENTER = '-25.2744,133.7751'
+
+/**
+ * Sanitise user input before sending to external APIs.
+ * Strips HTML-like tags, restricts length, and trims whitespace.
+ */
+function sanitiseInput(input, maxLength = 200) {
+  if (typeof input !== 'string') return ''
+  return input
+    .replace(/<[^>]*>/g, '')
+    .trim()
+    .substring(0, maxLength)
+}
 
 /**
  * Calculate a weight-aware route for caravans, motorhomes, and tow vehicles.
@@ -114,15 +133,18 @@ export async function calculateTruckRoute({
  * @returns {Promise<Array>} Array of address suggestions
  */
 export async function geocodeAddress(query) {
+  const safeQuery = sanitiseInput(query)
+  if (!safeQuery) return []
+
   if (!API_KEY || API_KEY === 'your_api_key_here') {
-    return getDemoSuggestions(query)
+    return getDemoSuggestions(safeQuery)
   }
 
   try {
     const response = await axios.get(`${GEOCODE_BASE_URL}/geocode`, {
       params: {
         apiKey: API_KEY,
-        q: query,
+        q: safeQuery,
         at: AUSTRALIA_CENTER,
         in: 'countryCode:AUS',
         limit: 5,
@@ -138,19 +160,19 @@ export async function geocodeAddress(query) {
 
     // Fallback to Nominatim if HERE geocoding returns nothing
     if (results.length === 0) {
-      return searchNominatim(query)
+      return searchNominatim(safeQuery)
     }
 
     return results
   } catch (error) {
     console.error('Error geocoding address:', error)
     try {
-      const nominatimResults = await searchNominatim(query)
+      const nominatimResults = await searchNominatim(safeQuery)
       if (nominatimResults.length > 0) return nominatimResults
     } catch (nominatimError) {
       console.error('Nominatim fallback also failed:', nominatimError)
     }
-    return getDemoSuggestions(query)
+    return getDemoSuggestions(safeQuery)
   }
 }
 
@@ -162,12 +184,13 @@ export async function geocodeAddress(query) {
  * @returns {Promise<Array>} Array of suggestions
  */
 export async function getAddressSuggestions(query, near = null) {
-  if (!query || query.length < 3) {
+  const safeQuery = sanitiseInput(query)
+  if (!safeQuery || safeQuery.length < 3) {
     return []
   }
 
   if (!API_KEY || API_KEY === 'your_api_key_here') {
-    return getDemoSuggestions(query)
+    return getDemoSuggestions(safeQuery)
   }
 
   try {
@@ -175,7 +198,7 @@ export async function getAddressSuggestions(query, near = null) {
     const atParam = near ? `${near.lat},${near.lng}` : AUSTRALIA_CENTER
     const params = {
       apiKey: API_KEY,
-      q: query,
+      q: safeQuery,
       at: atParam,
       in: 'countryCode:AUS',
       limit: 5,
@@ -197,7 +220,7 @@ export async function getAddressSuggestions(query, near = null) {
       const geocodeResponse = await axios.get(`${GEOCODE_BASE_URL}/geocode`, {
         params: {
           apiKey: API_KEY,
-          q: query,
+          q: safeQuery,
           at: atParam,
           in: 'countryCode:AUS',
           limit: 5,
@@ -214,7 +237,7 @@ export async function getAddressSuggestions(query, near = null) {
 
     // If HERE APIs both fail, try OpenStreetMap Nominatim as final fallback
     if (results.length === 0) {
-      results = await searchNominatim(query)
+      results = await searchNominatim(safeQuery)
     }
 
     return results
@@ -222,12 +245,12 @@ export async function getAddressSuggestions(query, near = null) {
     console.error('Error getting address suggestions:', error)
     // On network/API error, try Nominatim before falling back to demo
     try {
-      const nominatimResults = await searchNominatim(query)
+      const nominatimResults = await searchNominatim(safeQuery)
       if (nominatimResults.length > 0) return nominatimResults
     } catch (nominatimError) {
       console.error('Nominatim fallback also failed:', nominatimError)
     }
-    return getDemoSuggestions(query)
+    return getDemoSuggestions(safeQuery)
   }
 }
 
@@ -272,9 +295,10 @@ function processRouteResponse(route) {
  * Reliable fallback for small towns that HERE doesn't index well.
  */
 async function searchNominatim(query) {
+  const safeQuery = sanitiseInput(query)
   const response = await axios.get(`${NOMINATIM_BASE_URL}/search`, {
     params: {
-      q: query,
+      q: safeQuery,
       countrycodes: 'au',
       format: 'json',
       addressdetails: 1,
@@ -287,7 +311,7 @@ async function searchNominatim(query) {
     .map((item) => {
       const addr = item.address || {}
       const state = addr.state ? abbreviateState(addr.state) : ''
-      const town = addr.city || addr.town || addr.village || addr.hamlet || item.name || query
+      const town = addr.city || addr.town || addr.village || addr.hamlet || item.name || safeQuery
       const title = state ? `${town}, ${state}` : town
 
       return {
@@ -319,6 +343,7 @@ function getDemoRoute(origin, destination) {
   const distance = calculateDemoDistance(origin, destination)
 
   return {
+    isStale: true,
     summary: {
       distance: distance * 1000, // Convert to meters
       duration: Math.round((distance / 80) * 3600), // Assume 80km/h average
@@ -386,9 +411,10 @@ function getDemoSuggestions(query) {
     { id: '16', title: 'Dubbo, NSW', address: 'Dubbo NSW 2830, Australia', position: { lat: -32.2569, lng: 148.6011 } },
   ]
 
-  return demoLocations.filter(
-    (loc) =>
-      loc.title.toLowerCase().includes(lowercaseQuery) ||
-      loc.address.toLowerCase().includes(lowercaseQuery)
+  const results = demoLocations.filter((loc) =>
+    loc.title.toLowerCase().includes(lowercaseQuery) ||
+    loc.address.toLowerCase().includes(lowercaseQuery)
   )
+
+  return { isStale: true, results }
 }

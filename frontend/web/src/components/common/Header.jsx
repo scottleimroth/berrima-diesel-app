@@ -31,8 +31,50 @@ function Header() {
   const [bannerDismissed, setBannerDismissed] = useState(false)
   const { canInstall, promptInstall } = useInstallPrompt()
   const dropdownRef = useRef(null)
+  const mobileMenuRef = useRef(null)
+  const mobileButtonRef = useRef(null)
 
   const showBanner = canInstall && !bannerDismissed
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false)
+        mobileButtonRef.current?.focus()
+      }
+    }
+    if (mobileMenuOpen) {
+      document.addEventListener('keydown', handleKeyDown)
+      // Focus first link when menu opens
+      const firstLink = mobileMenuRef.current?.querySelector('a, button')
+      firstLink?.focus()
+    }
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [mobileMenuOpen])
+
+  // Focus trap for mobile menu
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    function handleTab(e) {
+      if (e.key !== 'Tab') return
+      const focusables = mobileMenuRef.current?.querySelectorAll(
+        'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+      )
+      if (!focusables || focusables.length === 0) return
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener('keydown', handleTab)
+    return () => document.removeEventListener('keydown', handleTab)
+  }, [mobileMenuOpen])
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -145,9 +187,12 @@ function Header() {
 
           {/* Mobile Menu Button */}
           <button
+            ref={mobileButtonRef}
             className="md:hidden p-2 text-white hover:text-brand-yellow"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -155,7 +200,13 @@ function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav className="md:hidden mt-4 pb-2 border-t border-brand-yellow/30 pt-4 flex flex-col gap-2">
+          <nav
+            id="mobile-nav"
+            ref={mobileMenuRef}
+            role="navigation"
+            aria-label="Mobile navigation"
+            className="md:hidden mt-4 pb-2 border-t border-brand-yellow/30 pt-4 flex flex-col gap-2"
+          >
             <NavLink
               to="/fuel"
               onClick={() => setMobileMenuOpen(false)}

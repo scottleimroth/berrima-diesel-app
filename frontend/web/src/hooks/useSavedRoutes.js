@@ -8,7 +8,7 @@ const STORAGE_KEY = 'berrima-saved-routes'
 export function useSavedRoutes() {
   const [savedRoutes, setSavedRoutes] = useState(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY)
+      let saved = null; try { saved = localStorage.getItem(STORAGE_KEY) } catch {}
       return saved ? JSON.parse(saved) : []
     } catch {
       return []
@@ -17,7 +17,7 @@ export function useSavedRoutes() {
 
   // Save to localStorage whenever routes change
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(savedRoutes))
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(savedRoutes)) } catch {}
   }, [savedRoutes])
 
   const saveRoute = useCallback((route) => {

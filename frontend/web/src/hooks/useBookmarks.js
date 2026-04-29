@@ -12,7 +12,7 @@ export function useBookmarks() {
   // Load bookmarks from localStorage on mount
   useEffect(() => {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY)
+      let stored = null; try { stored = localStorage.getItem(STORAGE_KEY) } catch {}
       if (stored) {
         setBookmarks(JSON.parse(stored))
       }
@@ -24,7 +24,7 @@ export function useBookmarks() {
   // Save bookmarks to localStorage
   const persistBookmarks = useCallback((newBookmarks) => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(newBookmarks))
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(newBookmarks)) } catch {}
     } catch (error) {
       console.error('Error saving bookmarks:', error)
     }

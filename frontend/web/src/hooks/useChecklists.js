@@ -84,7 +84,7 @@ const DEFAULT_CHECKLISTS = [
 
 function loadChecklists() {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY)
+    let stored = null; try { stored = localStorage.getItem(STORAGE_KEY) } catch {}
     if (stored) {
       return JSON.parse(stored)
     }
@@ -95,7 +95,7 @@ function loadChecklists() {
 }
 
 function saveChecklists(checklists) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(checklists))
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(checklists)) } catch {}
 }
 
 export function useChecklists() {

@@ -8,7 +8,7 @@ const STORAGE_KEY = 'berrima-fuel-calculator'
 export function useFuelCalculator() {
   const [settings, setSettings] = useState(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY)
+      let saved = null; try { saved = localStorage.getItem(STORAGE_KEY) } catch {}
       return saved ? JSON.parse(saved) : {
         consumption: 12, // L/100km - typical for diesel 4WD with caravan
         tankSize: 80,    // Litres
@@ -20,7 +20,7 @@ export function useFuelCalculator() {
 
   // Save to localStorage whenever settings change
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings))
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(settings)) } catch {}
   }, [settings])
 
   const setConsumption = useCallback((value) => {
