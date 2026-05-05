@@ -68,3 +68,11 @@ coverage/
 .cache/
 .temp/
 .tmp/
+
+# Security baseline
+.env.*
+*.pem
+*.key
+*.db
+*.sqlite
+*.sqlite3
