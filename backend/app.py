@@ -1,3 +1,4 @@
+# Scott Leimroth copyright 2026
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
