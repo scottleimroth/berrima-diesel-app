@@ -161,3 +161,5 @@ Automatically deployed to GitHub Pages on push to `main` via GitHub Actions.
 ## Copyright
 
 Copyright (c) 2026 Scott Leimroth. All rights reserved.
+
+Owner marker: Scott Leimroth, Copyright 2026.
