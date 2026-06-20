@@ -157,3 +157,7 @@ Automatically deployed to GitHub Pages on push to `main` via GitHub Actions.
 ---
 
 *Berrima Diesel Service - 3483 Old Hume Hwy, Berrima NSW 2577 - (02) 4877 1256*
+
+## Copyright
+
+Copyright (c) 2026 Scott Leimroth. All rights reserved.
