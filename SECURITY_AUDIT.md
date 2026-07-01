@@ -119,5 +119,4 @@
 ---
 
 **Last audited:** 2026-02-04
-**Audited by:** Claude Code
 **Next audit due:** 2026-03-04
