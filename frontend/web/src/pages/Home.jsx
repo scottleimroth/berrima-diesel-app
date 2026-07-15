@@ -131,6 +131,14 @@ const TOOL_CARDS = [
     description: 'Find laundromats and laundry facilities for long-term touring.',
   },
   {
+    to: '/payphones-postboxes',
+    icon: 'PB',
+    color: 'bg-red-600',
+    borderHover: 'hover:border-red-500',
+    title: 'Payphones & Postboxes',
+    description: 'Find public payphones, Wi-Fi hotspots, and Australia Post street posting boxes.',
+  },
+  {
     to: '/checklists',
     icon: '✅',
     color: 'bg-brand-gold',
@@ -307,7 +315,7 @@ function Home() {
               Find Nearby
             </h3>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {TOOL_CARDS.filter(t => ['/campgrounds', '/rest-areas', '/dump-points', '/water-points', '/gas-refills', '/wifi', '/laundromats'].includes(t.to)).map((tool) => (
+              {TOOL_CARDS.filter(t => ['/campgrounds', '/rest-areas', '/dump-points', '/water-points', '/gas-refills', '/wifi', '/laundromats', '/payphones-postboxes'].includes(t.to)).map((tool) => (
                 <Link key={tool.to} to={tool.to}
                   className={`group bg-white rounded-xl p-5 hover:shadow-lg transition-all border-2 border-brand-tan ${tool.borderHover} shadow`}
                 >

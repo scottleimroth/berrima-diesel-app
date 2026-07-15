@@ -22,6 +22,7 @@ const WaterPoints = lazy(() => import('./pages/WaterPoints'))
 const GasRefills = lazy(() => import('./pages/GasRefills'))
 const WifiHotspots = lazy(() => import('./pages/WifiHotspots'))
 const Laundromats = lazy(() => import('./pages/Laundromats'))
+const PayphonesPostboxes = lazy(() => import('./pages/PayphonesPostboxes'))
 const FloodWarnings = lazy(() => import('./pages/FloodWarnings'))
 const Privacy = lazy(() => import('./pages/Privacy'))
 const Terms = lazy(() => import('./pages/Terms'))
@@ -47,6 +48,7 @@ const pageTitles = {
   '/gas-refills': 'Gas Refills',
   '/wifi': 'WiFi Hotspots',
   '/laundromats': 'Laundromats',
+  '/payphones-postboxes': 'Payphones & Postboxes',
   '/flood-warnings': 'Flood Warnings',
   '/privacy': 'Privacy Policy',
   '/terms': 'Terms of Use',
@@ -163,6 +165,7 @@ function App() {
               <Route path="/gas-refills" element={<GasRefills />} />
               <Route path="/wifi" element={<WifiHotspots />} />
               <Route path="/laundromats" element={<Laundromats />} />
+              <Route path="/payphones-postboxes" element={<PayphonesPostboxes />} />
               <Route path="/flood-warnings" element={<FloodWarnings />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
