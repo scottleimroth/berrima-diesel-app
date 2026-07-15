@@ -85,6 +85,12 @@ berrima-diesel-app/
 3. Results displayed in list and map views
 4. User can sort by price or distance, filter by radius
 
+### Payphones & Postboxes
+1. User opens `/payphones-postboxes` from the Touring Tools "Find Nearby" section
+2. The page embeds `https://payphones.scottleimroth.com/` in an iframe
+3. The Aussie Payphones repo remains the source of truth for Telstra payphones, Telstra Wi-Fi hotspots, and Australia Post postbox data
+4. Users can open the full map in a new tab if the embedded view is too small on mobile
+
 ### Route Planning
 1. User selects vehicle preset (4WD + Caravan, Motorhome, etc.)
 2. Enters origin and destination
@@ -100,6 +106,7 @@ berrima-diesel-app/
 - **Government APIs:** NSW, WA, QLD, TAS fuel APIs are public
 - **No user data stored server-side:** All preferences in browser localStorage
 - **HTTPS:** GitHub Pages enforces HTTPS
+- **Embedded traveller map:** CSP allows framing only `https://payphones.scottleimroth.com` for the payphones/postboxes tool
 
 ---
 
@@ -111,4 +118,15 @@ berrima-diesel-app/
 
 ---
 
-**Last Updated:** 2026-02-10
+## Change Notes
+
+### 2026-07-15 - Payphones & Postboxes Integration
+
+The Touring Tools PWA now includes `/payphones-postboxes`, an embedded/link-out view of the Aussie Payphones map. This was intentionally implemented as a canonical iframe integration rather than importing the GeoJSON into this repo, so Telstra and Australia Post refresh behaviour stays in `aussie-payphones`.
+
+Validation expected for this feature:
+- `npm run build` in `frontend/web`
+- Local browser check that `/payphones-postboxes` loads the branded page
+- Local browser check that the iframe renders `payphones.scottleimroth.com`
+
+**Last Updated:** 2026-07-15

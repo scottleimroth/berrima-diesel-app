@@ -113,6 +113,12 @@ Diesel Price Tracker, Route Planner & Touring Tools for 4WD, Caravan & Motorhome
 - Venue type labels (library, cafe, caravan park, etc.)
 - Free-only filter
 
+### Payphones & Postboxes
+- Embedded traveller map for Australian payphones, Telstra Wi-Fi hotspots, and Australia Post street posting boxes
+- Uses the Aussie Payphones map at https://payphones.scottleimroth.com/ as the canonical data source
+- Keeps Telstra and AusPost data refresh logic in the `aussie-payphones` repo instead of duplicating datasets here
+- Available from the Touring Tools "Find Nearby" section
+
 ### Laundromat Finder
 - Find laundromats and laundry facilities for long-term touring
 - Opening hours and self-service indicators
@@ -153,6 +159,16 @@ VITE_DEFAULT_LNG=150.3369
 ## Deployment
 
 Automatically deployed to GitHub Pages on push to `main` via GitHub Actions.
+
+## Operational Notes
+
+### 2026-07-15 - Payphones & Postboxes Touring Tool
+
+- Added the `/payphones-postboxes` route to embed the live Aussie Payphones map in the Berrima Diesel Touring Tools PWA.
+- The live Berrima Diesel commerce website has separate "Phone App Tuning" and "ECU PHONE APP" sales pages. This traveller utility belongs in the Touring Tools PWA at `app.berrimadiesel.com`, not those sales pages.
+- The embedded map remains canonical at `https://payphones.scottleimroth.com/`; this repo only links/frames it so data refreshes are maintained in one place.
+- `frontend/web/index.html` allows `frame-src https://payphones.scottleimroth.com` so the iframe can render under the existing CSP.
+- If the embedded map stops loading, check for CSP regressions here and frame-blocking headers on the Aussie Payphones deployment.
 
 ---
 
