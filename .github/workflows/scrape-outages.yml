@@ -2,7 +2,7 @@ name: Scrape Fuel Outages
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Every 30 minutes
+    - cron: '0 19 * * 6'  # Weekly: Sat 19:00 UTC = Sun 05:00 AEST
   workflow_dispatch:  # Allow manual trigger
 
 permissions:
